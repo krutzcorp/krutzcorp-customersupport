@@ -143,14 +143,15 @@ class Order:
         :return: A dictionary containing values mapped to keys from api
         docs. The items key will map to a list of dictionaries.
         """
-        dict = {}
         items = []
-        dict["id"] = self._id
-        dict["orderDate"] = self._order_date
         for item in self._items:
             items.append(item.serialize())
-        dict["items"] = items
-        return dict
+
+        return{
+            "id" : self._id,
+            "orderDate" : self._order_date,
+            "items" : items
+        }
 
 
     @property
@@ -158,8 +159,8 @@ class Order:
         return self._id
 
     @property
-    def status(self):
-        return self._status
+    def order_date(self):
+        return self._order_date
 
     @property
     def items(self):
@@ -204,12 +205,12 @@ class Item:
         Serialize this object.
         :return: A dictionary containing values mapped to keys from api docs.
         """
-        dict = {}
-        dict["serialId"] = self._id
-        dict["status"] = self._status
-        dict["replaceDeadline"] = self._replace_date
-        dict["refundDeadline"] = self.refund_date
-        return dict
+        return {
+            "serialId" : self._id,
+            "status" : self._status,
+            "replaceDeadline" : self._replace_date,
+            "refundDeadline" : self.refund_date
+        }
 
     @property
     def id(self):
