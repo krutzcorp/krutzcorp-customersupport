@@ -1,11 +1,16 @@
 import requests
 import json
+import urllib.parse
 from config import HR_URL
 from customersupport.models import Employee
 
 
 def get_employee(employee_id):
     """Get the employee with the given ID."""
+    # get_employee_url_format = HR_URL + "/employees?employee_id={employee_id}"
+    #
+    # r = requests.get(get_employee_url_format.format(employee_id=employee_id))
+
     r = requests.get(HR_URL)
 
     json_resp = r.json()
