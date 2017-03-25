@@ -17,7 +17,12 @@ def index():
 @app.route('/employee/real')
 def get_employee(mock=False):
     """Get an employee."""
-    return jsonify(hr.get_employee(1, mock=mock).serialize())
+    employee = hr.get_employee(1, mock=mock)
+
+    if employee is not None:
+        return jsonify(employee.serialize())
+    else:
+        return jsonify([])
 
 
 @app.route('/employee/stub')

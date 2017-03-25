@@ -6,7 +6,7 @@ from customersupport.wrappers import sales
 
 @app.route('/sales/refund/real')
 def refund_order(mock=False):
-    return jsonify(sales.initiate_refund(
+    order = sales.initiate_refund(
         replace=True,
         order_id=1,
         serial_numbers=[
@@ -14,7 +14,13 @@ def refund_order(mock=False):
             456,
             789
         ],
-        mock=mock).serialize())
+        mock=mock
+    )
+
+    if order is not None:
+        return jsonify(order.serialize())
+    else:
+        return jsonify([])
 
 
 @app.route('/sales/refund/stub')
