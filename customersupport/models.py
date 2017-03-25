@@ -107,3 +107,122 @@ class Customer:
         #TODO query database for tickets
         return  None
 
+class Order:
+    """
+    Order is another class not stored in out database.
+
+    An Order class exposes this data (properties of an order item included):
+      Order ID    : id
+      Order Date  : order_date
+      Order Items : items
+          Item ID      : id
+          Item Status  : status
+          Replace Date : replace_date
+          Refund Date  : refund_date
+    """
+    _id = None
+    _order_date = None
+    _items = set()
+
+    def __init__(self, order_dict):
+        """
+        All parameters come from api docs. An order dictionary should
+        contain zero or more item dictionaries.
+
+        :param item_dict: dictionary from api call
+        """
+        self._id = order_dict["id"]
+        self._order_date = order_dict["orderDate"]
+        for item in order_dict["items"]:
+            self._items.add(Item(item))
+
+    def serialize(self):
+        """
+        Serialize this object.
+
+        :return: A dictionary containing values mapped to keys from api
+        docs. The items key will map to a list of dictionaries.
+        """
+        dict = {}
+        items = []
+        dict["id"] = self._id
+        dict["orderDate"] = self._order_date
+        for item in self._items:
+            items.append(item.serialize())
+        dict["items"] = items
+        return dict
+
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def status(self):
+        return self._status
+
+    @property
+    def items(self):
+        return self._items
+
+
+class Item:
+    """
+    This is a helper class for Order to store data on individual
+    items.
+
+    Item ID      : id
+    Item Status  : status
+    Replace Date : replace_date
+    Refund Date  : refund_date
+    """
+    _id = None
+    _status = None
+    _replace_date = None
+    _refund_date = None
+
+    def __init__(self, item_dict):
+        """
+        All parameters come from api docs
+        :param item_dict: dictionary from api call
+        """
+        self._id = item_dict["serialId"]
+        self._status = item_dict["status"]
+        self._replace_date = item_dict["replaceDeadline"]
+        self._refund_date = item_dict["refundDeadline"]
+
+    def __hash__(self):
+        """
+        Overridden hash function so we can store items in a set
+        for an Order.
+        :return: item id
+        """
+        return self.id;
+
+    def serialize(self):
+        """
+        Serialize this object.
+        :return: A dictionary containing values mapped to keys from api docs.
+        """
+        dict = {}
+        dict["serialId"] = self._id
+        dict["status"] = self._status
+        dict["replaceDeadline"] = self._replace_date
+        dict["refundDeadline"] = self.refund_date
+        return dict
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def status(self):
+        return self._status
+
+    @property
+    def replace_date(self):
+        return self._replace_date
+
+    @property
+    def refund_date(self):
+        return self._refund_date
