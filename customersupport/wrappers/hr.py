@@ -1,17 +1,22 @@
+import requests_mock
 import requests
 import json
 import urllib.parse
 from config import HR_URL
 from customersupport.models import Employee
+from customersupport.wrappers import mocked_responses
 
 
-def get_employee(employee_id):
+def get_employee(employee_id, mock=False):
     """Get the employee with the given ID."""
-    # get_employee_url_format = HR_URL + "/employees?employee_id={employee_id}"
-    #
-    # r = requests.get(get_employee_url_format.format(employee_id=employee_id))
+    get_employee_url = HR_URL + "/employees?employee_id={employee_id}".format(employee_id=employee_id)
 
-    r = requests.get(HR_URL)
+    if mock:
+        with requests_mock.Mocker() as m:
+            m.get(get_employee_url, text=mocked_responses.hr_get_employee)
+            r = requests.get(get_employee_url)
+    else:
+        r = requests.get(get_employee_url)
 
     json_resp = r.json()
     if "employee_array" not in json_resp:
@@ -27,8 +32,6 @@ def get_employee(employee_id):
 
     employee_resp = json_resp["employee_array"][0]
     # print(employee_resp)
-    employee = Employee()
-    employee.id = employee_resp["employee_id"]
-    employee.name = employee_resp["name"]
+    employee = Employee(employee_resp)
 
     return employee

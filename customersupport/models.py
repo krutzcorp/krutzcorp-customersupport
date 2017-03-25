@@ -77,6 +77,15 @@ class Customer:
         self._email = customer_dict["email"]
         self._phone_number = customer_dict["phone"]
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "phone": self.phone_number
+        }
+
     # Start read-only properties.
     @property
     def id(self):
