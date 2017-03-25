@@ -8,14 +8,19 @@ import os
 db_connect_string = config.DATABASE_URI
 
 engine = create_engine(db_connect_string, convert_unicode=True)
-db_session = scoped_session(sessionmaker(autocommit=False,
-                                         autoflush=False,
-                                         bind=engine))
+db_session = scoped_session(
+    sessionmaker(
+        autocommit=False,
+        autoflush=False,
+        bind=engine
+    )
+)
 
 # Initialize SqlAlchemy Base class, see 
 # http://docs.sqlalchemy.org/en/latest/orm/extensions/declarative/basic_use.html
 Base = declarative_base()
 Base.query = db_session.query_property()
+
 
 def init_db():
     # import all modules here that might define models so that

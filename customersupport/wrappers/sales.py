@@ -70,8 +70,9 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
     return order
 
 
-def get_orders(address, billing_address=False, customer_id=None, incl_payment_info=False,
-               incl_shipping_info=False, incl_customer_info=False, incl_items=False, mock=False):
+def get_orders(
+        address, billing_address=False, customer_id=None, incl_payment_info=False,
+        incl_shipping_info=False, incl_customer_info=False, incl_items=False, mock=False):
     query_params = {
         "address": address, "billingAddress": billing_address, "customerId": customer_id,
         "paymentInfo": incl_payment_info, "shippingInfo": incl_shipping_info,
@@ -102,8 +103,9 @@ def get_orders(address, billing_address=False, customer_id=None, incl_payment_in
     return orders
 
 
-def get_order_info(order_id, incl_payment_info=False, incl_shipping_info=False,
-                   incl_customer_info=False, incl_items=False, mock=False):
+def get_order_info(
+        order_id, incl_payment_info=False, incl_shipping_info=False, incl_customer_info=False,
+        incl_items=False, mock=False):
     query_params = {
         "orderId": order_id, "paymentInfo": incl_payment_info, "shippingInfo": incl_shipping_info,
         "customerInfo": incl_customer_info, "items": incl_items

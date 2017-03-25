@@ -2,6 +2,7 @@ from sqlalchemy import Column, BigInteger, Integer, String, Float, Boolean, Fore
 from sqlalchemy.orm import relationship
 from customersupport.database import Base
 
+
 # class CallLog(Base):
 #     __tablename__ = "call_log"
 
@@ -105,7 +106,7 @@ class Customer:
 
     @property
     def phone_number(self):
-        return  self._phone_number
+        return self._phone_number
 
     # These properties require database calls to create.
     @property
@@ -159,12 +160,11 @@ class Order:
         for item in self._items:
             items.append(item.serialize())
 
-        return{
-            "id" : self._id,
-            "orderDate" : self._order_date,
-            "items" : items
+        return {
+            "id": self._id,
+            "orderDate": self._order_date,
+            "items": items
         }
-
 
     @property
     def id(self):
@@ -218,10 +218,10 @@ class Item:
         :return: A dictionary containing values mapped to keys from api docs.
         """
         return {
-            "serialId" : self._id,
-            "status" : self._status,
-            "replaceDeadline" : self._replace_date,
-            "refundDeadline" : self.refund_date
+            "serialId": self._id,
+            "status": self._status,
+            "replaceDeadline": self._replace_date,
+            "refundDeadline": self.refund_date
         }
 
     @property
