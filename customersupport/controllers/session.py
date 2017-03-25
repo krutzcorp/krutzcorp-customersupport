@@ -1,5 +1,4 @@
 from customersupport import app
-# from customersupport import wrappers
 from customersupport.wrappers import hr, sales
 import json
 
@@ -16,16 +15,12 @@ def index():
 
 
 @app.route('/employee/real')
-def get_employee():
+def get_employee(mock=False):
     """Get an employee."""
-    return jsonify(hr.get_employee(1).serialize())
+    return jsonify(hr.get_employee(1, mock=mock).serialize())
 
 
 @app.route('/employee/stub')
 def get_employee_stubbed():
     """Use the stubbed version of the wrapper."""
-    return jsonify(hr.get_employee(1, mock=True).serialize())
-
-@app.route('/cust/stub')
-def search_customer_stubbed():
-    return jsonify([c.serialize() for c in sales.search_customer(first_name="Corban", mock=True)])
+    return get_employee(mock=True)

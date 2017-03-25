@@ -25,7 +25,11 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
     else:
         r = requests.get(search_customer_url, params=query_params)
 
-    json_resp = r.json()
+    try:
+        json_resp = r.json()
+    except ValueError:
+        return None
+
     if "customers" not in json_resp:
         return None
 
@@ -36,9 +40,33 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
     return customers
 
 
-def initiate_refund(replace, order_id, serial_numbers):
-    r = requests.get(SALES_URL)
-    return r
+def initiate_refund(replace, order_id, serial_numbers, mock=False):
+    payload = {"replace": replace, "orderId": order_id, "serialIds": serial_numbers}
+
+    refund_url = SALES_URL + "/return"
+
+    if mock:
+        with requests_mock.Mocker() as m:
+            m.post(requests_mock.ANY, text=mocked_responses.sales_initiate_refund)
+            r = requests.post(refund_url, data=payload)
+    else:
+        r = requests.post(refund_url, data=payload)
+
+    try:
+        json_resp = r.json()
+    except ValueError:
+        return None
+
+    # if "customers" not in json_resp:
+    #     return None
+    #
+    # customers = []
+    # for customer_resp in json_resp["customers"]:
+    #     customers.append(Customer(customer_resp))
+    #
+    # return customers\
+
+    return None
 
 
 def get_orders(address=None, billing_address=None, customer_id=None, incl_payment_info=False,

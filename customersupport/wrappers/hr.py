@@ -18,7 +18,11 @@ def get_employee(employee_id, mock=False):
     else:
         r = requests.get(get_employee_url)
 
-    json_resp = r.json()
+    try:
+        json_resp = r.json()
+    except ValueError:
+        return None
+
     if "employee_array" not in json_resp:
         return None
 

@@ -41,3 +41,25 @@ sales_search_customer = """
       ]
     }
 """
+
+sales_initiate_refund =  """
+    {
+      "items": [
+        {
+          "price": 100,
+          "refundDeadline": "2017-03-01T20:51:26.908Z",
+          "replaceDeadline": "2017-03-01T20:51:26.908Z",
+          "serialId": 20,
+          "status": "return"
+        },
+        {
+          "price": 200,
+          "refundDeadline": "2017-03-01T20:51:26.909Z",
+          "replaceDeadline": "2017-03-01T20:51:26.909Z",
+          "serialId": 21,
+          "status": "return"
+        }
+      ],
+      "orderId": 24
+    }
+"""
