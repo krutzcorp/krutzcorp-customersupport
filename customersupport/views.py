@@ -6,13 +6,25 @@ from flask import json
 
 from customersupport import app
 from customersupport.database import db_session
-from customersupport.session_controller import SessionController
-# from customersupport.models import CallLog
+from customersupport.controllers import session as session_controller
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/session')
-def sessionCall():
-    return json.dumps(SessionController.getEmployeeStubbed().json())
+
+# Search customer
+# @app.route()
+
+
+# Get Employee
+@app.route('/employee/real')
+def get_employee():
+    return jsonify(session_controller.get_employee().json())
+
+
+@app.route('/employee/stub')
+def get_employee_stub():
+    return jsonify(session_controller.get_employee_stubbed().serialize())
+
+

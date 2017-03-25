@@ -1,15 +1,15 @@
 import unittest
 import requests_mock
-from customersupport.hrwrapper import HRWrapper
+from customersupport.wrappers import hr as hr_wrapper
+from config import HR_URL
 
-url = 'http://human-resources.com/employee?employee_id=1'
 
 class TestCase(unittest.TestCase):
 
     def testMockCalled(self):
         with requests_mock.mock() as m:
-            #Stubber.stubMock(m)
-            HRWrapper.getEmployee(1)
+            Stubber.stubMock(m)
+            hr_wrapper.get_employee(1)
             actual = m.called
             expected = True
             assert actual == expected, "actual: " + str(actual.json()) 
@@ -17,14 +17,17 @@ class TestCase(unittest.TestCase):
     def testMockReturnsCorrectResponse(self):
         with requests_mock.mock() as m:
             Stubber.stubMock(m)
-            actual = HRWrapper.getEmployee(1)
+            actual = hr_wrapper.get_employee(1)
             expected = {'hello': 'world'}
             assert actual.json() == expected, "actual: " + str(actual.json()) 
 
 class Stubber:
-    def stubMock(m):
-        url = 'http://human-resources.com/employee?employee_id=1'
-        return m.get(url, json={'hello': 'world'}) 
+    @staticmethod
+    def stubMock(m, json=None):
+        if json is None:
+            return m.get(HR_URL, json={'hello': 'world'})
+        else:
+            return m.get(HR_URL, json=json)
     # This json can be replaced with a real response, 
     # or the response can be passed into the function
 
