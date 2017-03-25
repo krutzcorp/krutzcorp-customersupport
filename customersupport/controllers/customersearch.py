@@ -10,9 +10,9 @@ from flask import json
 
 @app.route('/sales/customer/real')
 def search_customer(mock=False):
-    customers = sales.search_customer(first_name="John")
+    customers = sales.search_customer(first_name="John", mock=mock)
     if customers is not None:
-        return jsonify([c.serialize() for c in sales.search_customer(first_name="John", mock=mock)])
+        return jsonify([c.serialize() for c in customers])
     else:
         return jsonify([])
 

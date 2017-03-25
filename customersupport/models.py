@@ -120,7 +120,7 @@ class Customer:
 
 class Order:
     """
-    Order is another class not stored in out database.
+    Order is another class not stored in our database.
 
     An Order class exposes this data (properties of an order item included):
       Order ID    : id
@@ -140,10 +140,11 @@ class Order:
         All parameters come from api docs. An order dictionary should
         contain zero or more item dictionaries.
 
-        :param item_dict: dictionary from api call
+        :param item_dict: dictionary from API call
         """
         self._id = order_dict["id"]
-        self._order_date = order_dict["orderDate"]
+        if "orderDate" in order_dict:  # This isn't in the refund response.
+            self._order_date = order_dict["orderDate"]
         for item in order_dict["items"]:
             self._items.add(Item(item))
 

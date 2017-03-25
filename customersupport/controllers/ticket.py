@@ -1,11 +1,7 @@
+from flask import jsonify
+
 from customersupport import app
 from customersupport.wrappers import sales
-
-from flask import Flask, request, render_template
-from flask import request
-from flask import render_template
-from flask import jsonify
-from flask import json
 
 
 @app.route('/sales/refund/real')
@@ -18,7 +14,7 @@ def refund_order(mock=False):
             456,
             789
         ],
-        mock=mock))
+        mock=mock).serialize())
 
 
 @app.route('/sales/refund/stub')
