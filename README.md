@@ -23,3 +23,19 @@
 To run the server, activate the virtual environment then run `python run.py`
 
 The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
+
+## Updating the deployment server
+
+1. ssh into the vm
+2. Kill the old process
+`ps ax | grep python`
+find the process then run
+`kill ` [the id]
+3. cd into the repo
+`cd /var/www/krutzcorp-customersupport`
+4. pull master
+`git pull origin master`
+5. run venv
+`source venv/bin/active`
+6. run the app in the background
+`ENV=production screen python run.py`
