@@ -2,34 +2,40 @@ from sqlalchemy import Column, BigInteger, Integer, String, Float, Boolean, Fore
 from sqlalchemy.orm import relationship
 from customersupport.database import Base
 
+
 # class CallLog(Base):
 #     __tablename__ = "call_log"
 
 
-"""
-An Employee's data will not be stored in our database, so our
-Employee class does not implement Model.
-
-An employee class is a glorified struct for the following data:
-  Employee ID : id
-  Full Name   : name
-"""
 class Employee:
+    """
+    An Employee's data will not be stored in our database, so our
+    Employee class does not implement Model.
+
+    An employee class is a glorified struct for the following data:
+      Employee ID : id
+      Full Name   : name
+    """
     _id = None
     _name = None
 
-    """
-    Constructor. Super basic.
-    Dictionary names are based on API docs. If these don't work
-    HR either changed or ignored their documents.
-    """
-    def __init__(self, employeeDict):
-        self._id = employeeDict["employee_id"]
-        self._name = employeeDict["name"]
+    def __init__(self, employee_dict):
+        """
+        Constructor. Super basic.
+        Dictionary names are based on API docs. If these don't work
+        HR either changed or ignored their documents.
+        """
+        self._id = employee_dict["employee_id"]
+        self._name = employee_dict["name"]
 
-    """
-    Start read-only properties.
-    """
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name
+        }
+
+    # Start read-only properties.
+
     @property
     def id(self):
         return self._id
@@ -39,42 +45,49 @@ class Employee:
         return self._name
 
 
-"""
-A customer's data will not be stored in our database, so our
-Customer class does not implement Model.
-
-A customer class exposes this data:
-  Employee ID  : id
-  First Name   : first_name
-  Last Name    : last_name
-  Email        : email
-  Phone number : phone_number
-  Order List   : orders
-  Ticket List  : support_tickets
-"""
 class Customer:
+    """
+    A customer's data will not be stored in our database, so our
+    Customer class does not implement Model.
+
+    A customer class exposes this data:
+      Customer ID  : id
+      First Name   : first_name
+      Last Name    : last_name
+      Email        : email
+      Phone number : phone_number
+      Order List   : orders
+      Ticket List  : support_tickets
+    """
     _id = None
     _first_name = None
     _last_name = None
     _email = None
     _phone_number = None
 
-    """
-    Constructor.
-    Everything is based off of API docs.
-    Same thing as Employee from HR, but this time we
-    yell at Sales if it doesn't work.
-    """
-    def __init__(self, customerDict):
-        self._id = customerDict["customerId"]
-        self._first_name = customerDict["firstName"]
-        self._last_name = customerDict["lastName"]
-        self._email = customerDict["email"]
-        self._phone_number = customerDict["phone"]
+    def __init__(self, customer_dict):
+        """
+        Constructor.
+        Everything is based off of API docs.
+        Same thing as Employee from HR, but this time we
+        yell at Sales if it doesn't work.
+        """
+        self._id = customer_dict["customerId"]
+        self._first_name = customer_dict["firstName"]
+        self._last_name = customer_dict["lastName"]
+        self._email = customer_dict["email"]
+        self._phone_number = customer_dict["phone"]
 
-    """
-    Start read-only properties.
-    """
+    def serialize(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "phone": self.phone_number
+        }
+
+    # Start read-only properties.
     @property
     def id(self):
         return self._id
@@ -93,23 +106,22 @@ class Customer:
 
     @property
     def phone_number(self):
-        return  self._phone_number
+        return self._phone_number
 
-    """
-    These properties require database calls to create.
-    """
+    # These properties require database calls to create.
     @property
     def orders(self):
-        #TODO call sale api wrapper
+        # TODO call sale api wrapper
         return None
 
     def support_tickets(self):
-        #TODO query database for tickets
-        return  None
+        # TODO query database for tickets
+        return None
+
 
 class Order:
     """
-    Order is another class not stored in out database.
+    Order is another class not stored in our database.
 
     An Order class exposes this data (properties of an order item included):
       Order ID    : id
@@ -129,10 +141,11 @@ class Order:
         All parameters come from api docs. An order dictionary should
         contain zero or more item dictionaries.
 
-        :param item_dict: dictionary from api call
+        :param item_dict: dictionary from API call
         """
         self._id = order_dict["id"]
-        self._order_date = order_dict["orderDate"]
+        if "orderDate" in order_dict:  # This isn't in the refund response.
+            self._order_date = order_dict["orderDate"]
         for item in order_dict["items"]:
             self._items.add(Item(item))
 
@@ -147,12 +160,11 @@ class Order:
         for item in self._items:
             items.append(item.serialize())
 
-        return{
-            "id" : self._id,
-            "orderDate" : self._order_date,
-            "items" : items
+        return {
+            "id": self._id,
+            "orderDate": self._order_date,
+            "items": items
         }
-
 
     @property
     def id(self):
@@ -206,10 +218,10 @@ class Item:
         :return: A dictionary containing values mapped to keys from api docs.
         """
         return {
-            "serialId" : self._id,
-            "status" : self._status,
-            "replaceDeadline" : self._replace_date,
-            "refundDeadline" : self.refund_date
+            "serialId": self._id,
+            "status": self._status,
+            "replaceDeadline": self._replace_date,
+            "refundDeadline": self.refund_date
         }
 
     @property
