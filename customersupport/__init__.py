@@ -3,7 +3,8 @@ from customersupport.database import db_session
 
 app = Flask(__name__)
 
-import customersupport.views
+from customersupport.controllers import session, customersearch, ticket, ordersearch
+
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
