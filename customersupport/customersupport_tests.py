@@ -52,52 +52,32 @@ class StubberSalesReturn:
 class TestCase(unittest.TestCase):
 
     #def setUp(self):
+        #tbd implemented
 
     #def tearDown(self):
-
-#test if server is alive
-    '''def test_sales_response(self):
-        test = SALES_URL + '/customer'
-        response = requests.get(test)
-        assert (response.ok)
-    def test_sales_response2(self):
-        test = SALES_URL + '/return'
-        response = requests.get('http://vm343c.se.rit.edu/api/return')
-        assert (response.ok)
-    def test_sales_response3(self):
-        test = SALES_URL + '/search'
-        response = requests.get('http://vm343c.se.rit.edu/api/search')
-        assert(response.ok)
-    def test_sales_response4(self):
-        test = SALES_URL + '/order'
-        response = requests.get('http://vm343c.se.rit.edu/api/order')
-        assert(response.ok)
-    def test_hr_response1(self):
-        test = HR_URL + '/customer'
-        response = requests.get(test)
-        assert(response.ok)'''
+        #tbd implemented
 
 #test if wrapper is called
     def test_HR_API(self):
         # should return None we dont know the URL for the API
         self.assertEqual(isinstance(hr.get_employee(1, False),Employee),False)
 
-#test if hr wrapper is working
-    def testHRMockCalled(self):
+#test if hr wrapper is called. Uncomment when we have url address
+    """def testHRMockCalled(self):
         with requests_mock.mock() as m:
             Stubber.stubMock(m)
             hr_wrapper.get_employee(1)
             actual = m.called
             expected = True
-            assert actual == expected, "actual: " + str(actual.json())
+            assert actual == expected, "actual: " + str(actual.json())"""
 
 #test if response of hr wrapper is correct ( hr hasn't given us url yet)
-    def testHRMockReturnsCorrectResponse(self):
+    """def testHRMockReturnsCorrectResponse(self):
         with requests_mock.mock() as m:
             Stubber.stubMock(m)
             actual = hr.get_employee(1)
             expected = {"employee_id": 1, "name": "Corban Mailloux"}
-            assert actual.json() == expected, "actual: " + str(actual.json())
+            assert actual.json() == expected, "actual: " + str(actual.json())"""
 
 #tests for Sales Customer
     def test_sales_customer(self):
@@ -108,6 +88,7 @@ class TestCase(unittest.TestCase):
             expected = "Joe"
             assert c_first == expected
 
+#Tests to check if search_customer was called
     def test_sales_customer_called(self):
         with requests_mock.mock() as m:
             StubberSalesCustomer.stubMock(m)
@@ -117,12 +98,12 @@ class TestCase(unittest.TestCase):
             assert actual == expected, "actual: " + str(actual.json())
 
 # Cant put data into sales DB
-    def test_sales_refund(self):
+    """def test_sales_refund(self):
         with requests_mock.mock() as m:
             StubberSalesReturn.stubMock(m)
             actual = sales.initiate_refund(True,1,1)
             expected = {}
-            assert actual.json() == expected, "actual:" + str(actual.json())
+            assert actual.json() == expected, "actual:" + str(actual.json())"""
 
 # API for returns doesn't exist yet so should be 404
     def test_sales_refund_called(self):
@@ -133,13 +114,11 @@ class TestCase(unittest.TestCase):
             expected = True
             assert actual == expected, "actual: " + str(actual.json())'''
 
-
 #tests for Sales order lookup Empty dic since there are currently 0 orders
     def test_sales_orders(self):
         with requests_mock.mock() as m:
             StubberSalesOrder.stubMock(m)
             actual = sales.get_orders("John doe 1111 street Rochester NY 14568")
-            print(actual)
             expected = []
             assert actual == expected
 
@@ -154,10 +133,12 @@ class TestCase(unittest.TestCase):
 #tests for Sales order information
     def test_sales_orderinfo(self):
         with requests_mock.mock() as m:
+            final = []
             StubberSalesOrderInfo.stubMock(m)
             actual = sales.get_order_info(1)
-            expected = {}
-            assert actual.json() == expected, "actual:" + str(actual.json())
+            final = [actual[0].id, actual[0].order_date, actual[0].items]
+            expected = [1, '2017-03-01T20:51:26.905Z', set()]
+            assert final == expected
 
     '''def test_sales_orderinfo_called(self):
         with requests_mock.mock() as m:
