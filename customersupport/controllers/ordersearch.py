@@ -7,7 +7,8 @@ from customersupport.wrappers import sales
 @app.route('/sales/ordersearch/real')
 def search_order(mock=False):
     orders = sales.get_orders(
-        address="1 Lomb Memorial Dr.",
+        customer_id=1,
+        incl_items=True,
         mock=mock
     )
 
@@ -25,7 +26,8 @@ def search_order_stubbed():
 @app.route('/sales/orderinfo/real')
 def get_order_info(mock=False):
     orders = sales.get_order_info(
-        order_id=1000,
+        order_id=1,
+        incl_items=True,
         mock=mock
     )
 
