@@ -146,8 +146,9 @@ class Order:
         self._id = order_dict["id"]
         if "orderDate" in order_dict:  # This isn't in the refund response.
             self._order_date = order_dict["orderDate"]
-        for item in order_dict["items"]:
-            self._items.add(Item(item))
+        if "items" in order_dict:  # Items aren't always included
+            for item in order_dict["items"]:
+                self._items.add(Item(item))
 
     def serialize(self):
         """
