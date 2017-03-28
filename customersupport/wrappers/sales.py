@@ -71,7 +71,7 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
 
 
 def get_orders(
-        address, billing_address=False, customer_id=None, incl_payment_info=False,
+        address=None, billing_address=False, customer_id=None, incl_payment_info=False,
         incl_shipping_info=False, incl_customer_info=False, incl_items=False, mock=False):
     query_params = {
         "address": address, "billingAddress": billing_address, "customerId": customer_id,
