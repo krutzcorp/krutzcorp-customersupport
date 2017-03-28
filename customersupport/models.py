@@ -26,7 +26,7 @@ class Employee:
         HR either changed or ignored their documents.
         """
         self._id = employee_dict["employee_id"]
-        self._name = employee_dict["name"]
+        self._name = employee_dict["fname"] + " " + employee_dict["lname"]
 
     def serialize(self):
         return {
