@@ -11,7 +11,8 @@ hr_get_employee = """
           "department": "Customer Support",
           "employee_id": 1,
           "is_active": true,
-          "name": "Corban Mailloux",
+          "fname": "Corban",
+          "lname": "Mailloux",
           "role": "Support Rep",
           "salary": 999999,
           "team_start_date": "2017-01-01"
