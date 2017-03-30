@@ -9,7 +9,7 @@ from customersupport.wrappers import mocked_responses
 
 def get_employee(employee_id, mock=False):
     """Get the employee with the given ID."""
-    get_employee_url = HR_URL + "/employees?employee_id={employee_id}".format(employee_id=employee_id)
+    get_employee_url = HR_URL + "/employee?employee_id={employee_id}".format(employee_id=employee_id)
 
     if mock:
         with requests_mock.Mocker() as m:
