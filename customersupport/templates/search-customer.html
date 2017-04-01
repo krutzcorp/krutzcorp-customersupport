@@ -107,23 +107,19 @@
 
     <hr>
 
-    <form>
+    <form action="/new-call.html" method="get">
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="matchingCustomers">Matching Customers</label>
-                    <select size="9" class="form-control" id="matchingCustomers">
-                        <option>John Smith</option>
-                        <option>Jimmy Adams</option>
-                        <option>Susan Anthony</option>
-                        <option>Julie Randal</option>
+                    <select size="9" name="customer_id" class="form-control" id="matchingCustomers">
+                        <option disabled>Click search above.</option>
                     </select>
                 </div>
             </div>
         </div>
 
-        <!-- <button type="submit" class="btn btn-success btn-lg btn-block">Select</button> -->
-        <a class="btn btn-success btn-lg btn-block" href="new-call.html" role="button">Select</a>
+        <input type="submit" value="Select" class="btn btn-success btn-lg btn-block" />
     </form>
 </div><!-- /.container -->
 
