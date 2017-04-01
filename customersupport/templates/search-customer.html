@@ -55,7 +55,7 @@
         <h2>Search Customer</h2>
     </div>
 
-    <form id="searchCustomerForm">
+    <form id="searchCustomerForm" onsubmit="return false">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
@@ -97,7 +97,7 @@
                     <label for="search">&nbsp;</label>
                     <div class="input-group">
                 <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button" id="search">Search</button>
+                    <input type="submit" id="search" value="Search" class="btn btn-primary" />
                 </span>
                     </div>
                 </div>
