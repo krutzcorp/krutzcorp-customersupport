@@ -16,7 +16,10 @@ def get_employee(employee_id, mock=False):
             m.get(get_employee_url, text=mocked_responses.hr_get_employee)
             r = requests.get(get_employee_url)
     else:
-        r = requests.get(get_employee_url)
+        try:
+            r = requests.get(get_employee_url)
+        except requests.exceptions.RequestException:
+            return None
 
     try:
         json_resp = r.json()
