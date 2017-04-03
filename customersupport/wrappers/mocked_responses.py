@@ -3,21 +3,21 @@
 # HR
 hr_get_employee = """
     {
-      "employee_array": [
-        {
-          "address": "123 Main St.",
-          "birth_date": "1994-03-19",
-          "company_start_date": "2017-01-01",
-          "department": "Customer Support",
-          "employee_id": 1,
-          "is_active": true,
-          "name": "Corban Mailloux",
-          "role": "Support Rep",
-          "salary": 999999,
-          "team_start_date": "2017-01-01"
-        }
-      ]
+  "employee_array": [
+    {
+      "address": "42 Wallaby Way, Rochester, New York 14623",
+      "birth_date": "1995-04-25",
+      "department": "Human Resources",
+      "employee_id": 1,
+      "is_active": true,
+      "name": "Wendy Williams",
+      "role": "HR Admin",
+      "salary": "60000",
+      "start_date": "2017-03-28",
+      "team_start_date": "2006-11-10"
     }
+  ]
+}
 """
 
 # Sales

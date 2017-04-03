@@ -4,24 +4,21 @@ import requests_mock
 from config import SALES_URL, HR_URL
 from customersupport.wrappers import sales
 from customersupport.models import Employee
-from customersupport.wrappers import hr
+from customersupport.wrappers import hr, mocked_responses
 from customersupport.wrappers import hr as hr_wrapper
 
 
 class Stubber:
-    @staticmethod
-    def stubMock(m,json=None):
+    def stubMock(m,json):
         if json is None:
-            return m.get(HR_URL, json={'hello': 'world'})
+            return m.get(hr.giveURL(0), json = mocked_responses.hr_get_employee )
         else:
-            return m.get(HR_URL, json=json)
-            # This json can be replaced with a real response,
-            # or the response can be passed into the function
+            return m.get('http://vm343a.se.rit.edu:8080/employee?employee_id=0', json=json)
 class StubberSalesCustomer:
     def stubMock(m, json=None):
         json = {'customers': [{'customerId': 2, 'firstName': 'Joe', 'lastName': 'Jefferson', 'email': 'therealjoe@joemail.com', 'phone': '1231231234'}]}
         if json is None:
-            return m.get(SALES_URL, json={'Hola': 'Hola'})
+            return m.get(SALES_URL, json=mocked_responses.sales_search_customer)
         else:
             return m.get('http://vm343c.se.rit.edu/api/customer?firstName=Joe',json=json)
 class StubberSalesOrder:
@@ -29,7 +26,7 @@ class StubberSalesOrder:
         text = 'http://vm343c.se.rit.edu/api/order/search?address=John+doe+1111+street+Rochester+NY+14568&billingAddress=False&paymentInfo=False&shippingInfo=False&customerInfo=False&items=False'
         json ={"orders":[]}
         if json is None:
-            return m.get(SALES_URL, json={'Hola': 'Hola'})
+            return m.get(SALES_URL, json=mocked_responses.sales_search_orders)
         else:
             return m.get(text,json=json)
 class StubberSalesOrderInfo:
@@ -37,7 +34,7 @@ class StubberSalesOrderInfo:
         text = 'http://vm343c.se.rit.edu/api/order?orderId=1&paymentInfo=False&shippingInfo=False&customerInfo=False&items=False'
         json = {"orders":[{"id":1,"customerId":1,"repId":99,"cost":200,"orderDate":"2017-03-01T20:51:26.905Z","isPaid":False,"taxPercentage":8}]}
         if json is None:
-            return m.get(SALES_URL, json={'Hola': 'Hola'})
+            return m.get(SALES_URL, json=mocked_responses.sales_get_order_info)
         else:
             return m.get(text,json=json)
 class StubberSalesReturn:
@@ -57,34 +54,33 @@ class TestCase(unittest.TestCase):
     #def tearDown(self):
         #tbd implemented
 
-#test if wrapper is called
-    def test_HR_API(self):
-        # should return None we dont know the URL for the API
-        self.assertEqual(isinstance(hr.get_employee(1, False),Employee),False)
-
 #test if hr wrapper is called. Uncomment when we have url address
-    """def testHRMockCalled(self):
+    def testHRMockCalled(self):
         with requests_mock.mock() as m:
-            Stubber.stubMock(m)
-            hr_wrapper.get_employee(1)
+            Stubber.stubMock(m,True)
+            hr.get_employee(0)
             actual = m.called
             expected = True
-            assert actual == expected, "actual: " + str(actual.json())"""
+            assert actual == expected
 
 #test if response of hr wrapper is correct ( hr hasn't given us url yet)
-    """def testHRMockReturnsCorrectResponse(self):
+    def testHRMockReturnsCorrectResponse(self):
         with requests_mock.mock() as m:
-            Stubber.stubMock(m)
-            actual = hr.get_employee(1)
-            expected = {"employee_id": 1, "name": "Corban Mailloux"}
-            assert actual.json() == expected, "actual: " + str(actual.json())"""
+            Stubber.stubMock(m,None)
+            actual = hr.get_employee(0)
+            expected = mocked_responses.hr_get_employee
+            assert actual.json() == expected, "actual: " + str(actual.json())
 
 #tests for Sales Customer
     def test_sales_customer(self):
         with requests_mock.mock() as m:
             StubberSalesCustomer.stubMock(m)
-            actual = sales.search_customer("Joe")
-            c_first = actual[0].first_name
+            c_first = ""
+            try:
+                actual = sales.search_customer("Joe")
+                c_first = actual[0].first_name
+            except ConnectionError:
+                actual = "Joe"
             expected = "Joe"
             assert c_first == expected
 
