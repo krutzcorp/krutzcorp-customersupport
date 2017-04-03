@@ -23,7 +23,10 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
             m.get(requests_mock.ANY, text=mocked_responses.sales_search_customer)
             r = requests.get(search_customer_url, params=query_params)
     else:
-        r = requests.get(search_customer_url, params=query_params)
+        try:
+            r = requests.get(search_customer_url, params=query_params)
+        except requests.exceptions.RequestException:
+            return None
 
     try:
         json_resp = r.json()
@@ -50,7 +53,10 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
             m.post(requests_mock.ANY, text=mocked_responses.sales_initiate_refund)
             r = requests.post(refund_url, data=payload)
     else:
-        r = requests.post(refund_url, data=payload)
+        try:
+            r = requests.post(refund_url, data=payload)
+        except requests.exceptions.RequestException:
+            return None
 
     try:
         json_resp = r.json()
@@ -86,7 +92,10 @@ def get_orders(
             m.get(requests_mock.ANY, text=mocked_responses.sales_search_orders)
             r = requests.get(search_order_url, params=query_params)
     else:
-        r = requests.get(search_order_url, params=query_params)
+        try:
+            r = requests.get(search_order_url, params=query_params)
+        except requests.exceptions.RequestException:
+            return None
 
     try:
         json_resp = r.json()
@@ -118,7 +127,10 @@ def get_order_info(
             m.get(requests_mock.ANY, text=mocked_responses.sales_get_order_info)
             r = requests.get(order_info_url, params=query_params)
     else:
-        r = requests.get(order_info_url, params=query_params)
+        try:
+            r = requests.get(order_info_url, params=query_params)
+        except requests.exceptions.RequestException:
+            return None
 
     try:
         json_resp = r.json()

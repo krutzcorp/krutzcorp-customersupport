@@ -26,7 +26,7 @@ class Employee:
         HR either changed or ignored their documents.
         """
         self._id = employee_dict["employee_id"]
-        self._name = employee_dict["fname"] + " " + employee_dict["lname"]
+        self._name = employee_dict["name"]
 
     def serialize(self):
         return {
@@ -72,11 +72,23 @@ class Customer:
         Same thing as Employee from HR, but this time we
         yell at Sales if it doesn't work.
         """
-        self._id = customer_dict["customerId"]
+        if "customerId" in customer_dict:
+            self._id = customer_dict["customerId"]
+        elif "id" in customer_dict:
+            self._id = customer_dict["id"]
+        else:
+            raise KeyError("Couldn't extract customer ID from the customer response.")
+
         self._first_name = customer_dict["firstName"]
         self._last_name = customer_dict["lastName"]
         self._email = customer_dict["email"]
-        self._phone_number = customer_dict["phone"]
+
+        if "phone" in customer_dict:
+            self._phone_number = customer_dict["phone"]
+        elif "phoneNumber" in customer_dict:
+            self._phone_number = customer_dict["phoneNumber"]
+        else:
+            raise KeyError("Couldn't extract phone number from the customer response.")
 
     def serialize(self):
         return {

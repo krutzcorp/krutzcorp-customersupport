@@ -20,3 +20,32 @@ def search_customer(mock=False):
 @app.route('/sales/customer/stub')
 def search_customer_stubbed():
     return search_customer(mock=True)
+
+
+@app.route('/customer/search')
+def get_customer_search_form():
+    return render_template('search-customer.html')
+
+
+def get_param_from_request_if_not_empty(param_name):
+    """Get a query parameter from the request, or None if the parameter is empty or missing."""
+    value = request.args.get(param_name)
+    if value is not None and value != "":
+        return value
+    else:
+        return None
+
+
+@app.route('/api/customer/search')
+def get_matching_customers():
+    use_mock = request.args.get("use_mock") is not None
+
+    customers = sales.search_customer(
+        first_name=get_param_from_request_if_not_empty('first_name'),
+        last_name=get_param_from_request_if_not_empty('last_name'),
+        email=get_param_from_request_if_not_empty('email'),
+        phone_number=get_param_from_request_if_not_empty('phone'),
+        mock=use_mock
+    )
+    if customers is not None:
+        return jsonify([c.serialize() for c in customers])
