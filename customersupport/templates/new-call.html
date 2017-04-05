@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% block title %}New Call{% endblock %}
 {% block content %}
-
+    {# Bring in the search customer modal. #}
     {% include 'search-customer-modal.html' %}
 
     <div class="page-header">
@@ -12,13 +12,12 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customer">Customer</label>
+                    <label for="customer">Customer ID</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="customer" placeholder="Customer">
+                        <input type="text" class="form-control" id="customer" placeholder="Customer ID">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#customerSearchModal">Search</button>
-{#                            <a class="btn btn-primary" href="search-customer.html" role="button">Search</a>#}
+                                    data-target="#searchCustomerModal">Search</button>
                         </span>
                     </div>
                 </div>

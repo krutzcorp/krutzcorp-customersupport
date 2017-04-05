@@ -10,13 +10,13 @@ from flask import json
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/new-call')
 def get_new_call_form():
     return render_template('new-call.html')
+
+
+@app.route('/listing')
+def index():
+    return render_template('api-route-listing.html')
 
 
 @app.route('/employee/real')

@@ -1,5 +1,5 @@
-$(document).ready(
-    $("#search").click(function () {
+$(document).ready(function () {
+    $("#searchCustomerButton").click(function () {
         $.get("/api/customer/search", $('#searchCustomerForm').serializeArray())
             .done(function (data) {
                 $("#matchingCustomers").find("option").remove(); // Remove all <option> child tags.
@@ -11,5 +11,10 @@ $(document).ready(
                     );
                 });
             });
-    })
-);
+    });
+
+    $("#selectCustomer").click(function () {
+        $("#customer").val($("#matchingCustomers").val());
+        $('#searchCustomerModal').modal('hide')
+    });
+});
