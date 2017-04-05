@@ -1,7 +1,6 @@
-from sqlalchemy import Column, BigInteger, Integer, String, Float, Boolean, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, DateTime, Enum
 from customersupport.database import Base
-
+import enum
 
 # class CallLog(Base):
 #     __tablename__ = "call_log"
@@ -252,3 +251,100 @@ class Item:
     @property
     def refund_date(self):
         return self._refund_date
+
+class TicketType(enum.Enum):
+    REFUND="REFUND"
+    REPAIR="REPAIR"
+
+class TicketStatus(enum.Enum):
+    CLOSED="CLOSED"
+    OPEN="OPEN"
+    PENDING="PENDING"
+
+class Ticket(Base):
+    """
+    This class stores tickets in the database.
+
+    Tickets expose the following data
+    Id of the ticket:           id
+    Issue Enumeration:          issue
+    Date Opened:                dateOpened
+    Date Closed:                dateClosed
+    Current Status Enumeration: currentStatus
+    List of Call Sessions:      sessions
+    Customer on Ticket:         customerId
+    Order on Ticket:            orderId
+
+    """
+    __tablename__ = 'Ticket'
+    id = Column(String(60), primary_key=True)
+    issue = Column(Enum(TicketType))
+    dateOpened = Column(DateTime)
+    dateClosed = Column(DateTime)
+    currentStatus = Column(Enum(TicketStatus))
+#    sessions = relationship('CallSession',backref="post",cascade="all, delete-orphan",lazy="dynamic")
+#    customerId = Column(String(60),ForeignKey('customer.id')) 
+#    orderId = Column(String(60),ForeignKey('order.id'))
+    
+    def __init__(self, ticket_dict):
+        """
+        Params come from API docs
+        :param ticket_dict: dictionary for init ticket
+        """
+        self.issue = ticket_dict["issue"]
+        self.dataOpened = ticket_dict["dateOpened"]
+        self.dateClosed = ticket_dict["dateClosed"]
+        self.currentStatus = ticket_dict["currentStatus"]
+#        self._sessions = ticket_dict["sessions"]
+#        self._customerId = ticket_dict["customerId"]
+#        self._orderId = ticket_dict["orderId"]
+"""
+    def serialize(self):
+        sessions = []
+        for session in self.sessions:
+            sessions.append(session.serialize())
+        return {
+            "id": self.id,
+            "issue": self.issue,
+            "dateOpened": self.dateOpened,
+            "dateClosed": self.dateClosed,
+            "currentStatus": self.currentStatus,
+            "sessions": sessions,
+            "customerId": self.customerId,
+            "orderId": self.orderId
+        }
+"""
+"""
+    @property
+    def issue(self):
+        return self._id
+
+    @property
+    def issue(self):
+        return self._issue
+
+    @property
+    def dateOpened(self):
+        return self._dateOpened
+
+    @property
+    def dateClosed(self):
+        return self._dateClosed
+
+    @property
+    def currentStatus(self):
+        return self._currentStatus
+
+    @property
+    def sessions(self):
+        return self._sessions
+
+    @property
+    def customerId(self):
+        return self._customerId
+
+    @property
+    def orderId(self):
+        return self._orderId
+
+"""
