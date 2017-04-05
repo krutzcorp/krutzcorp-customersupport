@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    // When the user searches for a customer, call the API and fill the select box.
     $("#searchCustomerButton").click(function () {
         $.get("/api/customer/search", $('#searchCustomerForm').serializeArray())
             .done(function (data) {
@@ -13,6 +15,7 @@ $(document).ready(function () {
             });
     });
 
+    // When the user selects a customer, populate the new-call form and close the modal.
     $("#selectCustomer").click(function () {
         $("#customer").val($("#matchingCustomers").val());
         $('#searchCustomerModal').modal('hide')
