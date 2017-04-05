@@ -1,76 +1,101 @@
 {% extends 'template.html' %}
 {% block title %}Search for Customer{% endblock %}
 {% block content %}
-    <div class="page-header">
-        <h2>Search Customer</h2>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="customerSearchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Search Customer</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="searchCustomerForm" onsubmit="return false">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" id="firstName"
+                                           placeholder="John">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name" id="lastName"
+                                           placeholder="Smith">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" name="phone" id="phone"
+                                           placeholder="(585) 555-5575">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           placeholder="jsmith@example.com">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" name="use_mock" value="">Use Mock</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label for="search">&nbsp;</label>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <input type="submit" id="search" value="Search" class="btn btn-primary"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                    <form action="/new-call.html" method="get" id="select_customer_form">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="matchingCustomers">Matching Customers</label>
+                                    <select size="9" name="customer_id" class="form-control" id="matchingCustomers">
+                                        <option disabled>Click search above.</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Select Customer" form="select_customer_form"
+                               class="btn btn-success btn-lg btn-block"/>
+                    </form>
+                </div>
+                {#                <div class="modal-footer">#}
+                {#                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
+                {#                    <button type="button" class="btn btn-primary">Save changes</button>#}
+                {#                </div>#}
+            </div>
+        </div>
     </div>
-
-    <form id="searchCustomerForm" onsubmit="return false">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" name="first_name" id="firstName" placeholder="John">
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="lastName" placeholder="Smith">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="(585) 555-5575">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-8">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="jsmith@example.com">
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="checkbox">
-                    <label><input type="checkbox" name="use_mock" value="">Use Mock</label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label for="search">&nbsp;</label>
-                    <div class="input-group">
-                <span class="input-group-btn">
-                    <input type="submit" id="search" value="Search" class="btn btn-primary"/>
-                </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <hr>
-
-    <form action="/new-call.html" method="get">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="matchingCustomers">Matching Customers</label>
-                    <select size="9" name="customer_id" class="form-control" id="matchingCustomers">
-                        <option disabled>Click search above.</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <input type="submit" value="Select" class="btn btn-success btn-lg btn-block"/>
-    </form>
 {% endblock %}
 
 {% block page_scripts %}
