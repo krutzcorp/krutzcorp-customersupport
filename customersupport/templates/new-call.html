@@ -1,0 +1,92 @@
+{% extends 'template.html' %}
+{% block title %}New Call{% endblock %}
+{% block content %}
+    {# Bring in the search customer modal. #}
+    {% include 'search-customer-modal.html' %}
+
+    <div class="page-header">
+        <h2>New Call</h2>
+    </div>
+
+    <form>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customer">Customer ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="customer" placeholder="Customer ID">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#searchCustomerModal">Search</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="order">Order</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="order" placeholder="Order">
+                        <span class="input-group-btn">
+                  <a class="btn btn-primary" href="search-order.html" role="button">Search</a>
+                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <h4>Phone</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="calledFromPhone">Called From</label>
+                    <input type="tel" class="form-control" id="calledFromPhone" placeholder="Called From">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="callBackPhone">Call Back</label>
+                    <input type="tel" class="form-control" id="callBackPhone" placeholder="Call Back">
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <h4>Ticket</h4>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <div class="input-group">
+                        <select class="form-control" id="type">
+                            <option>Refund</option>
+                            <option>Replace</option>
+                        </select>
+                        <span class="input-group-btn">
+                  <a class="btn btn-primary" href="new-ticket.html" role="button">New Ticket</a>
+                </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <a class="btn btn-info btn-block" href="list-tickets.html" role="button">List Customer Tickets</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="notes">Notes</label>
+                    <textarea class="form-control" rows="3" id="notes"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+    </form>
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{{ url_for('static', filename='search-customer.js') }}"></script>
+{% endblock %}
