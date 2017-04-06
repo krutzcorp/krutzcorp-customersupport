@@ -27,15 +27,11 @@ The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 ## Updating the deployment server
 
 1. ssh into the vm
-2. Kill the old process
-`ps ax | grep python`
-find the process then run
-`kill ` [the id]
-3. cd into the repo
+2. cd into the repo
 `cd /var/www/krutzcorp-customersupport`
-4. pull master
+3. pull master
 `git pull origin master`
-5. run venv
-`source venv/bin/active`
-6. run the app in the background
-`ENV=production screen python run.py`
+4. Restart the service
+`sudo service krutzcorp-customersupport restart`
+5. Restart nginx
+`sudo service nginx restart`

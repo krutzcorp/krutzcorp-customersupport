@@ -22,9 +22,9 @@ def search_customer_stubbed():
     return search_customer(mock=True)
 
 
-@app.route('/customer/search')
-def get_customer_search_form():
-    return render_template('search-customer.html')
+# @app.route('/customer/search')
+# def get_customer_search_form():
+#     return render_template('search-customer.html')
 
 
 def get_param_from_request_if_not_empty(param_name):
@@ -38,6 +38,7 @@ def get_param_from_request_if_not_empty(param_name):
 
 @app.route('/api/customer/search')
 def get_matching_customers():
+    """Call the Sales API to get matching customers. Used by the search-customer modal."""
     use_mock = request.args.get("use_mock") is not None
 
     customers = sales.search_customer(
