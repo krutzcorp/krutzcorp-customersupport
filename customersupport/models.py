@@ -1,10 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, Enum
+from sqlalchemy import Column, Integer, String, DateTime, Enum, ForeignKey
+from sqlalchemy.orm import relationship
 from customersupport.database import Base
 import enum
-
-# class CallLog(Base):
-#     __tablename__ = "call_log"
-
 
 class Employee:
     """
@@ -276,13 +273,13 @@ class Ticket(Base):
     Order on Ticket:            orderId
 
     """
-    __tablename__ = 'Ticket'
-    id = Column(String(60), primary_key=True)
+    __tablename__ = 'ticket'
+    id = Column(Integer, primary_key=True, autoincrement=True)
     issue = Column(Enum(TicketType))
     dateOpened = Column(DateTime)
     dateClosed = Column(DateTime)
     currentStatus = Column(Enum(TicketStatus))
-#    sessions = relationship('CallSession',backref="post",cascade="all, delete-orphan",lazy="dynamic")
+    sessions = relationship('CallLog',backref="post",cascade="all, delete-orphan",lazy="dynamic")
 #    customerId = Column(String(60),ForeignKey('customer.id')) 
 #    orderId = Column(String(60),ForeignKey('order.id'))
     
@@ -295,10 +292,13 @@ class Ticket(Base):
         self.dataOpened = ticket_dict["dateOpened"]
         self.dateClosed = ticket_dict["dateClosed"]
         self.currentStatus = ticket_dict["currentStatus"]
-#        self._sessions = ticket_dict["sessions"]
+        self._sessions = ticket_dict["sessions"]
 #        self._customerId = ticket_dict["customerId"]
 #        self._orderId = ticket_dict["orderId"]
-"""
+
+    def __repr__(self):
+        return '<Ticket %r %r %r %r>' %(self.id, self.issue, self.dateOpened, self.currentStatus)
+
     def serialize(self):
         sessions = []
         for session in self.sessions:
@@ -313,38 +313,26 @@ class Ticket(Base):
             "customerId": self.customerId,
             "orderId": self.orderId
         }
-"""
-"""
-    @property
-    def issue(self):
-        return self._id
 
-    @property
-    def issue(self):
-        return self._issue
+class CallLog(Base):
+    __tablename__ = "call_log"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    dateCalled = Column(DateTime)
+    callingNumber = Column(String(60))
+    callbackNumber = Column(String(60))
+    notes = Column(String(500))
+#    actionTaken = Column(ActionTaken)????
+    employee = Column(String(16))
+    ticket = Column(Integer, ForeignKey('ticket.id'))
 
-    @property
-    def dateOpened(self):
-        return self._dateOpened
+    def __init__(self, call_dict):
+        self.dateCalled = call_dict["dateCalled"]
+        self.callingNumber = call_dict["callingNumber"]
+        self.callbackNumber = call_dict["callbackNumber"]
+        self.notes = call_dict["notes"]
+        self.employee = call_dict["employee"]
+        self.ticket = call_dict["ticket"]
 
-    @property
-    def dateClosed(self):
-        return self._dateClosed
+    def __refr__(self):
+        return '<CallLog %r $r $r $r %r %r>' %(self.dateCalled,self.callingNumber,self.callbackNumber,self.notes,self.employee)
 
-    @property
-    def currentStatus(self):
-        return self._currentStatus
-
-    @property
-    def sessions(self):
-        return self._sessions
-
-    @property
-    def customerId(self):
-        return self._customerId
-
-    @property
-    def orderId(self):
-        return self._orderId
-
-"""
