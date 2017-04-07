@@ -8,7 +8,6 @@ from flask import render_template
 from flask import jsonify
 from flask import json
 
-
 @app.route('/sales/refund/real')
 def refund_order(mock=False):
     order = sales.initiate_refund(

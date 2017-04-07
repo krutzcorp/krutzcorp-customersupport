@@ -3,6 +3,7 @@
 {% block content %}
     {# Bring in the search customer modal. #}
     {% include 'search-customer-modal.html' %}
+    {% include 'list-tickets-modal.html' %}
 
     <div class="page-header">
         <h2>New Call</h2>
@@ -70,7 +71,10 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <a class="btn btn-info btn-block" href="list-tickets.html" role="button">List Customer Tickets</a>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                            data-target="#listTicketModal">List Customer Tickets</button>
+                    </span>
                 </div>
             </div>
         </div>
