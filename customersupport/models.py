@@ -280,7 +280,7 @@ class Ticket(Base):
     dateClosed = Column(DateTime)
     currentStatus = Column(Enum(TicketStatus))
     sessions = relationship('CallLog',backref="post",cascade="all, delete-orphan",lazy="dynamic")
-#    customerId = Column(String(60),ForeignKey('customer.id')) 
+    customerId = Column(String(16)) 
 #    orderId = Column(String(60),ForeignKey('order.id'))
     
     def __init__(self, ticket_dict):
@@ -292,26 +292,27 @@ class Ticket(Base):
         self.dataOpened = ticket_dict["dateOpened"]
         self.dateClosed = ticket_dict["dateClosed"]
         self.currentStatus = ticket_dict["currentStatus"]
-        self._sessions = ticket_dict["sessions"]
-#        self._customerId = ticket_dict["customerId"]
+        self.sessions = ticket_dict["sessions"]
+        self.customerId = ticket_dict["customerId"]
 #        self._orderId = ticket_dict["orderId"]
 
     def __repr__(self):
-        return '<Ticket %r %r %r %r>' %(self.id, self.issue, self.dateOpened, self.currentStatus)
+        return '<Ticket %r %r %r %r %r %r>' %(self.id, self.issue, self.dateOpened, self.currentStatus, self.sessions, self.customerId)
 
     def serialize(self):
         sessions = []
         for session in self.sessions:
+            print(session)
             sessions.append(session.serialize())
         return {
             "id": self.id,
-            "issue": self.issue,
+            "issue": self.issue.name,
             "dateOpened": self.dateOpened,
             "dateClosed": self.dateClosed,
-            "currentStatus": self.currentStatus,
+            "currentStatus": self.currentStatus.name,
             "sessions": sessions,
-            "customerId": self.customerId,
-            "orderId": self.orderId
+            "customerId": self.customerId
+        #    "orderId": self.orderId
         }
 
 class CallLog(Base):
@@ -331,8 +332,17 @@ class CallLog(Base):
         self.callbackNumber = call_dict["callbackNumber"]
         self.notes = call_dict["notes"]
         self.employee = call_dict["employee"]
-        self.ticket = call_dict["ticket"]
 
     def __refr__(self):
         return '<CallLog %r $r $r $r %r %r>' %(self.dateCalled,self.callingNumber,self.callbackNumber,self.notes,self.employee)
 
+    def serialize(self):
+        return {
+            "id":self.id,
+            "dateCalled":self.dateCalled,
+            "calllingNumber":self.callingNumber,
+            "callbackNumber":self.callbackNumber,
+            "notes":self.notes,
+            "employee":self.employee,
+            "ticket":self.ticket
+        }
