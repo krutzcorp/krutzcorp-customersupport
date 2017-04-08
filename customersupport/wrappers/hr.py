@@ -42,6 +42,3 @@ def get_employee(employee_id, mock=False):
 
     return employee
 
-def giveURL(employee_id):
-    get_employee_url = HR_URL + "/employee?employee_id={employee_id}".format(employee_id=employee_id)
-    return get_employee_url

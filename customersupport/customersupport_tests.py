@@ -1,5 +1,6 @@
 import unittest
 import requests
+import requests_mock
 from config import SALES_URL, HR_URL
 from customersupport.wrappers import sales
 from customersupport.wrappers import hr, mocked_responses
@@ -47,41 +48,31 @@ class TestCase(unittest.TestCase):
 
     def test_sales_orders_called(self):
         """ tests for Sales Search Order API is called """
-        try:
-            r = requests.get(SALES_URL+'/order/search')
-            r.raise_for_status()
-            assert r.status_code == 200
-        except ConnectionError:
-            r.raise_for_status()
+        actual = sales.get_order_info("John doe 1111 street Rochester NY 14568", True)
+        expected = []
+        assert actual == expected
 
 
     def test_sales_orderinfo_called(self):
         """tests for Sales order information"""
-        try:
-            r = requests.get('http://vm343c.se.rit.edu/api/order?orderId=1&paymentInfo=False&shippingInfo=False&customerInfo=False&items=False')
-            r.raise_for_status()
-            assert r.status_code == 200
-        except ConnectionError:
-            r.raise_for_status()
-
+        actual = sales.get_order_info(1, True)
+        final = [actual[0].id, actual[0].order_date, actual[0].items]
+        expected = [1, '2017-03-01T20:51:26.905Z', set()]
+        assert final == expected
 
     def test_sales_customer_called(self):
         """ Tests to check if search_customer was called """
-        try:
-            r = requests.get(SALES_URL+'/customer?firstName=Joe')
-            r.raise_for_status()
-            assert r.status_code == 200
-        except ConnectionError:
-            r.raise_for_status()
+        actual = sales.search_customer("Joe", True)
+        c_first = actual[0].first_name
+        expected = "Joe"
+        assert c_first == expected
 
 
     def testHRMockCalled(self):
         """ Tests to check if api address is correct and live """
-        try:
-            r = requests.get(HR_URL+'/employee?employee_id=0')
-            assert r.status_code == 200
-        except ConnectionError:
-            r.raise_for_status()
+        actual = hr.get_employee(0, True)
+        expected = mocked_responses.hr_get_employee
+        assert actual == expected
 
 
 """def test_sales_refund_called(self):
