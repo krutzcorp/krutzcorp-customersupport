@@ -3,6 +3,8 @@
 {% block content %}
     {# Bring in the search customer modal. #}
     {% include 'search-customer-modal.html' %}
+    {# Bring in the search order modal. #}
+    {% include 'search-order.html' %}
 
     <div class="page-header">
         <h2>New Call</h2>
@@ -28,8 +30,9 @@
                     <div class="input-group">
                         <input type="text" class="form-control" id="order" placeholder="Order">
                         <span class="input-group-btn">
-                  <a class="btn btn-primary" href="search-order.html" role="button">Search</a>
-                </span>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#searchOrderModal">Search</button>
+                        </span>
                     </div>
                 </div>
             </div>

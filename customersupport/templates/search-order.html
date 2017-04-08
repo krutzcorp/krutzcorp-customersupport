@@ -1,0 +1,112 @@
+<div class="modal fade" id="searchOrderModal" tabindex="-1" role="dialog" aria-labelledby="searchOrderModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="searchOrderModalLabel">Search Order</h4>
+            </div>
+            <div class="modal-body">
+                <form id="searchOrderForm" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="First Name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="firstName"
+                                       >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="Last Name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="lastName"
+                                       >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="Street Address">Street Addresss</label>
+                                <input type="text" class="form-control" name="street_address" id="streetAddress"
+                                       >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="State">State</label>
+                                <input type="text" class="form-control" name="state" id="state"
+                                       >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="zipcode">Zipcode</label>
+                                <input type="text" class="form-control" name="zipcode" id="zipcde"
+                                       >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="customer_id">Customer ID</label>
+                                <input type="text" class="form-control" name="customer_id" id="customer_id"
+                                       >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="radio">
+                                <label><input type="radio" name="billing" value="billing">Billing Address</label>
+                                <label><input type="radio" name="shipping" value="shipping">Shipping Address</label>
+                            </div>
+                        </div>
+                        <label>What to return</label>
+                        <div class="col-sm-2">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="return_billing" value="returnBilling">Billing Address</label>
+                                <label><input type="checkbox" name="return_shipping" value="returnShipping">Shipping Address</label>
+                                <label><input type="checkbox" name="return_customer" value="returnCustomer">Customer Information</label>
+                                <label><input type="checkbox" name="return_items" value="return_items" >Items</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="search">&nbsp;</label>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <input type="submit" id="searchOrderButton" value="Search"
+                                               class="btn btn-primary"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <hr>
+
+                <form id="select_order_form" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="matchingOrders">Matching Orders</label>
+                                <select size="9" name="order_id" class="form-control" id="matchingOrders">
+                                    <option disabled>Click search above.</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Select Order" id="selectOrder"
+                           class="btn btn-success btn-lg btn-block"/>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
