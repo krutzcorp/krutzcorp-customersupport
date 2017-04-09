@@ -58,6 +58,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
+                    <input type="text" class="form-control" id="ticketId" placeholder="Ticket Id">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
                     <div class="input-group">
                         <select class="form-control" id="type">
                             <option>Refund</option>
@@ -73,7 +80,7 @@
                 <div class="form-group">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-success btn-block" data-toggle="modal"
-                            data-target="#listTicketModal">List Customer Tickets</button>
+                            data-target="#listTicketModal"id="listTicketsButton">List Customer Tickets</button>
                     </span>
                 </div>
             </div>
@@ -93,4 +100,5 @@
 
 {% block page_scripts %}
     <script src="{{ url_for('static', filename='search-customer.js') }}"></script>
+    <script src="{{ url_for('static', filename='list-tickets.js') }}"></script>
 {% endblock %}

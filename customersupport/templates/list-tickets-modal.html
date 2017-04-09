@@ -2,10 +2,23 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="listTicketsModalLabel">List Tickets</h4>
             </div>
             <div class="modal-body">
+                <form id="list_tickets_form" onsubmit="return false">
+                    <div class="row">
+                        <div id="listTicketsSection" class="col-sm-12">
+                            <div class="form-group">
+                                <select id="listTicketSelection" class="form-control" size="9"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Select Ticket" id="selectTicket"
+                        class="btn btn-success btn-lg btn-block"/>
+                </form>
             </div>
         </div>
     </div>

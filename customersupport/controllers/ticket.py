@@ -46,7 +46,7 @@ def get_tickets_for_customer():
 
     res = []
     if customer_id is not None:
-        res = Ticket.query.filter_by(customerId=customer_id).all()
+        res = Ticket.query.filter_by(customer_id=customer_id).all()
     elif ticket_id is not None:
         res = Ticket.query.filter_by(id=ticket_id).all()
     else:
