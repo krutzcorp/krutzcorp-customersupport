@@ -1,7 +1,4 @@
 import unittest
-import requests
-import requests_mock
-from config import SALES_URL, HR_URL
 from customersupport.wrappers import sales
 from customersupport.wrappers import hr, mocked_responses
 
@@ -10,8 +7,9 @@ class TestCase(unittest.TestCase):
     def test_hr_employee(self):
         """ test if response of hr wrapper is correct ( hr hasn't given us url yet) """
         actual = hr.get_employee(0)
-        expected = mocked_responses.hr_get_employee
-        assert actual == expected
+        final = [actual.name, actual.id]
+        expected = ['Wendy Williams', 1]
+        assert final == expected
 
 
     def test_sales_customer(self):
@@ -50,7 +48,7 @@ class TestCase(unittest.TestCase):
         """ tests for Sales Search Order API is called """
         actual = sales.get_order_info("John doe 1111 street Rochester NY 14568", mock=True)
         final = [actual[0].id,actual[0].order_date]
-        expected = expected = [1000, '2017-03-01T20:51:26.905Z']
+        expected = [1000, '2017-03-01T20:51:26.905Z']
         assert final == expected
 
 
@@ -72,8 +70,9 @@ class TestCase(unittest.TestCase):
     def test_hr_employee_called(self):
         """ Tests to check if api address is correct and live """
         actual = hr.get_employee(0, mock=True)
-        expected = mocked_responses.hr_get_employee
-        assert actual == expected
+        final = [actual.name, actual.id]
+        expected = ['Wendy Williams', 1]
+        assert final == expected
 
 
 """def test_sales_refund_called(self):
