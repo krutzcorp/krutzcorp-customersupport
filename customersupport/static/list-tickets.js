@@ -19,4 +19,13 @@ $(document).ready(function(){
         $("#listTicketModal").modal("hide");
     });
 
+    //Hook up a change listener to see if the list-tickets button should be active
+    $(document.body).on('change','#customer',function(){
+        if(!$(this).val()){
+            $("#listTicketsButton").prop('disabled',true);
+        } else {
+            $("#listTicketsButton").prop('disabled',false);
+        }
+    });
+
 });
