@@ -9,6 +9,15 @@
             <div class="modal-body">
                 <form id="searchOrderForm" onsubmit="return false">
                     <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="order_id">Order ID</label>
+                                <input type="text" class="form-control" name="order_id" id="order_id"
+                                       >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="First Name">First Name</label>
@@ -32,22 +41,33 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label for="City">City</label>
+                                <input type="text" class="form-control" name="city" id="city"
+                                       >
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label for="State">State</label>
                                 <input type="text" class="form-control" name="state" id="state"
                                        >
                             </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
+                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="zipcode">Zipcode</label>
                                 <input type="text" class="form-control" name="zipcode" id="zipcde"
                                        >
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="radio">
+                                <label><input type="radio" name="billing" value="billing">Billing Address</label>
+                                <label><input type="radio" name="shipping" value="shipping">Shipping Address</label>
+                            </div>
+                        </div>
                     </div>
+
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -59,12 +79,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2">
-                            <div class="radio">
-                                <label><input type="radio" name="billing" value="billing">Billing Address</label>
-                                <label><input type="radio" name="shipping" value="shipping">Shipping Address</label>
-                            </div>
-                        </div>
+
                         <label>What to return</label>
                         <div class="col-sm-2">
                             <div class="checkbox">
