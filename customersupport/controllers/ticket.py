@@ -1,6 +1,8 @@
 from customersupport import app
+from customersupport.wrappers import sales
 from customersupport.models import Ticket, CallLog
 from customersupport.database import db_session
+from customersupport.util import get_param_from_request_if_not_empty
 
 from flask import Flask, request, render_template
 from flask import request
@@ -31,13 +33,6 @@ def refund_order(mock=False):
 def refund_order_stubbed():
     return refund_order(mock=True)
 
-def get_param_from_request_if_not_empty(param_name):
-    """Get a query parameter from the request, or None if the parameter is empty or missing."""
-    value = request.args.get(param_name)
-    if value is not None and value != "":
-        return value
-    else:
-        return None
 
 @app.route('/api/ticket/customer')
 def get_tickets_for_customer():

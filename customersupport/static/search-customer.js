@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     // When the user selects a customer, populate the new-call form and close the modal.
     $("#selectCustomer").click(function () {
-        $("#customer").val($("#matchingCustomers").val());
+        $("#customer").val($("#matchingCustomers").val()).change();
         $('#searchCustomerModal').modal('hide')
     });
 });
