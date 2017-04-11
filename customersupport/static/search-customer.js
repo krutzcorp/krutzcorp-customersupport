@@ -21,12 +21,4 @@ $(document).ready(function () {
         $('#searchCustomerModal').modal('hide')
     });
 
-    $("#createTicket").click(function (){
-        var e = document.getElementById("ticketType");
-        var ticketType = e.options[e.selectedIndex].value;
-        var orderID = $('#order').val();
-        $(".modal-body #titleForm").val('['+ ticketType + '] Order '+ orderID);
-
-     });
-
 });
