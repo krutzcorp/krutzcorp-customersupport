@@ -35,3 +35,12 @@ The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 `sudo service krutzcorp-customersupport restart`
 5. Restart nginx
 `sudo service nginx restart`
+
+## Running Tests from CommandLine (
+
+1. Pull Repo
+  `git pull origin master`
+2. cd into project directory
+3. Run tests
+    python tests.py
+
