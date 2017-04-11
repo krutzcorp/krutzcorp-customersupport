@@ -34,16 +34,16 @@ def refund_order_stubbed():
     return refund_order(mock=True)
 
 
-@app.route('/api/ticket/customer')
-def get_tickets_for_customer():
+@app.route('/api/ticket')
+def get_ticket():
     customer_id=get_param_from_request_if_not_empty('customer_id')
     ticket_id=get_param_from_request_if_not_empty('ticket_id')
 
     res = []
-    if customer_id is not None:
-        res = Ticket.query.filter_by(customer_id=customer_id).all()
-    elif ticket_id is not None:
+    if ticket_id is not None:
         res = Ticket.query.filter_by(id=ticket_id).all()
+    elif customer_id is not None:
+        res = Ticket.query.filter_by(customer_id=customer_id).all()
     else:
         res = Ticket.query.all()
     return jsonify([r.serialize() for r in res])

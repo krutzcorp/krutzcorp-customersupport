@@ -41,3 +41,5 @@ def get_matching_customers():
     )
     if customers is not None:
         return jsonify([c.serialize() for c in customers])
+    else:
+        return jsonify([])
