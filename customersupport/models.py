@@ -264,7 +264,7 @@ class Ticket(Base):
 
     Tickets expose the following data
     Id of the ticket:           id
-    Issue Enumeration:          issue
+    Ticket Type Enumeration:    ticket_type
     Date Opened:                date_opened
     Date Closed:                date_closed
     Current Status Enumeration: current_status
@@ -275,7 +275,7 @@ class Ticket(Base):
     """
     __tablename__ = 'ticket'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    issue = Column(Enum(TicketType))
+    ticket_type = Column(Enum(TicketType))
     date_opened = Column(DateTime)
     date_closed = Column(DateTime)
     current_status = Column(Enum(TicketStatus))
@@ -288,7 +288,7 @@ class Ticket(Base):
         Params come from API docs
         :param ticket_dict: dictionary for init ticket
         """
-        self.issue = ticket_dict["issue"]
+        self.ticket_type = ticket_dict["ticket_type"]
         self.date_opened = ticket_dict["date_opened"]
         self.date_closed = ticket_dict["date_closed"]
         self.current_status = ticket_dict["current_status"]
@@ -297,16 +297,15 @@ class Ticket(Base):
 #        self._order_id = ticket_dict["order_id"]
 
     def __repr__(self):
-        return '<Ticket %r %r %r %r %r %r>' %(self.id, self.issue, self.date_opened, self.current_status, self.sessions, self.customer_id)
+        return '<Ticket {} {} {} {} {} {}>'.format(self.id, self.ticket_type, self.date_opened, self.current_status, self.sessions, self.customer_id)
 
     def serialize(self):
-        sessions = []
+        sessions = [r.serialize() for r in self.sessions]
         for session in self.sessions:
-            print(session)
             sessions.append(session.serialize())
         return {
             "id": self.id,
-            "issue": self.issue.name,
+            "ticket_type": self.ticket_type.name,
             "date_opened": self.date_opened.strftime('{%Y-%m-%d %H:%M:%S}'),
             "date_closed": self.date_closed.strftime('{%Y-%m-%d %H:%M:%S}'),
             "current_status": self.current_status.name,
@@ -333,8 +332,8 @@ class CallLog(Base):
         self.notes = call_dict["notes"]
         self.employee = call_dict["employee"]
 
-    def __refr__(self):
-        return '<CallLog %r $r $r $r %r %r>' %(self.date_called,self.calling_number,self.callback_number,self.notes,self.employee)
+    def __repr__(self):
+        return '<CallLog {} {} {} {} {}>'.format(self.date_called,self.calling_number,self.callback_number,self.notes,self.employee)
 
     def serialize(self):
         return {

@@ -7,10 +7,23 @@ init_db()
 
 today = datetime.datetime.now()
 
-cl_1 = {"date_called":today,"calling_number":"111-222-3333","callback_number":"111-222-3434","notes":"Nothing to report here","employee":"1","ticket":1}
+cl_1 = {
+        "date_called":today,
+        "calling_number":"111-222-3333",
+        "callback_number":"111-222-3434",
+        "notes":"Nothing to report here",
+        "employee":"1","ticket":1
+}
 c_1 = CallLog(cl_1)
 
-td = {"customer_id":"1","issue":"REFUND","date_opened":today,"date_closed":today,"current_status":"CLOSED","sessions":[c_1]}
+td = {
+        "customer_id":"1",
+        "ticket_type":"REFUND",
+        "date_opened":today,
+        "date_closed":today,
+        "current_status":"CLOSED",
+        "sessions":[c_1]
+}
 t = Ticket(td)
 
 td_2 = td

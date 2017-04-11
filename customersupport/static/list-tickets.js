@@ -7,7 +7,7 @@ $(document).ready(function(){
                 $.each(data, function(index, item){
                     $("#listTicketSelection").append(
                         $('<option></option>')
-                            .text(`id: ${item.id} customer_id: ${item.customer_id}  date: ${item.date_opened} issue: ${item.issue} status: ${item.current_status}`)
+                            .text(`ID: ${item.id} Customer: ${item.customer_id}  Date: ${item.date_opened} Type: ${item.ticket_type} Status: ${item.current_status}`)
                             .val(item.id)
                     );                    
                 });
