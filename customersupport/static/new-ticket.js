@@ -4,21 +4,20 @@ $(document).ready(function () {
     $("#createTicket").click(function (){
 
         // Grab Type of Ticket and Order Number to create new ticket modal
-        var e = document.getElementById("ticketType");
-        var ticketType = e.options[e.selectedIndex].value;
+        var ticketType = $('#ticketType').val();
         var orderID = $('#order').val();
         $(".modal-body #titleForm").val('['+ ticketType + '] Order '+ orderID);
-        var getInfo= [ticketType, OrderID];
+        //var getInfo= [ticketType, orderID];
 
         // Search for items within an order to add to the form
-        $.get("/api/orderinfo/real", $('#order').val())
+        $.get("/api/ordersearch", {'order_id':orderID})
             .done(function (data) {
                 $("#matchingReturnOrders").find("option").remove();
-                $.each(data, function (index, item) { // Iterates through a collection of
+                $.each(data, function (index, item) { // Iterates through a collection
                     $("#matchingReturnOrders").append( // Append an object to the inside of the select box
                         $("<option></option>")
-                            .text(`${item.id}, ${item.status}`)
-                            .val(item.id)
+                            .text(`${item.serialId}, ${item.status}`)
+                            .val(item.serialId)
                     );
                 });
             });
