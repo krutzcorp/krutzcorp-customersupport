@@ -1,5 +1,6 @@
 from customersupport import app
 from customersupport.wrappers import sales
+from customersupport.util import get_param_from_request_if_not_empty
 
 from flask import Flask, request, render_template
 from flask import request
@@ -26,16 +27,6 @@ def search_customer_stubbed():
 # def get_customer_search_form():
 #     return render_template('search-customer.html')
 
-
-def get_param_from_request_if_not_empty(param_name):
-    """Get a query parameter from the request, or None if the parameter is empty or missing."""
-    value = request.args.get(param_name)
-    if value is not None and value != "":
-        return value
-    else:
-        return None
-
-
 @app.route('/api/customer/search')
 def get_matching_customers():
     """Call the Sales API to get matching customers. Used by the search-customer modal."""
@@ -50,3 +41,5 @@ def get_matching_customers():
     )
     if customers is not None:
         return jsonify([c.serialize() for c in customers])
+    else:
+        return jsonify([])
