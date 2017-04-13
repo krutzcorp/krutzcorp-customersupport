@@ -29,7 +29,6 @@ sales_search_customer = """
     "id": 1,
     "isCompany": true,
     "lastName": "Jankowiak",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   },
   {
@@ -38,7 +37,6 @@ sales_search_customer = """
     "id": 2,
     "isCompany": true,
     "lastName": "Fisher",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   },
   {
@@ -47,7 +45,6 @@ sales_search_customer = """
     "id": 3,
     "isCompany": false,
     "lastName": "Campione",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   },
   {
@@ -56,7 +53,6 @@ sales_search_customer = """
     "id": 4,
     "isCompany": true,
     "lastName": "Li",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   },
   {
@@ -65,7 +61,6 @@ sales_search_customer = """
     "id": 5,
     "isCompany": true,
     "lastName": "Swanson",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   },
   {
@@ -74,7 +69,6 @@ sales_search_customer = """
     "id": 6,
     "isCompany": true,
     "lastName": "Verizon",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   },
   {
@@ -83,7 +77,6 @@ sales_search_customer = """
     "id": 7,
     "isCompany": false,
     "lastName": "Nietzel",
-    "password": "5f4dcc3b5aa765d61d8327deb882cf99",
     "phoneNumber": "123-123-1234"
   }
 ]
