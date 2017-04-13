@@ -198,12 +198,11 @@ class Item:
     items.
 
     Item ID      : id
-    Item Status  : status
     Replace Date : replace_date
     Refund Date  : refund_date
     """
     _id = None
-    _status = None
+    _model_id = None
     _replace_date = None
     _refund_date = None
 
@@ -212,9 +211,9 @@ class Item:
         All parameters come from api docs
         :param item_dict: dictionary from api call
         """
-        self._id = item_dict["serialId"]
-        self._status = item_dict["status"]
-        self._replace_date = item_dict["replaceDeadline"]
+        self._id = item_dict["serialNumber"]
+        self._model_id = item_dict["modelId"]
+        self._replace_date = item_dict["replacementDeadline"]
         self._refund_date = item_dict["refundDeadline"]
 
     def __hash__(self):
@@ -232,7 +231,7 @@ class Item:
         """
         return {
             "serialId": self._id,
-            "status": self._status,
+            "modelId": self._model_id,
             "replaceDeadline": self._replace_date,
             "refundDeadline": self.refund_date
         }
@@ -242,8 +241,8 @@ class Item:
         return self._id
 
     @property
-    def status(self):
-        return self._status
+    def model_Id(self):
+        return self._model_id
 
     @property
     def replace_date(self):

@@ -9,19 +9,21 @@ $(document).ready(function () {
         $(".modal-body #titleForm").val('['+ ticketType + '] Order '+ orderID);
         //var getInfo= [ticketType, orderID];
 
+        // Create Table
+        var table = $("#newTicketTable")
+
         // Search for items within an order to add to the form
-        $.get("/api/ordersearch", {'order_id':orderID})
+        $.get("/api/orderitem", {'order_id':orderID})
             .done(function (data) {
-                $("#matchingReturnOrders").find("option").remove();
                 $.each(data, function (index, item) { // Iterates through a collection
-                    $("#matchingReturnOrders").append( // Append an object to the inside of the select box
-                        $("<option></option>")
-                            .text(`${item.serialId}, ${item.status}`)
-                            .val(item.serialId)
-                    );
-                });
+                    var serial_id = item.serialId;
+                    var model_id = item.modelId;
+                    table.append('<tr><td>'+ serial_id +'</td><td> Model: '+ model_id +'</td><td><input type="checkbox"><br></td><td><input type="checkbox"><br></td></tr>');
+                  });
             });
      });
+
+
 
 
 

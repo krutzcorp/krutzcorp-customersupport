@@ -143,18 +143,26 @@ sales_get_order_info = """
           "isPaid": false,
           "items": [
             {
-              "price": 100,
-              "refundDeadline": "2017-03-01T20:51:26.908Z",
-              "replaceDeadline": "2017-03-01T20:51:26.908Z",
-              "serialId": 20,
-              "status": "original|return|replace"
+              "id":2,
+              "serialNumber":120134,
+      "modelId":"B",
+      "price":160.85,
+      "replacementDeadline":"1970-01-17T22:54:46.000Z",
+      "refundDeadline":"1970-01-29T15:23:47.000Z",
+      "refunded":null,
+      "bogoSerialNumber":null,
+      "orderId":1
             },
             {
-              "price": 200,
-              "refundDeadline": "2017-03-01T20:51:26.909Z",
-              "replaceDeadline": "2017-03-01T20:51:26.909Z",
-              "serialId": 21,
-              "status": "original|return|replace"
+              "id":1,
+      "serialNumber":120133,
+      "modelId":"B",
+      "price":550.58,
+      "replacementDeadline":"1970-01-20T02:52:45.000Z",
+      "refundDeadline":"1970-01-26T07:17:54.000Z",
+      "refunded":null,
+      "bogoSerialNumber":null,
+      "orderId":1
             }
           ],
           "orderDate": "2017-03-01T20:51:26.905Z",
