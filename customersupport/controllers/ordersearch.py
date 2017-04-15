@@ -22,23 +22,19 @@ def select_search():
     if get_param_from_request_if_not_empty('order_id') is not None:
         orders = sales.get_order_info(
             order_id=get_param_from_request_if_not_empty('order_id'),
-            incl_payment_info=get_param_from_request_if_not_empty('return_billing'),
-            incl_shipping_info=get_param_from_request_if_not_empty('return_shipping'),
-            incl_customer_info= get_param_from_request_if_not_empty('return_customer'),
-            incl_items=get_param_from_request_if_not_empty('return_items'),
             mock=False
-
         )
     # call order info
     else:
         orders = sales.get_orders(
             address=get_param_from_request_if_not_empty('address'),
             billing_address= True, #check if radio button click,
+            city=get_param_from_request_if_not_empty('city'),
+            state=get_param_from_request_if_not_empty('state'),
+            zipcode=get_param_from_request_if_not_empty('zipcode'),
+            first_name=get_param_from_request_if_not_empty('first_name'),
+            last_name=get_param_from_request_if_not_empty('last_name'),
             customer_id=get_param_from_request_if_not_empty('customer'),
-            incl_payment_info=get_param_from_request_if_not_empty('return_billing'),
-            incl_shipping_info=get_param_from_request_if_not_empty('return_shipping'),
-            incl_customer_info=get_param_from_request_if_not_empty('return_customer'),
-            incl_items=get_param_from_request_if_not_empty('return_items'),
             mock=False
         )
 
