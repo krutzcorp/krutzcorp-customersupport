@@ -20,4 +20,6 @@ $(document).ready(function () {
         $("#customer").val($("#matchingCustomers").val()).change();
         $('#searchCustomerModal').modal('hide')
     });
+
+
 });

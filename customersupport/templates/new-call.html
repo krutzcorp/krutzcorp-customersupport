@@ -3,6 +3,7 @@
 {% block content %}
     {# Bring in the search customer modal. #}
     {% include 'search-customer-modal.html' %}
+    {% include 'new-ticket-modal.html' %}
     {% include 'list-tickets-modal.html' %}
 
     <div class="page-header">
@@ -66,12 +67,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <div class="input-group">
-                        <select class="form-control" id="type">
+                        <select class="form-control" id="ticketType">
                             <option>Refund</option>
                             <option>Replace</option>
                         </select>
                         <span class="input-group-btn">
-                  <a class="btn btn-primary" href="new-ticket.html" role="button">New Ticket</a>
+                            <button type="button" class="btn btn-primary" id="createTicket" data-toggle="modal"
+                                    data-target="#newTicketModal" disabled="true">Create</button>
                 </span>
                     </div>
                 </div>
@@ -100,5 +102,7 @@
 
 {% block page_scripts %}
     <script src="{{ url_for('static', filename='search-customer.js') }}"></script>
+    <script src="{{ url_for('static', filename='new-ticket.js') }}"></script>
     <script src="{{ url_for('static', filename='list-tickets.js') }}"></script>
 {% endblock %}
+
