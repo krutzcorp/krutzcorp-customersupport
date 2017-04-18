@@ -12,9 +12,8 @@ def get_param_from_request_if_not_empty(param_name):
     else:
         return None
 
-# select which order search to use
-# if order id exists use order search
-# otherwise order info
+"""select which order search to use if order id exists use order search otherwise order info"""
+
 @app.route('/api/order/search')
 def select_search():
 
@@ -29,7 +28,6 @@ def select_search():
             mock=False
 
         )
-    # call order info
     else:
         orders = sales.get_orders(
             address=get_param_from_request_if_not_empty('address'),
@@ -42,7 +40,7 @@ def select_search():
             mock=False
         )
 
-    # Call the Sales API to get matching . Used by the search-order
+    """Call the Sales API to get matching . Used by the search-order"""
 
     if orders is not None:
         return jsonify([c.serialize() for c in orders])

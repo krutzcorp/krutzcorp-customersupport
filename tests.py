@@ -1,6 +1,6 @@
 import unittest
 from customersupport.wrappers import sales
-from customersupport.wrappers import hr, mocked_responses
+from customersupport.wrappers import hr
 
 class TestCase(unittest.TestCase):
 

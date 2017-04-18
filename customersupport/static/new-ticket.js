@@ -23,6 +23,15 @@ $(document).ready(function () {
             });
      });
 
+     //Hook up a change listener to see if the new tickets button should be active
+    $(document.body).on('change','#order',function(){
+        if(!$(this).val()){
+            $("#createTicket").prop('disabled',true);
+        } else {
+            $("#createTicket").prop('disabled',false);
+        }
+    });
+
 
 
 

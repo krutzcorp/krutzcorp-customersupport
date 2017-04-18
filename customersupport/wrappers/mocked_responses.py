@@ -22,24 +22,64 @@ hr_get_employee = """
 
 # Sales
 sales_search_customer = """
-    {
-      "customers": [
-        {
-          "customerId": 0,
-          "firstName": "John",
-          "lastName": "Smith",
-          "email": "johnsmith@email.com",
-          "phone": "5451112222"
-        },
-        {
-          "customerId": 42,
-          "firstName": "John",
-          "lastName": "Johnson",
-          "email": "nottheotherjohn@email.com",
-          "phone": "5451112222"
-        }
-      ]
-    }
+[
+  {
+    "email": "jrj2211@rit.edu",
+    "firstName": "Joe",
+    "id": 1,
+    "isCompany": true,
+    "lastName": "Jankowiak",
+    "phoneNumber": "123-123-1234"
+  },
+  {
+    "email": "dan@gmail.com",
+    "firstName": "Dan",
+    "id": 2,
+    "isCompany": true,
+    "lastName": "Fisher",
+    "phoneNumber": "123-123-1234"
+  },
+  {
+    "email": "Joe@gmail.com",
+    "firstName": "Joe",
+    "id": 3,
+    "isCompany": false,
+    "lastName": "Campione",
+    "phoneNumber": "123-123-1234"
+  },
+  {
+    "email": "Cailin@gmail.com",
+    "firstName": "Cailin",
+    "id": 4,
+    "isCompany": true,
+    "lastName": "Li",
+    "phoneNumber": "123-123-1234"
+  },
+  {
+    "email": "Nick@gmail.com",
+    "firstName": "Nick",
+    "id": 5,
+    "isCompany": true,
+    "lastName": "Swanson",
+    "phoneNumber": "123-123-1234"
+  },
+  {
+    "email": "nottheotherjohn@email.com",
+    "firstName": "John",
+    "id": 6,
+    "isCompany": true,
+    "lastName": "Verizon",
+    "phoneNumber": "123-123-1234"
+  },
+  {
+    "email": "successewDan@gmail.com",
+    "firstName": "Justin",
+    "id": 7,
+    "isCompany": false,
+    "lastName": "Nietzel",
+    "phoneNumber": "123-123-1234"
+  }
+]
 """
 
 sales_initiate_refund = """

@@ -1,11 +1,7 @@
-from sqlalchemy import Column, BigInteger, Integer, String, Float, Boolean, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Enum, ForeignKey
 from sqlalchemy.orm import relationship
 from customersupport.database import Base
-
-
-# class CallLog(Base):
-#     __tablename__ = "call_log"
-
+import enum
 
 class Employee:
     """
@@ -241,7 +237,7 @@ class Item:
         return self._id
 
     @property
-    def model_Id(self):
+    def model_id(self):
         return self._model_id
 
     @property
@@ -251,3 +247,100 @@ class Item:
     @property
     def refund_date(self):
         return self._refund_date
+
+class TicketType(enum.Enum):
+    REFUND="REFUND"
+    REPAIR="REPAIR"
+
+class TicketStatus(enum.Enum):
+    CLOSED="CLOSED"
+    OPEN="OPEN"
+    PENDING="PENDING"
+
+class Ticket(Base):
+    """
+    This class stores tickets in the database.
+
+    Tickets expose the following data
+    Id of the ticket:           id
+    Ticket Type Enumeration:    ticket_type
+    Date Opened:                date_opened
+    Date Closed:                date_closed
+    Current Status Enumeration: current_status
+    List of Call Sessions:      sessions
+    Customer on Ticket:         customer_id
+    Order on Ticket:            order_id
+
+    """
+    __tablename__ = 'ticket'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ticket_type = Column(Enum(TicketType))
+    date_opened = Column(DateTime)
+    date_closed = Column(DateTime)
+    current_status = Column(Enum(TicketStatus))
+    sessions = relationship('CallLog',backref="post",cascade="all, delete-orphan",lazy="dynamic")
+    customer_id = Column(String(16)) 
+#    order_id = Column(String(60),ForeignKey('order.id'))
+    
+    def __init__(self, ticket_dict):
+        """
+        Params come from API docs
+        :param ticket_dict: dictionary for init ticket
+        """
+        self.ticket_type = ticket_dict["ticket_type"]
+        self.date_opened = ticket_dict["date_opened"]
+        self.date_closed = ticket_dict["date_closed"]
+        self.current_status = ticket_dict["current_status"]
+        self.sessions = ticket_dict["sessions"]
+        self.customer_id = ticket_dict["customer_id"]
+#        self._order_id = ticket_dict["order_id"]
+
+    def __repr__(self):
+        return '<Ticket {} {} {} {} {} {}>'.format(self.id, self.ticket_type, self.date_opened, self.current_status, self.sessions, self.customer_id)
+
+    def serialize(self):
+        sessions = [r.serialize() for r in self.sessions]
+        for session in self.sessions:
+            sessions.append(session.serialize())
+        return {
+            "id": self.id,
+            "ticket_type": self.ticket_type.name,
+            "date_opened": self.date_opened.strftime('{%Y-%m-%d %H:%M:%S}'),
+            "date_closed": self.date_closed.strftime('{%Y-%m-%d %H:%M:%S}'),
+            "current_status": self.current_status.name,
+            "sessions": sessions,
+            "customer_id": self.customer_id
+        #    "order_id": self.order_id
+        }
+
+class CallLog(Base):
+    __tablename__ = "call_log"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    date_called = Column(DateTime)
+    calling_number = Column(String(60))
+    callback_number = Column(String(60))
+    notes = Column(String(500))
+#    action_taken = Column(ActionTaken)????
+    employee = Column(String(16))
+    ticket = Column(Integer, ForeignKey('ticket.id'))
+
+    def __init__(self, call_dict):
+        self.date_called = call_dict["date_called"]
+        self.calling_number = call_dict["calling_number"]
+        self.callback_number = call_dict["callback_number"]
+        self.notes = call_dict["notes"]
+        self.employee = call_dict["employee"]
+
+    def __repr__(self):
+        return '<CallLog {} {} {} {} {}>'.format(self.date_called,self.calling_number,self.callback_number,self.notes,self.employee)
+
+    def serialize(self):
+        return {
+            "id":self.id,
+            "date_called":self.date_called,
+            "callling_number":self.calling_number,
+            "callback_number":self.callback_number,
+            "notes":self.notes,
+            "employee":self.employee,
+            "ticket":self.ticket
+        }
