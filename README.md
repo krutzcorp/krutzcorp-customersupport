@@ -26,21 +26,8 @@ The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 
 ## Updating the deployment server
 
-1. ssh into the vm
-2. cd into the repo
-`cd /var/www/krutzcorp-customersupport`
-3. pull master
-`git pull origin master`
-4. Restart the service
-`sudo service krutzcorp-customersupport restart`
-5. Restart nginx
-`sudo service nginx restart`
+- Unix:
+`ssh root@vm343f.se.rit.edu 'bash -s' < deploy.sh`
 
-## Running Tests from CommandLine (
-
-1. Pull Repo
-  `git pull origin master`
-2. cd into project directory
-3. Run tests
-    python tests.py
-
+- Windows Based:
+`plink root@vm343f.se.rit.edu -m deploy.sh`
