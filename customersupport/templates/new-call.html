@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% block title %}New Call{% endblock %}
 {% block content %}
-    {# Bring in the search customer modal. #}
+    {#- Bring in the search customer modal. -#}
     {% include 'search-customer-modal.html' %}
     {% include 'new-ticket-modal.html' %}
     {% include 'list-tickets-modal.html' %}
@@ -17,7 +17,7 @@
                 <div class="form-group{% if form.customer_id.errors %} has-error{% endif %}">
                     {{ form.customer_id.label }}
                     <div class="input-group">
-                        {{ form.customer_id(class="form-control", id="customer_id") }}
+                        {{ form.customer_id(class="form-control", id="customer") }}
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#searchCustomerModal">Search</button>
@@ -53,7 +53,6 @@
                 <div class="form-group{% if form.phone_called_from.errors %} has-error{% endif %}">
                     {{ form.phone_called_from.label }}
                     {{ form.phone_called_from(class="form-control", placeholder="(222) 867-5309") }}
-                    {#                    <input type="tel" class="form-control" id="calledFromPhone" placeholder="Called From">#}
                     {% if form.phone_called_from.errors %}
                         <ul class="text-danger">{% for error in form.phone_called_from.errors %}
                             <li>{{ error }}</li>{% endfor %}</ul>
