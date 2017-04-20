@@ -1,13 +1,26 @@
 from customersupport import app
 from customersupport.forms import NewCallForm
+from customersupport.models import CallLog
+from customersupport.database import db_session
 
-from flask import Flask, request, render_template
+from flask import request, render_template, flash, redirect, url_for
 
 
 @app.route('/', methods=["GET", "POST"])
-def get_new_call_form():
+def new_call():
     form = NewCallForm()
     if form.validate_on_submit():
-        pass
+        call_log = CallLog(
+            calling_number=form.phone_called_from.data,
+            callback_number=form.phone_call_back.data,
+            notes=form.notes.data,
+            ticket_id=form.ticket_id.data,
+            employee="Corban"  # TODO: Add a real employee based on the session.
+        )
 
-    return render_template('new-call.html', form=form)
+        db_session.add(call_log)
+        db_session.commit()
+        flash("Call log added.")
+        return redirect(url_for("new_call"))
+
+    return render_template("new-call.html", form=form)
