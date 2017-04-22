@@ -7,9 +7,9 @@
                 <h4 class="modal-title" id="searchOrderModalLabel">Search Order</h4>
             </div>
             <div class="modal-body">
-                <form id="searchOrderForm" onsubmit="return false">
+                <form id="searchOrderIdForm" onsubmit="return false">
                     <div class="row">
-                        <div class="col-sm-12">
+                       <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="order_id">Order ID</label>
                                 <input type="text" class="form-control" name="order_id" id="order_id"
@@ -17,6 +17,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="search">&nbsp;</label>
+                                <div class="input-group">
+                                    <span class="input-group-btn">
+                                        <input type="submit" id="searchOrderIdButton" value="Search Order By ID"
+                                               class="btn btn-primary"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <form id="searchOrderForm" onsubmit="return false">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -60,11 +79,13 @@
                                        >
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
                             <div class="radio">
-                                <label><input type="radio" name="billing" value="billing">Billing Address</label>
-                                <label><input type="radio" name="shipping" value="shipping">Shipping Address</label>
+                                <label><input type="radio" name="address" value="billing">Billing Address</label>
+                                <label><input type="radio" name="address" value="shipping">Shipping Address</label>
                             </div>
+                        </div>
                         </div>
                     </div>
 
@@ -78,24 +99,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-                        <div class="col-sm-2">
-                            <div class="checkbox">
-                                <label>What to return</label>
-                                <label><input type="checkbox" name="return_billing" value="returnBilling" id="return_billing">Billing Address</label>
-                                <label><input type="checkbox" name="return_shipping" value="returnShipping" id="return_shipping">Shipping Address</label>
-                                <label><input type="checkbox" name="return_customer" value="returnCustomer" id="return_customer">Customer Information</label>
-                                <label><input type="checkbox" name="return_items" value="return_items" id="return_items">Items</label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="search">&nbsp;</label>
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <input type="submit" id="searchOrderButton" value="Search"
+                                        <input type="submit" id="searchOrderButton" value="Search By Address"
                                                class="btn btn-primary"/>
                                     </span>
                                 </div>
@@ -117,7 +126,7 @@
                         </div>
                     </div>
 
-                    <input type="submit" value="Select Order" id="selectOrder"
+                    <input type="submit" value="Select Order By Address" id="selectOrder"
                            class="btn btn-success btn-lg btn-block"/>
                 </form>
             </div>
