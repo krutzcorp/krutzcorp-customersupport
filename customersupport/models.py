@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Enum, ForeignKey
 from sqlalchemy.orm import relationship
 from customersupport.database import Base
+from datetime import datetime
 import enum
 
 class Employee:
@@ -279,9 +280,9 @@ class Ticket(Base):
     date_closed = Column(DateTime)
     current_status = Column(Enum(TicketStatus))
     sessions = relationship('CallLog',backref="post",cascade="all, delete-orphan",lazy="dynamic")
-    customer_id = Column(String(16)) 
+    customer_id = Column(String(16))
 #    order_id = Column(String(60),ForeignKey('order.id'))
-    
+
     def __init__(self, ticket_dict):
         """
         Params come from API docs
@@ -313,6 +314,7 @@ class Ticket(Base):
         #    "order_id": self.order_id
         }
 
+
 class CallLog(Base):
     __tablename__ = "call_log"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -324,23 +326,39 @@ class CallLog(Base):
     employee = Column(String(16))
     ticket = Column(Integer, ForeignKey('ticket.id'))
 
-    def __init__(self, call_dict):
-        self.date_called = call_dict["date_called"]
-        self.calling_number = call_dict["calling_number"]
-        self.callback_number = call_dict["callback_number"]
-        self.notes = call_dict["notes"]
-        self.employee = call_dict["employee"]
+    def __init__(
+            self,
+            date_called=datetime.today(),
+            calling_number=None,
+            callback_number=calling_number,
+            notes="",
+            employee=None,
+            ticket_id=None
+    ):
+        self.date_called = date_called
+        self.calling_number = calling_number
+        self.callback_number = callback_number
+        self.notes = notes
+        self.employee = employee
+        if ticket_id is not None:
+            self.ticket = ticket_id
 
     def __repr__(self):
-        return '<CallLog {} {} {} {} {}>'.format(self.date_called,self.calling_number,self.callback_number,self.notes,self.employee)
+        return '<CallLog {} {} {} {} {}>'.format(
+            self.date_called.isoformat(),
+            self.calling_number,
+            self.callback_number,
+            self.notes,
+            self.employee
+        )
 
     def serialize(self):
         return {
-            "id":self.id,
-            "date_called":self.date_called,
-            "callling_number":self.calling_number,
-            "callback_number":self.callback_number,
-            "notes":self.notes,
-            "employee":self.employee,
-            "ticket":self.ticket
+            "id": self.id,
+            "date_called": self.date_called.isoformat(),
+            "calling_number": self.calling_number,
+            "callback_number": self.callback_number,
+            "notes": self.notes,
+            "employee": self.employee,
+            "ticket": self.ticket
         }
