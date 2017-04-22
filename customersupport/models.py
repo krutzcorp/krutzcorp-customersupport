@@ -218,7 +218,7 @@ class Item:
         for an Order.
         :return: item id
         """
-        return self.id;
+        return self.id
 
     def serialize(self):
         """
