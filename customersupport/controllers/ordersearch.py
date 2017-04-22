@@ -36,17 +36,19 @@ def select_search():
     if orders is not None:
         return jsonify([c.serialize() for c in orders])
 
+    return jsonify([])
+
 
 @app.route('/api/orderid/search')
 def search_order_id():
 
-    orders = sales.get_order_info(
+    order = sales.get_order_info(
         order_id=get_param_from_request_if_not_empty('order_id'),
         mock=False
     )
 
-    if orders is not None:
-        return jsonify([c.serialize() for c in orders])
+    if order is not None:
+        return jsonify([order.serialize()])
 
 
 @app.route('/api/orderitem')

@@ -106,11 +106,8 @@ def get_orders(
     except ValueError:
         return None
 
-    if "orders" not in json_resp:
-        return None
-
     orders = []
-    for order in json_resp["orders"]:
+    for order in json_resp:
         orders.append(Order(order))
 
     return orders
