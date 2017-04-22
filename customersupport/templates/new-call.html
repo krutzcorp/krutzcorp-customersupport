@@ -5,6 +5,8 @@
     {% include 'search-customer-modal.html' %}
     {# Bring in the search order modal. #}
     {% include 'search-order.html' %}
+    {% include 'new-ticket-modal.html' %}
+    {% include 'list-tickets-modal.html' %}
 
     <div class="page-header">
         <h2>New Call</h2>
@@ -60,20 +62,31 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
+                    <input type="text" class="form-control" id="ticketId" placeholder="Ticket ID">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
                     <div class="input-group">
-                        <select class="form-control" id="type">
+                        <select class="form-control" id="ticketType">
                             <option>Refund</option>
                             <option>Replace</option>
                         </select>
                         <span class="input-group-btn">
-                  <a class="btn btn-primary" href="new-ticket.html" role="button">New Ticket</a>
+                            <button type="button" class="btn btn-primary" id="createTicket" data-toggle="modal"
+                                    data-target="#newTicketModal" disabled="true">Create</button>
                 </span>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <a class="btn btn-info btn-block" href="list-tickets.html" role="button">List Customer Tickets</a>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                            data-target="#listTicketModal"id="listTicketsButton" disabled="true">List Customer Tickets</button>
+                    </span>
                 </div>
             </div>
         </div>
@@ -93,4 +106,7 @@
 {% block page_scripts %}
     <script src="{{ url_for('static', filename='search-customer.js') }}"></script>
     <script src="{{ url_for('static', filename='search-order.js') }}"></script>
+    <script src="{{ url_for('static', filename='new-ticket.js') }}"></script>
+    <script src="{{ url_for('static', filename='list-tickets.js') }}"></script>
 {% endblock %}
+

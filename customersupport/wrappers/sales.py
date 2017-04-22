@@ -26,18 +26,22 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
         try:
             r = requests.get(search_customer_url, params=query_params)
         except requests.exceptions.RequestException:
-            return None
+            print("Request error.")
+            raise
 
     try:
         json_resp = r.json()
     except ValueError:
-        return None
+        print("Response wasn't JSON.")
+        raise
 
-    if "customers" not in json_resp:
-        return None
+    # Sales changed this.
+    # if "customers" not in json_resp:
+    #     return None
 
     customers = []
-    for customer_resp in json_resp["customers"]:
+    # for customer_resp in json_resp["customers"]:
+    for customer_resp in json_resp:
         customers.append(Customer(customer_resp))
 
     return customers
@@ -135,11 +139,12 @@ def get_order_info(
     except ValueError:
         return None
 
-    if "orders" not in json_resp:
-        return None
+    # if "orders" not in json_resp:
+    #     return None
 
-    orders = []
-    for order in json_resp["orders"]:
-        orders.append(Order(order))
+    return Order(json_resp)
+    # orders = []
+    # for order in json_resp:
+    #     orders.append(Order(order))
 
-    return orders
+    # return orders
