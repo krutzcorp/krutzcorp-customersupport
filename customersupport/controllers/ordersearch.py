@@ -50,9 +50,7 @@ def select_search():
 def get_info():
     order_id = get_param_from_request_if_not_empty('order_id')
     if order_id is not None:
-        order_info = sales.get_order_info(
-            order_id=order_id, mock=False
-        )
+        order_info = sales.get_order_info(order_id = order_id)
         order = order_info
         items_list = order.items
         return jsonify([c.serialize() for c in items_list])

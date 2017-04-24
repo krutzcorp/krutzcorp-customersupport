@@ -97,3 +97,4 @@ ENV/
 /customer-support.db
 *.swp
 *.swo
+.vscode/
