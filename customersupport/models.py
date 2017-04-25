@@ -143,7 +143,7 @@ class Order:
     """
     _id = None
     _order_date = None
-    _items = set()
+    _items = []
 
     def __init__(self, order_dict):
         """
@@ -153,11 +153,12 @@ class Order:
         :param item_dict: dictionary from API call
         """
         self._id = order_dict["id"]
+        self._items = [] #Let's be really sure we clear this first
         if "orderDate" in order_dict:  # This isn't in the refund response.
             self._order_date = order_dict["orderDate"]
         if "items" in order_dict:  # Items aren't always included
             for item in order_dict["items"]:
-                self._items.add(Item(item))
+                self._items.append(Item(item))
 
     def serialize(self):
         """

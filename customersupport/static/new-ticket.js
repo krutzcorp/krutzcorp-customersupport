@@ -9,8 +9,10 @@ $(document).ready(function () {
         $(".modal-body #titleForm").val('['+ ticketType + '] Order '+ orderID);
         //var getInfo= [ticketType, orderID];
 
-        // Create Table
+        // Get Table DOM element
         var table = $("#newTicketTable")
+        // Remove all table rows that may be there already
+        table.find("tr").remove();
 
         // Search for items within an order to add to the form
         $.get("/api/orderitem", {'order_id':orderID})
