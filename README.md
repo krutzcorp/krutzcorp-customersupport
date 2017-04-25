@@ -9,7 +9,7 @@
 5. To activate the virtual environment, run:
     - OSX/Linux: `source venv/bin/activate`
     - Windows: `venv\Scripts\activate`
-6. Install the requirements for the project with `pip install -r requirements.txt`.
+6. Install the requirements for the project with `pip install -r requirements/dev.txt`.
 7. Initialize the database:
     ```bash
     $ python
