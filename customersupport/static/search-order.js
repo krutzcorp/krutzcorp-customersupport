@@ -10,9 +10,9 @@ $(document).ready(function () {
                         $("<option></option>")
                             .text(`Order Id: ${item.id}, Order Date: ${item.orderDate.substring(0,10)}, Phones Purchased: `)
                             .val(item.id))
-                            $.each(item.items, function (index, phone) {
+                            $.each(item.items, function (index, items) {
                             $("<option></option>")
-                            .text(`Model Id: ${phone.modelId}, Refund Deadline: ${phone.refundDeadline} Replace Deadline: ${phone.replaceDeadline}, Serial Id: ${phone.serialId}`)
+                            .text(`Model Id: ${items.modelId}, Refund Deadline: ${items.refundDeadline.substring(0,10)} Replace Deadline: ${items.replaceDeadline.substring(0,10)}, Serial Id: ${items.serialId}`)
                         })
                 });
             });
@@ -27,9 +27,9 @@ $(document).ready(function () {
                         $("<option></option>")
                             .text(`Order Id: ${item.id}, Order Date: ${item.orderDate.substring(0,10)}, Phones Purchased: `)
                             .val(item.id),
-                        $.each(item.items, function (index, phone) {
+                        $.each(item.items, function (index, items) {
                             $("<option></option>")
-                            .text(`Model Id: ${phone.modelId}, Refund Deadline: ${phone.refundDeadline} Replace Deadline: ${phone.replaceDeadline}, Serial Id: ${phone.serialId}`)
+                            .text(`Model Id: ${items.modelId}, Refund Deadline: ${items.refundDeadline.substring(0,10)} Replace Deadline: ${items.replaceDeadline.substring(0,10)}, Serial Id: ${items.serialId}`)
                         })
                     );
                 });
