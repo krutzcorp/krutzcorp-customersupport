@@ -28,10 +28,21 @@ $(document).ready(function () {
      });
 
     $("#saveTicketChanges").click(function(){
-        //TODO call the api endpoint
-
-        //Change ticket status to pass
-        $("#status option[value='pass']").prop('selected', 'selected').change();
+        var ticketBar = $("#ticketProgress");
+        ticketBar.css("width","0%");
+        ticketBar.css("visibility", "visible");
+        ticketBar.animate({
+            width: "20%"
+        }, 500);
+        // TODO call the api endpoint
+        $.post("/sales/refund",{'use_mock':true}, function(res,status){
+            ticketBar.animate({
+                    width: "100%"
+            }, 2500);
+            // Change ticket status to pass
+            $("#status option[value='pass']").prop('selected', 'selected').change();
+            ticketBar.css("visibility", "hidden");
+        });
     });
 
      //Hook up a change listener to see if the new tickets button should be active

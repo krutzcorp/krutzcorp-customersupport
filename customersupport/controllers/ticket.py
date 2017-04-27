@@ -10,8 +10,9 @@ from flask import render_template
 from flask import jsonify
 from flask import json
 
-@app.route('/sales/refund/real')
-def refund_order(mock=False):
+@app.route('/sales/refund', methods=['POST'])
+def refund_order():
+    use_mock = request.args.get("use_mock") is not None
     order = sales.initiate_refund(
         replace=True,
         order_id=1,
@@ -20,7 +21,7 @@ def refund_order(mock=False):
             456,
             789
         ],
-        mock=mock
+        mock=use_mock
     )
 
     if order is not None:
