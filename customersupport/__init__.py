@@ -3,7 +3,7 @@ from customersupport.database import db_session
 
 app = Flask(__name__)
 
-from customersupport.controllers import session, customersearch, ticket, ordersearch
+from customersupport.controllers import session, customersearch, ticket, ordersearch, calllog
 
 
 @app.teardown_appcontext
