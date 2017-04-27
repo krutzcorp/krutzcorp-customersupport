@@ -12,7 +12,9 @@ $(document).ready(function () {
         // Get Table DOM element
         var table = $("#newTicketTable")
         // Remove all table rows that may be there already
-        table.find("tr").remove();
+        table.find("tr:gt(0)").remove();
+        // Init the ticket type to new
+        $("#status option[value='open']").prop('selected', 'selected').change();
 
         // Search for items within an order to add to the form
         $.get("/api/orderitem", {'order_id':orderID})
@@ -24,6 +26,13 @@ $(document).ready(function () {
                   });
             });
      });
+
+    $("#saveTicketChanges").click(function(){
+        //TODO call the api endpoint
+
+        //Change ticket status to pass
+        $("#status option[value='pass']").prop('selected', 'selected').change();
+    });
 
      //Hook up a change listener to see if the new tickets button should be active
     $(document.body).on('change','#order',function(){
