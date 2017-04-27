@@ -84,23 +84,25 @@ sales_search_customer = """
 
 sales_initiate_refund = """
     {
-      "items": [
-        {
-          "price": 100,
-          "refundDeadline": "2017-03-01T20:51:26.908Z",
-          "replaceDeadline": "2017-03-01T20:51:26.908Z",
-          "serialId": 20,
-          "status": "return"
-        },
-        {
-          "price": 200,
-          "refundDeadline": "2017-03-01T20:51:26.909Z",
-          "replaceDeadline": "2017-03-01T20:51:26.909Z",
-          "serialId": 21,
-          "status": "return"
-        }
-      ],
-      "orderId": 24
+      “orderId”: 24,
+        “items”: [
+          {
+            "serialNumber": 20,
+            "price": 100,
+            "status": "return",
+            "replaceDeadline": "2017-03-01T20:51:26.908Z",
+            "refundDeadline": "2017-03-01T20:51:26.908Z",
+            "bogoSerialId": 25
+          },
+          {
+            "serialNumber": 25,
+            "price": 200,
+            "status": "return",
+            "replaceDeadline": "2017-03-01T20:51:26.909Z",
+            "refundDeadline": "2017-03-01T20:51:26.909Z",
+            "bogoSerialId": null
+          }  
+        ]
     }
 """
 
