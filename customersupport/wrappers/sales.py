@@ -35,12 +35,7 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
         print("Response wasn't JSON.")
         raise
 
-    # Sales changed this.
-    # if "customers" not in json_resp:
-    #     return None
-
     customers = []
-    # for customer_resp in json_resp["customers"]:
     for customer_resp in json_resp:
         customers.append(Customer(customer_resp))
 
@@ -113,8 +108,7 @@ def get_orders(
     return orders
 
 
-def get_order_info(
-        order_id, mock=False):
+def get_order_info(order_id, mock=False):
     query_params = {
         "orderId": order_id
     }
@@ -136,12 +130,4 @@ def get_order_info(
     except ValueError:
         return None
 
-    # if "orders" not in json_resp:
-    #     return None
-
     return Order(json_resp)
-    # orders = []
-    # for order in json_resp:
-    #     orders.append(Order(order))
-
-    # return orders

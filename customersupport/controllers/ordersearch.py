@@ -7,6 +7,7 @@ from customersupport.util import get_param_from_request_if_not_empty
 
 
 def check_address(address):
+    """Check if the address field of the request is set to billing."""
     value = request.args.get(address)
     if value == 'billing':
         return True
@@ -14,11 +15,9 @@ def check_address(address):
         return False
 
 
-# select which order search to use
-# if order id exists use order search
-# otherwise order info
 @app.route('/api/order/search')
 def select_search():
+    """Search for an order by address and/or customer."""
     orders = sales.get_orders(
         address=get_param_from_request_if_not_empty('street_address'),
         billing_address=check_address('address'),  # check if radio button click,
@@ -31,8 +30,6 @@ def select_search():
         mock=False
     )
 
-    # Call the Sales API to get matching . Used by the search-order
-
     if orders is not None:
         return jsonify([c.serialize() for c in orders])
 
@@ -41,7 +38,7 @@ def select_search():
 
 @app.route('/api/orderid/search')
 def search_order_id():
-
+    """Search for an order by order ID."""
     order = sales.get_order_info(
         order_id=get_param_from_request_if_not_empty('order_id'),
         mock=False
@@ -49,6 +46,8 @@ def search_order_id():
 
     if order is not None:
         return jsonify([order.serialize()])
+
+    return jsonify([])
 
 
 @app.route('/api/orderitem')

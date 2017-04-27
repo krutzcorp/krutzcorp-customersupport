@@ -1,10 +1,9 @@
 {% extends 'template.html' %}
 {% block title %}New Call{% endblock %}
 {% block content %}
-    {# Bring in the search customer modal. #}
+    {# Bring in the various modals. #}
     {% include 'search-customer-modal.html' %}
-    {# Bring in the search order modal. #}
-    {% include 'search-order.html' %}
+    {% include 'search-order-modal.html' %}
     {% include 'new-ticket-modal.html' %}
     {% include 'list-tickets-modal.html' %}
 
@@ -82,12 +81,9 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal"
-                            data-target="#listTicketModal"id="listTicketsButton" disabled="true">List Customer Tickets</button>
-                    </span>
-                </div>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#listTicketModal" id="listTicketsButton" disabled="true">List Customer Tickets
+                </button>
             </div>
         </div>
 
