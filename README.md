@@ -24,6 +24,8 @@ To run the server, activate the virtual environment then run `python run.py`
 
 The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 
+# Production
+
 ## Updating the deployment server
 
 - Unix:
@@ -31,3 +33,17 @@ The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 
 - Windows Based:
 `plink root@vm343f.se.rit.edu -m deploy.sh`
+
+## Restarting the deployment server
+
+- Unix:
+`ssh root@vm343f.se.rit.edu 'bash -s' < restart.sh`
+
+- Windows Based:
+`plink root@vm343f.se.rit.edu -m restart.sh`
+
+## Debugging the server
+
+Nginx logs can be found in `/var/log/nginx`
+
+Flask logs can be found in `/var/log/uwsgi`
