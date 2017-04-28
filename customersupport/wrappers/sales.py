@@ -35,12 +35,7 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
         print("Response wasn't JSON.")
         raise
 
-    # Sales changed this.
-    # if "customers" not in json_resp:
-    #     return None
-
     customers = []
-    # for customer_resp in json_resp["customers"]:
     for customer_resp in json_resp:
         customers.append(Customer(customer_resp))
 
@@ -81,12 +76,12 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
 
 
 def get_orders(
-        address=None, billing_address=False, customer_id=None, incl_payment_info=False,
-        incl_shipping_info=False, incl_customer_info=False, incl_items=False, mock=False):
+        address=None, billing_address=False, customer_id=None, state=None,
+        zipcode=None, city=None, first_name=None, last_name=None, mock=False):
     query_params = {
-        "address": address, "billingAddress": billing_address, "customerId": customer_id,
-        "paymentInfo": incl_payment_info, "shippingInfo": incl_shipping_info,
-        "customerInfo": incl_customer_info, "items": incl_items
+        "address": address, "state": state, "zipCode": zipcode, "city": city,
+        "billingAddress": billing_address, "customerId": customer_id,
+        "firstName": first_name, "lastName": last_name
     }
 
     search_order_url = SALES_URL + "/order/search"
@@ -106,22 +101,16 @@ def get_orders(
     except ValueError:
         return None
 
-    if "orders" not in json_resp:
-        return None
-
     orders = []
-    for order in json_resp["orders"]:
+    for order in json_resp:
         orders.append(Order(order))
 
     return orders
 
 
-def get_order_info(
-        order_id, incl_payment_info=False, incl_shipping_info=False, incl_customer_info=False,
-        incl_items=False, mock=False):
+def get_order_info(order_id, mock=False):
     query_params = {
-        "orderId": order_id, "paymentInfo": incl_payment_info, "shippingInfo": incl_shipping_info,
-        "customerInfo": incl_customer_info, "items": incl_items
+        "orderId": order_id
     }
 
     order_info_url = SALES_URL + "/order"
@@ -141,12 +130,4 @@ def get_order_info(
     except ValueError:
         return None
 
-    # if "orders" not in json_resp:
-    #     return None
-
     return Order(json_resp)
-    # orders = []
-    # for order in json_resp:
-    #     orders.append(Order(order))
-
-    # return orders

@@ -1,0 +1,119 @@
+<div class="modal fade" id="searchOrderModal" tabindex="-1" role="dialog" aria-labelledby="searchOrderModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="searchOrderModalLabel">Search Order</h4>
+            </div>
+            <div class="modal-body">
+                <form id="searchOrderIdForm" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="order_id">Order ID</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="order_id" id="order_id">
+                                    <span class="input-group-btn">
+                                        <input type="submit" id="searchOrderIdButton" value="Search Order By ID"
+                                               class="btn btn-primary"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <form id="searchOrderForm" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="lastName">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="streetAddress">Street Address</label>
+                                <input type="text" class="form-control" name="street_address" id="streetAddress">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" name="city" id="city">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" class="form-control" name="state" id="state">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="zipcode">Zipcode</label>
+                                <input type="text" class="form-control" name="zipcode" id="zipcode">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="address" value="billing">
+                                Billing Address
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="address" value="shipping">
+                                Shipping Address
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="customer_id">Customer ID</label>
+                                <input type="text" class="form-control" name="customer_id" id="customer_id">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" id="searchOrderButton" value="Search By Address"
+                           class="btn btn-primary btn-block"/>
+                </form>
+
+                <hr>
+
+                <form id="select_order_form" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="matchingOrders">Matching Orders</label>
+                                <select size="9" name="order_id" class="form-control" id="matchingOrders">
+                                    <option disabled>Click search above.</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Select Order" id="selectOrder"
+                           class="btn btn-success btn-lg btn-block"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

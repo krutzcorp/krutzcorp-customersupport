@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     // When the user searches for a customer, call the API and fill the select box.
     $("#searchCustomerButton").click(function () {
         $.get("/api/customer/search", $('#searchCustomerForm').serializeArray())
@@ -20,6 +19,4 @@ $(document).ready(function () {
         $("#customer").val($("#matchingCustomers").val()).change();
         $('#searchCustomerModal').modal('hide')
     });
-
-
 });
