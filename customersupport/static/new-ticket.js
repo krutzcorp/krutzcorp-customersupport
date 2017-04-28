@@ -27,21 +27,21 @@ $(document).ready(function () {
             });
      });
 
+    var ticketBar = $("#ticketProgress");
+    var ticketBarContainer = $("#ticketProgressContainer");
     $("#saveTicketChanges").click(function(){
-        var ticketBar = $("#ticketProgress");
+        
         ticketBar.css("width","0%");
-        ticketBar.css("visibility", "visible");
-        ticketBar.animate({
-            width: "20%"
-        }, 500);
+        ticketBarContainer.css("visibility", "visible");
         // TODO call the api endpoint
         $.post("/sales/refund",{'use_mock':true}, function(res,status){
-            ticketBar.animate({
-                    width: "100%"
-            }, 2500);
-            // Change ticket status to pass
-            $("#status option[value='pass']").prop('selected', 'selected').change();
-            ticketBar.css("visibility", "hidden");
+                ticketBar.animate({
+                        width: "100%"
+                }, 2500, function(){
+                    // Change ticket status to pass
+                    $("#status option[value='pass']").prop('selected', 'selected').change();
+                    ticketBarContainer.css("visibility", "hidden");
+                });
         });
     });
 
