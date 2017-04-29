@@ -1,8 +1,9 @@
 {% extends 'template.html' %}
 {% block title %}New Call{% endblock %}
 {% block content %}
-    {# Bring in the search customer modal. #}
+    {#- Bring in the various modals. -#}
     {% include 'search-customer-modal.html' %}
+    {% include 'search-order-modal.html' %}
     {% include 'new-ticket-modal.html' %}
     {% include 'list-tickets-modal.html' %}
 
@@ -10,29 +11,39 @@
         <h2>New Call</h2>
     </div>
 
-    <form>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="customer">Customer ID</label>
+                <div class="form-group{% if form.customer_id.errors %} has-error{% endif %}">
+                    {{ form.customer_id.label }}
                     <div class="input-group">
-                        <input type="text" class="form-control" id="customer" placeholder="Customer ID">
+                        {{ form.customer_id(class="form-control", id="customer") }}
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                     data-target="#searchCustomerModal">Search</button>
                         </span>
                     </div>
+                    {% if form.customer_id.errors %}
+                        <ul class="text-danger">{% for error in form.customer_id.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="order">Order</label>
+                <div class="form-group{% if form.order.errors %} has-error{% endif %}">
+                    {{ form.order.label }}
                     <div class="input-group">
-                        <input type="text" class="form-control" id="order" placeholder="Order">
+                        {{ form.order(class="form-control", id="order") }}
                         <span class="input-group-btn">
-                  <a class="btn btn-primary" href="search-order.html" role="button">Search</a>
-                </span>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#searchOrderModal">Search</button>
+                        </span>
                     </div>
+                    {% if form.order.errors %}
+                        <ul class="text-danger">{% for error in form.order.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -41,15 +52,23 @@
         <h4>Phone</h4>
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="calledFromPhone">Called From</label>
-                    <input type="tel" class="form-control" id="calledFromPhone" placeholder="Called From">
+                <div class="form-group{% if form.phone_called_from.errors %} has-error{% endif %}">
+                    {{ form.phone_called_from.label }}
+                    {{ form.phone_called_from(class="form-control", placeholder="(222) 867-5309") }}
+                    {% if form.phone_called_from.errors %}
+                        <ul class="text-danger">{% for error in form.phone_called_from.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="callBackPhone">Call Back</label>
-                    <input type="tel" class="form-control" id="callBackPhone" placeholder="Call Back">
+                <div class="form-group{% if form.phone_call_back.errors %} has-error{% endif %}">
+                    {{ form.phone_call_back.label }}
+                    {{ form.phone_call_back(class="form-control", placeholder="(222) 867-5309") }}
+                    {% if form.phone_call_back.errors %}
+                        <ul class="text-danger">{% for error in form.phone_call_back.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -58,41 +77,48 @@
         <h4>Ticket</h4>
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="ticketId" placeholder="Ticket ID">
+                <div class="form-group{% if form.ticket_id.errors %} has-error{% endif %}">
+                    {{ form.ticket_id.label }}
+                    {{ form.ticket_id(class="form-control", id="ticketId") }}
+                    {% if form.ticket_id.errors %}
+                        <ul class="text-danger">{% for error in form.ticket_id.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group{% if form.ticket_type.errors %} has-error{% endif %}">
                     <div class="input-group">
-                        <select class="form-control" id="ticketType">
-                            <option>Refund</option>
-                            <option>Replace</option>
-                        </select>
+                        {{ form.ticket_type(class="form-control", id="ticketType") }}
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-primary" id="createTicket" data-toggle="modal"
                                     data-target="#newTicketModal" disabled="true">Create</button>
-                </span>
+                        </span>
                     </div>
+                    {% if form.ticket_type.errors %}
+                        <ul class="text-danger">{% for error in form.ticket_type.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal"
-                            data-target="#listTicketModal"id="listTicketsButton" disabled="true">List Customer Tickets</button>
-                    </span>
-                </div>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#listTicketModal" id="listTicketsButton" disabled="true">List Customer Tickets
+                </button>
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="notes">Notes</label>
-                    <textarea class="form-control" rows="3" id="notes"></textarea>
+                <div class="form-group{% if form.notes.errors %} has-error{% endif %}">
+                    {{ form.notes.label }}
+                    {{ form.notes(class="form-control", rows=3) }}
+                    {% if form.notes.errors %}
+                        <ul class="text-danger">{% for error in form.notes.errors %}
+                            <li>{{ error }}</li>{% endfor %}</ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -102,6 +128,7 @@
 
 {% block page_scripts %}
     <script src="{{ url_for('static', filename='search-customer.js') }}"></script>
+    <script src="{{ url_for('static', filename='search-order.js') }}"></script>
     <script src="{{ url_for('static', filename='new-ticket.js') }}"></script>
     <script src="{{ url_for('static', filename='list-tickets.js') }}"></script>
 {% endblock %}

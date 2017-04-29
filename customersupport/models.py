@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Enum, ForeignKey
 from sqlalchemy.orm import relationship
 from customersupport.database import Base
+from datetime import datetime
 import enum
 
 class Employee:
@@ -142,7 +143,7 @@ class Order:
     """
     _id = None
     _order_date = None
-    _items = set()
+    _items = []
 
     def __init__(self, order_dict):
         """
@@ -152,11 +153,12 @@ class Order:
         :param item_dict: dictionary from API call
         """
         self._id = order_dict["id"]
+        self._items = [] #Let's be really sure we clear this first
         if "orderDate" in order_dict:  # This isn't in the refund response.
             self._order_date = order_dict["orderDate"]
         if "items" in order_dict:  # Items aren't always included
             for item in order_dict["items"]:
-                self._items.add(Item(item))
+                self._items.append(Item(item))
 
     def serialize(self):
         """
@@ -218,7 +220,7 @@ class Item:
         for an Order.
         :return: item id
         """
-        return self.id;
+        return self.id
 
     def serialize(self):
         """
@@ -279,9 +281,9 @@ class Ticket(Base):
     date_closed = Column(DateTime)
     current_status = Column(Enum(TicketStatus))
     sessions = relationship('CallLog',backref="post",cascade="all, delete-orphan",lazy="dynamic")
-    customer_id = Column(String(16)) 
+    customer_id = Column(String(16))
 #    order_id = Column(String(60),ForeignKey('order.id'))
-    
+
     def __init__(self, ticket_dict):
         """
         Params come from API docs
@@ -313,6 +315,7 @@ class Ticket(Base):
         #    "order_id": self.order_id
         }
 
+
 class CallLog(Base):
     __tablename__ = "call_log"
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -324,23 +327,39 @@ class CallLog(Base):
     employee = Column(String(16))
     ticket = Column(Integer, ForeignKey('ticket.id'))
 
-    def __init__(self, call_dict):
-        self.date_called = call_dict["date_called"]
-        self.calling_number = call_dict["calling_number"]
-        self.callback_number = call_dict["callback_number"]
-        self.notes = call_dict["notes"]
-        self.employee = call_dict["employee"]
+    def __init__(
+            self,
+            date_called=datetime.today(),
+            calling_number=None,
+            callback_number=calling_number,
+            notes="",
+            employee=None,
+            ticket_id=None
+    ):
+        self.date_called = date_called
+        self.calling_number = calling_number
+        self.callback_number = callback_number
+        self.notes = notes
+        self.employee = employee
+        if ticket_id is not None:
+            self.ticket = ticket_id
 
     def __repr__(self):
-        return '<CallLog {} {} {} {} {}>'.format(self.date_called,self.calling_number,self.callback_number,self.notes,self.employee)
+        return '<CallLog {} {} {} {} {}>'.format(
+            self.date_called.isoformat(),
+            self.calling_number,
+            self.callback_number,
+            self.notes,
+            self.employee
+        )
 
     def serialize(self):
         return {
-            "id":self.id,
-            "date_called":self.date_called,
-            "callling_number":self.calling_number,
-            "callback_number":self.callback_number,
-            "notes":self.notes,
-            "employee":self.employee,
-            "ticket":self.ticket
+            "id": self.id,
+            "date_called": self.date_called.isoformat(),
+            "calling_number": self.calling_number,
+            "callback_number": self.callback_number,
+            "notes": self.notes,
+            "employee": self.employee,
+            "ticket": self.ticket
         }
