@@ -1,7 +1,10 @@
 import requests_mock
 import requests
+from functools import wraps
 import json
 import urllib.parse
+from flask import request, Response
+from customersupport import app
 from config import HR_URL
 from customersupport.models import Employee
 from customersupport.wrappers import mocked_responses
@@ -42,3 +45,35 @@ def get_employee(employee_id, mock=False):
 
     return employee
 
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_authtoken():
+            return Response('<p>You are not allowed to view this page</p>')
+        return f(*args, **kwargs)
+    return decorated
+
+# oauth authentication token sent from hr to the main page
+def check_authtoken():
+
+    token = request.args.get('token')
+    #authenticate the token by calling hr
+    get_authtoken_url = HR_URL + "/confirm_login/CustomerService/{token}".format(token=token)
+
+    try:
+        r = requests.get(get_authtoken_url)
+    except requests.exceptions.RequestException:
+        return Response('<p>Login failed</p>')
+
+    try:
+        json_resp = r.json()
+    except ValueError:
+        return Response('<p>Login failed</p>')
+
+    if "employee_id" not in json_resp:
+        return Response('<p>Login failed</p>')
+
+    employee_id = json_resp["employee_id"]
+
+    return employee_id
