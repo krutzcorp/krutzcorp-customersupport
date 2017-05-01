@@ -1,33 +1,30 @@
-var $hOut = $('#hours'),
-    $mOut = $('#minutes'),
-    $sOut = $('#seconds'),
-    $ampmOut = $('#ampm');
+// Modified from: https://codepen.io/seanfree/pen/NrRrvZ
 
-function update(){
-  var date = new Date();
+function update() {
+    let date = new Date();
 
-  var ampm = date.getHours() < 12
-             ? 'AM'
-             : 'PM';
+    let ampm = date.getHours() < 12
+        ? 'AM'
+        : 'PM';
 
-  var hours = date.getHours() == 0
-              ? 12
-              : date.getHours() > 12
-                ? date.getHours() - 12
-                : date.getHours();
+    let hours = date.getHours() === 0
+        ? 12
+        : date.getHours() > 12
+            ? date.getHours() - 12
+            : date.getHours();
 
-  var minutes = date.getMinutes() < 10
-                ? '0' + date.getMinutes()
-                : date.getMinutes();
+    let minutes = date.getMinutes() < 10
+        ? '0' + date.getMinutes()
+        : date.getMinutes();
 
-  var seconds = date.getSeconds() < 10
-                ? '0' + date.getSeconds()
-                : date.getSeconds();
+    let seconds = date.getSeconds() < 10
+        ? '0' + date.getSeconds()
+        : date.getSeconds();
 
-  $hOut.text(hours + ":");
-  $mOut.text(minutes + ":");
-  $sOut.text(seconds);
-  $ampmOut.text(ampm);
+    $('#hours').text(hours + ":");
+    $('#minutes').text(minutes + ":");
+    $('#seconds').text(seconds);
+    $('#ampm').text(ampm);
 }
 
 update();

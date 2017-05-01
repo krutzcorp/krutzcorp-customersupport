@@ -9,11 +9,6 @@ from flask import jsonify
 from flask import json
 
 
-@app.route('/listing')
-def index():
-    return render_template('api-route-listing.html')
-
-
 @app.route('/employee/real')
 def get_employee(mock=False):
     """Get an employee."""
