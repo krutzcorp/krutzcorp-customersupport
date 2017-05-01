@@ -47,3 +47,12 @@ The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 Nginx logs can be found in `/var/log/nginx`
 
 Flask logs can be found in `/var/log/uwsgi`
+
+## Testing
+
+### Functional Tests
+
+To run the functional tests, ensure that a local server is running. Then run:
+```
+python functional_tests.py
+```

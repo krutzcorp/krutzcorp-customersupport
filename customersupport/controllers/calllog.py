@@ -24,3 +24,8 @@ def new_call():
         return redirect(url_for("new_call"))
 
     return render_template("new-call.html", form=form)
+
+@app.route('/calllog/', methods=["GET"])
+def call_log_index():
+    call_logs = db_session.query(CallLog)
+    return render_template('call-log-index.html', call_logs=call_logs)

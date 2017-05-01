@@ -1,0 +1,29 @@
+{% extends 'template.html' %}
+{% block title %}Call Logs{% endblock %}
+{% block content %}
+<body>
+  <h1 id="title">Call Logs</h1>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Date Called</th>
+        <th>Calling Number</th>
+        <th>Callback Number</th>
+        <th>Notes</th>
+        <th>Employee</th>
+        <th>Ticket</th>
+      </tr>
+    </thead>
+    {% for log in call_logs %}
+    <tr>
+      <td>{{ log.date_called }}</td>
+      <td>{{ log.calling_number }}</td>
+      <td>{{ log.callback_number }}</td>
+      <td>{{ log.notes }}</td>
+      <td>{{ log.employee }}</td>
+      <td>{{ log.ticket }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+{% endblock %}
