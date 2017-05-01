@@ -41,8 +41,12 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for("new_call") }}">New Call</a></li>
-                <li><a id="call_log_index" href="{{ url_for("call_log_index") }}">Call Logs</a></li>
+                <li{% if request.endpoint == "new_call" %} class="active"{% endif %}>
+                    <a href="{{ url_for("new_call") }}">New Call</a>
+                </li>
+                <li{% if request.endpoint == "call_log_index" %} class="active"{% endif %}>
+                    <a id="call_log_index" href="{{ url_for("call_log_index") }}">Call Logs</a>
+                </li>
                 {#<li><a href="#">Search Tickets</a></li>#}
             </ul>
             <ul class="nav navbar-nav navbar-right">
