@@ -5,6 +5,8 @@ from customersupport.database import db_session
 
 from flask import request, render_template, flash, redirect, url_for
 
+from datetime import datetime
+
 
 @app.route('/', methods=["GET", "POST"])
 def new_call():
@@ -15,6 +17,7 @@ def new_call():
             callback_number=form.phone_call_back.data,
             notes=form.notes.data,
             ticket_id=form.ticket_id.data,
+            date_called=form.date_called.data,
             employee="Corban"  # TODO: Add a real employee based on the session.
         )
 
@@ -22,6 +25,9 @@ def new_call():
         db_session.commit()
         flash("Call log added.")
         return redirect(url_for("new_call"))
+
+    if form.date_called.data is None:
+        form.date_called.data = datetime.today()
 
     return render_template("new-call.html", form=form)
 

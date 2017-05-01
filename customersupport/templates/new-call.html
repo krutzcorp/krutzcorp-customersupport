@@ -8,7 +8,9 @@
     {% include 'list-tickets-modal.html' %}
 
     <div class="page-header">
-        <h2>New Call</h2>
+        <h2>New Call
+            <small>Started at: {{ form.date_called.data|datetime }}</small>
+        </h2>
     </div>
 
     <form action="" method="post">

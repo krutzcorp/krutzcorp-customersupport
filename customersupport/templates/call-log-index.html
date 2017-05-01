@@ -16,7 +16,7 @@
     </thead>
     {% for log in call_logs %}
     <tr>
-      <td>{{ log.date_called }}</td>
+      <td>{{ log.date_called|datetime }}</td>
       <td>{{ log.calling_number }}</td>
       <td>{{ log.callback_number }}</td>
       <td>{{ log.notes }}</td>

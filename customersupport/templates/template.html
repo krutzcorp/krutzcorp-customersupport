@@ -27,7 +27,7 @@
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -44,6 +44,9 @@
                 <li><a href="{{ url_for("new_call") }}">New Call</a></li>
                 <li><a id="call_log_index" href="{{ url_for("call_log_index") }}">Call Logs</a></li>
                 {#<li><a href="#">Search Tickets</a></li>#}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Current Time: {% include 'clock.html' %}</p></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -87,5 +90,6 @@
 
 {% block page_scripts %}
 {% endblock %}
+<script src="{{ url_for('static', filename='clock.js') }}"></script>
 </body>
 </html>
