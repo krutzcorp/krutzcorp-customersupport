@@ -1,5 +1,5 @@
 from customersupport import app
-from customersupport.wrappers import sales
+from customersupport.wrappers import sales, hr
 from customersupport.models import Ticket, CallLog
 from customersupport.database import db_session
 from customersupport.util import get_param_from_request_if_not_empty
@@ -12,6 +12,8 @@ from flask import json
 
 @app.route('/sales/refund', methods=['POST'])
 def refund_order():
+
+    # TODO: Call sales
     use_mock = request.args.get("use_mock") is not None
     order = sales.initiate_refund(
         replace=True,
@@ -49,3 +51,15 @@ def get_ticket():
         res = Ticket.query.all()
     return jsonify([r.serialize() for r in res])
 
+@app.route('/api/refund/report', methods=["POST"])
+def report_refund():
+    employee_id = "1"
+    replace = get_param_from_request_if_not_empty('replace')
+    order_id = get_param_from_request_if_not_empty('orderId')
+    serial_numbers = get_param_from_request_if_not_empty('serialIds')
+    mocked = get_param_from_request_if_not_empty('mocked')
+
+    res = hr.report_action(replace,order_id,serial_numbers,employee_id,mocked)
+    if res is None:
+        return jsonify({})
+    return jsonify(res)

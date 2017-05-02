@@ -42,3 +42,22 @@ def get_employee(employee_id, mock=False):
 
     return employee
 
+def report_action(replace, order_id, serial_numbers, employeeId, mock=False):
+    payload = {"replace": replace, "orderId": order_id, "serialIds": serial_numbers, "employeeId": employeeId}
+
+    report_url = HR_URL + "/rewards"
+
+    if mock:
+        with requests_mock.Mocker() as m:
+            m.post(report_url)
+            r = requests.post(report_url)
+    else:
+        try:
+            r = requests.post(report_url, data=payload)
+        except requests.exceptions.RequestException:
+            return None
+    return {
+        "status" : r.status_code,
+        "text" : r.text
+    }
+
