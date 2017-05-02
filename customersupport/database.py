@@ -28,3 +28,7 @@ def init_db():
     # you will have to import them first before calling init_db()
     import customersupport.models
     Base.metadata.create_all(bind=engine)
+
+def drop_db():
+    import customersupport.models
+    Base.metadata.drop_all(bind=engine)
