@@ -1,13 +1,16 @@
 {% extends 'template.html' %}
 {% block title %}New Call{% endblock %}
 {% block content %}
-    {#- Bring in the search customer modal. -#}
+    {#- Bring in the various modals. -#}
     {% include 'search-customer-modal.html' %}
+    {% include 'search-order-modal.html' %}
     {% include 'new-ticket-modal.html' %}
     {% include 'list-tickets-modal.html' %}
 
     <div class="page-header">
-        <h2>New Call</h2>
+        <h2>New Call
+            <small>Started at: {{ form.date_called.data|datetime }}</small>
+        </h2>
     </div>
 
     <form action="" method="post">
@@ -35,7 +38,8 @@
                     <div class="input-group">
                         {{ form.order(class="form-control", id="order") }}
                         <span class="input-group-btn">
-                            <a class="btn btn-primary" href="search-order.html" role="button">Search</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#searchOrderModal">Search</button>
                         </span>
                     </div>
                     {% if form.order.errors %}
@@ -102,12 +106,9 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal"
-                                data-target="#listTicketModal" id="listTicketsButton" disabled="true">List Customer Tickets</button>
-                    </span>
-                </div>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal"
+                        data-target="#listTicketModal" id="listTicketsButton" disabled="true">List Customer Tickets
+                </button>
             </div>
         </div>
 
@@ -123,12 +124,13 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+        <button id="submit_button" type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
     </form>
 {% endblock %}
 
 {% block page_scripts %}
     <script src="{{ url_for('static', filename='search-customer.js') }}"></script>
+    <script src="{{ url_for('static', filename='search-order.js') }}"></script>
     <script src="{{ url_for('static', filename='new-ticket.js') }}"></script>
     <script src="{{ url_for('static', filename='list-tickets.js') }}"></script>
 {% endblock %}

@@ -133,14 +133,14 @@ sales_search_orders = """
               "refundDeadline": "2017-03-01T20:51:26.908Z",
               "replaceDeadline": "2017-03-01T20:51:26.908Z",
               "serialId": 20,
-              "status": "original|return|replace"
+              "status": "replace"
             },
             {
               "price": 200,
               "refundDeadline": "2017-03-01T20:51:26.909Z",
               "replaceDeadline": "2017-03-01T20:51:26.909Z",
               "serialId": 21,
-              "status": "original|return|replace"
+              "status": "original"
             }
           ],
           "orderDate": "2017-03-01T20:51:26.905Z",

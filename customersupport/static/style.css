@@ -10,3 +10,7 @@ body {
   -webkit-transition: none !important;
   transition: none !important;
 }
+
+.btn-monster {
+  padding: 10% 0;
+}

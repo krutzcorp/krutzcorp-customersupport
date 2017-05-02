@@ -1,0 +1,9 @@
+{% extends 'template.html' %}
+{% block title %}Start a New Call{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <h2>Waiting for Call...</h2>
+    </div>
+
+    <a href="{{ url_for("new_call") }}" class="btn btn-success btn-lg btn-block btn-monster">Start a New Call</a>
+{% endblock %}
