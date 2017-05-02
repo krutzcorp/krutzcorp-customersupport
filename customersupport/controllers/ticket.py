@@ -10,7 +10,7 @@ from flask import render_template
 from flask import jsonify
 from flask import json
 
-@app.route('/sales/refund', methods=['POST'])
+@app.route('/api/refund', methods=['POST'])
 def refund_order():
 
     use_mock = get_param_from_request_if_not_empty("use_mock") is not None

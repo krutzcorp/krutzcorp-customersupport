@@ -54,14 +54,18 @@ $(document).ready(function () {
         }
 
         // TODO call the api endpoint
-        $.post("/sales/refund", payload, function(res,status){
+        $.post("/api/refund", payload, function(res,status){
                 ticketBar.animate({
                         width: "100%"
                 }, 25, function(){
                     // Change ticket status to pass
                     $("#status option[value='pass']").prop('selected', 'selected').change();
                     // Delay then hide the progress bar
-                    setTimeout(function(){ticketBarContainer.css("visibility", "hidden")},750);
+                    setTimeout(function(){
+                        ticketBarContainer.css("visibility", "hidden");
+                        $("#ticketId").val(res.id);
+                        $("#newTicketModal").modal("hide");
+                    },750);
                 });
         });
     });
