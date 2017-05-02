@@ -10,5 +10,10 @@ def get_param_from_request_if_not_empty(param_name):
     else:
         return None
 
+def get_post_data(data_name):
+    if data_name in request.form:
+        return request.form[data_name]
+    else:
+        return None
 
 
