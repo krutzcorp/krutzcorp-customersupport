@@ -13,6 +13,8 @@
             <th>Callback Number</th>
             <th>Notes</th>
             <th>Employee</th>
+            <th>Customer</th>
+            <th>Order</th>
             <th>Ticket</th>
         </tr>
         </thead>
@@ -23,6 +25,8 @@
                 <td>{{ log.callback_number }}</td>
                 <td>{{ log.notes }}</td>
                 <td>{{ log.employee }}</td>
+                <td>{{ log.customer_id }}</td>
+                <td>{{ log.order_id }}</td>
                 <td>{{ log.ticket }}</td>
             </tr>
         {% endfor %}

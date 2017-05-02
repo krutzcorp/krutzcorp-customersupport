@@ -319,6 +319,8 @@ class Ticket(Base):
 class CallLog(Base):
     __tablename__ = "call_log"
     id = Column(Integer, primary_key=True, autoincrement=True)
+    customer_id = Column(String(16))
+    order_id = Column(String(16))
     date_called = Column(DateTime)
     calling_number = Column(String(60))
     callback_number = Column(String(60))
@@ -329,6 +331,8 @@ class CallLog(Base):
 
     def __init__(
             self,
+            customer_id,
+            order_id=None,
             date_called=datetime.today(),
             calling_number=None,
             callback_number=calling_number,
@@ -336,6 +340,8 @@ class CallLog(Base):
             employee=None,
             ticket_id=None
     ):
+        self.customer_id = customer_id
+        self.order_id = order_id
         self.date_called = date_called
         self.calling_number = calling_number
         self.callback_number = callback_number

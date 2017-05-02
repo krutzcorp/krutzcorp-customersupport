@@ -18,6 +18,8 @@ def new_call():
     form = NewCallForm()
     if form.validate_on_submit():
         call_log = CallLog(
+            customer_id=form.customer_id.data,
+            order_id=form.order.data,
             calling_number=form.phone_called_from.data,
             callback_number=form.phone_call_back.data,
             notes=form.notes.data,
