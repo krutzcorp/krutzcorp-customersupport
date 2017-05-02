@@ -26,6 +26,15 @@ The site should be available at [http://127.0.0.1:5000](http://127.0.0.1:5000/).
 
 # Production
 
+## Setting up the deployment server
+
+We followed the [Digital Ocean](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04) instructions for building Flask apps with NGINX. We've provided two files to make the process easier.
+
+Move `nginx_files/krutzcorp-customersupport` into `/etc/nginx/sites-available/`.
+Move `nginx_files/krutzcorp-customersupport.conf` into `etc/init/`.
+
+move 
+
 ## Updating the deployment server
 
 - Unix:

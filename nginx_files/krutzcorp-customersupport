@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name vm343f.se.rit.edu support.krutz.site;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/var/www/krutzcorp-customersupport/krutzcorp-customersupport.sock;
+    }
+}
