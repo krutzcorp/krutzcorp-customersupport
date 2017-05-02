@@ -1,9 +1,18 @@
 from flask_wtf import FlaskForm
-from wtforms import validators, IntegerField, SelectField, TextAreaField
+from wtforms import validators, IntegerField, SelectField, TextAreaField, DateTimeField
 from wtforms.fields.html5 import TelField
+from wtforms.widgets import HiddenInput
 
 
 class NewCallForm(FlaskForm):
+    date_called = DateTimeField(
+        "Date Called",
+        validators=[
+            validators.InputRequired()
+        ],
+        widget=HiddenInput()  # Hide this field. We are using it directly in the template.
+    )
+
     customer_id = IntegerField(
         "Customer ID",
         validators=[
