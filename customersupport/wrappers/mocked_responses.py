@@ -159,42 +159,59 @@ sales_search_orders = """
 """
 
 sales_get_order_info = """
-    {
-      "orders": [
-        {
-          "billingInfo": {
-            "address": "1111 street",
-            "ccLastFourDigets": "1234",
-            "firstName": "john",
-            "lastName": "doe",
-            "state": "NY",
-            "zip": "14586"
-          },
-          "cost": 200,
-          "customerId": 1,
-          "customerInfo": {
-            "customerId": 42,
-            "email": "nottheotherjohn@email.com",
-            "firstName": "John",
-            "lastName": "Johnson",
-            "phone": "5451112222"
-          },
-          "id": 1000,
-          "isPaid": false,
-          "items": [
-            {
-              "id":2,
-              "serialNumber":120134,
-      "modelId":"B",
-      "price":160.85,
-      "replacementDeadline":"1970-01-17T22:54:46.000Z",
-      "refundDeadline":"1970-01-29T15:23:47.000Z",
-      "refunded":null,
-      "bogoSerialNumber":null,
-      "orderId":1
-            },
-            {
-              "id":1,
+{  
+  "id":1,
+  "repId":null,
+  "totalItemCost":489.3,
+  "shippingCost":3.99,
+  "orderDate":"1970-01-20T02:44:32.000Z",
+  "isPaid":true,
+  "taxPercentage":0.1,
+  "shippingAddress":{  
+    "id":1,
+    "firstName":"Sally",
+    "lastName":"Doe",
+    "city":"Golden Creek",
+    "address":"419 Grove Street",
+    "zip":"97578",
+    "customerId":1,
+    "state":{  
+      "id":14,
+      "state":"Guam",
+      "rate":0.05
+    }
+  },
+  "paymentMethod":{  
+    "id":1,
+    "cardNumber":"5397030165636",
+    "CVC":220,
+    "expirationDate":"1970-01-29T02:44:29.000Z",
+    "billingAddress":{  
+      "id":8,
+      "firstName":"John",
+      "lastName":"Doe",
+      "city":"Ashton Park",
+      "address":"274 Clark Street",
+      "zip":"89180",
+      "customerId":8,
+      "state":{  
+        "id":113,
+        "state":"Virgin Islands",
+        "rate":0.04
+      }
+    }
+  },
+  "customer":{  
+    "id":1,
+    "firstName":"John",
+    "lastName":"Doe",
+    "email":"jrj2211@rit.edu",
+    "phoneNumber":"123-123-1234",
+    "isCompany":true
+  },
+  "items":[  
+    {  
+      "id":1,
       "serialNumber":120133,
       "modelId":"B",
       "price":550.58,
@@ -203,19 +220,18 @@ sales_get_order_info = """
       "refunded":null,
       "bogoSerialNumber":null,
       "orderId":1
-            }
-          ],
-          "orderDate": "2017-03-01T20:51:26.905Z",
-          "repId": 99,
-          "shippingInfo": {
-            "address": "1111 street",
-            "firstName": "john",
-            "lastName": "doe",
-            "state": "NY",
-            "zip": "14586"
-          },
-          "taxPercentage": 8
-        }
-      ]
+    },
+    {  
+      "id":2,
+      "serialNumber":120134,
+      "modelId":"B",
+      "price":160.85,
+      "replacementDeadline":"1970-01-17T22:54:46.000Z",
+      "refundDeadline":"1970-01-29T15:23:47.000Z",
+      "refunded":null,
+      "bogoSerialNumber":null,
+      "orderId":1
     }
+  ]
+}
 """

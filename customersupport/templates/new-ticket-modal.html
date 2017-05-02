@@ -13,6 +13,7 @@
                             <div class="form-group">
                                 <label for="titleForm">Ticket Name</label>
                                 <input type="text" class="form-control" id="titleForm" value="">
+                                <input type="hidden" id="replaceTicket" name="replace" value="">
                             </div>
                         </div>
                     </div>
@@ -39,8 +40,7 @@
                                         <tr>
                                             <th>Serial Number</th>
                                             <th>Phone Model</th>
-                                            <th>Refund</th>
-                                            <th>Replace</th>
+                                            <th>Select</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -55,8 +55,8 @@
                 <button type="button" class="btn btn-primary" id="saveTicketChanges">Save changes</button>
                 <div class="row" id="ticketProgressContainer"> 
                     <div class="col-xs-12 col-sm-12 progress-container">
-                        <div class="progress progress-striped active">
-                            <div id="ticketProgress" class="progress-bar progress-bar-success" style="width:0%"></div>
+                        <div id="ticketProgress" class="progress progress-striped active">
+                            <div id="ticketProgressBar" class="progress-bar progress-bar-success" style="width:0%"></div>
                         </div>
                     </div>
                 </div>

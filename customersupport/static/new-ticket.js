@@ -7,7 +7,12 @@ $(document).ready(function () {
         var ticketType = $('#ticketType').val();
         var orderID = $('#order').val();
         $(".modal-body #titleForm").val('['+ ticketType + '] Order '+ orderID);
-        //var getInfo= [ticketType, orderID];
+        //Set hidden value for 'replace' boolean
+        if(ticketType=="Replace"){
+            $(".modal-body #replaceTicket").val("true")
+        }else{
+            $(".modal-body #replaceTicket").val("false")
+        }
 
         // Get Table DOM element
         var table = $("#newTicketTable")
@@ -17,30 +22,44 @@ $(document).ready(function () {
         $("#status option[value='open']").prop('selected', 'selected').change();
 
         // Search for items within an order to add to the form
-        $.get("/api/orderitem", {'order_id':orderID})
+        $.get("/api/orderitem", {'order_id':orderID, 'mocked':true})
             .done(function (data) {
                 $.each(data, function (index, item) { // Iterates through a collection
                     var serial_id = item.serialId;
                     var model_id = item.modelId;
-                    table.append('<tr><td>'+ serial_id +'</td><td> Model: '+ model_id +'</td><td><input type="checkbox"><br></td><td><input type="checkbox"><br></td></tr>');
+                    table.append('<tr><td>'+ serial_id +'</td><td> Model: '+ model_id +'</td><td><input class="order-item-box" serialId='+ serial_id +' type="checkbox"><br></td></tr>');
                   });
             });
      });
 
-    var ticketBar = $("#ticketProgress");
-    var ticketBarContainer = $("#ticketProgressContainer");
     $("#saveTicketChanges").click(function(){
         
+        var ticketBar = $("#ticketProgressBar");        
+        var ticketBarContainer = $("#ticketProgressContainer");
         ticketBar.css("width","0%");
         ticketBarContainer.css("visibility", "visible");
+
+        // Build payload to post
+        serialIds = [];
+        $('.order-item-box:checkbox:checked').each(function(){
+            serialIds.push(this.serialId);
+        });
+        payload = {
+            'use_mock': true,
+            'replace': ($(".modal-body #replaceTicket").val()) == "true",
+            'order_id': $('#order').val(),
+            'serial_ids': serialIds
+        }
+
         // TODO call the api endpoint
-        $.post("/sales/refund",{'use_mock':true}, function(res,status){
+        $.post("/sales/refund", payload, function(res,status){
                 ticketBar.animate({
                         width: "100%"
-                }, 2500, function(){
+                }, 25, function(){
                     // Change ticket status to pass
                     $("#status option[value='pass']").prop('selected', 'selected').change();
-                    ticketBarContainer.css("visibility", "hidden");
+                    // Delay then hide the progress bar
+                    setTimeout(function(){ticketBarContainer.css("visibility", "hidden")},750);
                 });
         });
     });

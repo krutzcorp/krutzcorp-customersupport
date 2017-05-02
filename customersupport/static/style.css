@@ -11,6 +11,10 @@ body {
   transition: none !important;
 }
 
+#ticketProgressContainer {
+  padding-top: 15px;
+}
+
 .btn-monster {
   padding: 10% 0;
 }
