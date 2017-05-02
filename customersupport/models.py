@@ -252,7 +252,7 @@ class Item:
 
 class TicketType(enum.Enum):
     REFUND="REFUND"
-    REPAIR="REPAIR"
+    REPLACE="REPLACE"
 
 class TicketStatus(enum.Enum):
     CLOSED="CLOSED"
@@ -280,39 +280,41 @@ class Ticket(Base):
     date_opened = Column(DateTime)
     date_closed = Column(DateTime)
     current_status = Column(Enum(TicketStatus))
-    sessions = relationship('CallLog',backref="post",cascade="all, delete-orphan",lazy="dynamic")
     customer_id = Column(String(16))
-#    order_id = Column(String(60),ForeignKey('order.id'))
+    order_id = Column(String(60))
 
-    def __init__(self, ticket_dict):
+    def __init__(
+            self,
+            ticket_type,
+            customer_id,
+            order_id,
+            date_opened=datetime.today(),
+            date_closed=datetime.today(),
+            current_status=TicketStatus.CLOSED,
+            ):
         """
         Params come from API docs
         :param ticket_dict: dictionary for init ticket
         """
-        self.ticket_type = ticket_dict["ticket_type"]
-        self.date_opened = ticket_dict["date_opened"]
-        self.date_closed = ticket_dict["date_closed"]
-        self.current_status = ticket_dict["current_status"]
-        self.sessions = ticket_dict["sessions"]
-        self.customer_id = ticket_dict["customer_id"]
-#        self._order_id = ticket_dict["order_id"]
+        self.ticket_type = ticket_type
+        self.date_opened = date_opened
+        self.date_closed = date_closed
+        self.current_status = current_status
+        self.customer_id = customer_id
+        self.order_id = order_id
 
     def __repr__(self):
-        return '<Ticket {} {} {} {} {} {}>'.format(self.id, self.ticket_type, self.date_opened, self.current_status, self.sessions, self.customer_id)
+        return '<Ticket {} {} {} {} {} {}>'.format(self.id, self.ticket_type, self.date_opened, self.current_status, self.order_id, self.customer_id)
 
     def serialize(self):
-        sessions = [r.serialize() for r in self.sessions]
-        for session in self.sessions:
-            sessions.append(session.serialize())
         return {
             "id": self.id,
             "ticket_type": self.ticket_type.name,
             "date_opened": self.date_opened.strftime('{%Y-%m-%d %H:%M:%S}'),
             "date_closed": self.date_closed.strftime('{%Y-%m-%d %H:%M:%S}'),
             "current_status": self.current_status.name,
-            "sessions": sessions,
-            "customer_id": self.customer_id
-        #    "order_id": self.order_id
+            "customer_id": self.customer_id,
+            "order_id": self.order_id
         }
 
 

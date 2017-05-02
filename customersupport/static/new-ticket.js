@@ -42,13 +42,15 @@ $(document).ready(function () {
         // Build payload to post
         serialIds = [];
         $('.order-item-box:checkbox:checked').each(function(){
-            serialIds.push(this.serialId);
+            serialIds.push($(this).attr('serialId'));
         });
         payload = {
             'use_mock': true,
             'replace': ($(".modal-body #replaceTicket").val()) == "true",
             'order_id': $('#order').val(),
-            'serial_ids': serialIds
+            'serial_ids': serialIds,
+            'status': $("#status option[selected='selected']").val(),
+            'customer_id': $("#customer").val()
         }
 
         // TODO call the api endpoint
