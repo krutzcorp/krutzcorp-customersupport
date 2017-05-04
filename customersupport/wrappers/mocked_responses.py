@@ -2,19 +2,19 @@
 
 # HR
 hr_get_employee = """
-    {
+   {
   "employee_array": [
     {
-      "address": "42 Wallaby Way, Rochester, New York 14623",
-      "birth_date": "1995-04-25",
-      "department": "Human Resources",
+      "address": "0 Lomb Memorial Drive, Rochester, New York 14623",
+      "birth_date": "1992-02-12",
+      "department": "Sales",
       "employee_id": 1,
       "is_active": true,
-      "name": "Wendy Williams",
-      "role": "HR Admin",
-      "salary": "60000",
-      "start_date": "2017-03-28",
-      "team_start_date": "2006-11-10"
+      "name": "Joseph Campione",
+      "role": "Developer",
+      "salary": "88083",
+      "start_date": "2017-01-23",
+      "team_start_date": "2017-01-23"
     }
   ]
 }
@@ -102,7 +102,7 @@ sales_initiate_refund = """
             "refundDeadline": "2017-03-01T20:51:26.909Z",
             "bogoSerialId": null
           }  
-        ]
+      ]
     }
 """
 
@@ -161,63 +161,71 @@ sales_search_orders = """
 """
 
 sales_get_order_info = """
+[
     {
-      "orders": [
-        {
-          "billingInfo": {
-            "address": "1111 street",
-            "ccLastFourDigets": "1234",
-            "firstName": "john",
-            "lastName": "doe",
-            "state": "NY",
-            "zip": "14586"
-          },
-          "cost": 200,
-          "customerId": 1,
-          "customerInfo": {
-            "customerId": 42,
-            "email": "nottheotherjohn@email.com",
-            "firstName": "John",
-            "lastName": "Johnson",
-            "phone": "5451112222"
-          },
-          "id": 1000,
-          "isPaid": false,
-          "items": [
-            {
-              "id":2,
-              "serialNumber":120134,
-      "modelId":"B",
-      "price":160.85,
-      "replacementDeadline":"1970-01-17T22:54:46.000Z",
-      "refundDeadline":"1970-01-29T15:23:47.000Z",
-      "refunded":null,
-      "bogoSerialNumber":null,
-      "orderId":1
-            },
-            {
-              "id":1,
-      "serialNumber":120133,
-      "modelId":"B",
-      "price":550.58,
-      "replacementDeadline":"1970-01-20T02:52:45.000Z",
-      "refundDeadline":"1970-01-26T07:17:54.000Z",
-      "refunded":null,
-      "bogoSerialNumber":null,
-      "orderId":1
-            }
-          ],
-          "orderDate": "2017-03-01T20:51:26.905Z",
-          "repId": 99,
-          "shippingInfo": {
-            "address": "1111 street",
-            "firstName": "john",
-            "lastName": "doe",
-            "state": "NY",
-            "zip": "14586"
-          },
-          "taxPercentage": 8
-        }
-      ]
+      "id": 1,
+      "repId": null,
+      "totalItemCost": 1769.45,
+      "shippingCost": 3.99,
+      "orderDate": "1970-01-21T02:39:21.000Z",
+      "isPaid": true,
+      "taxPercentage": 0.07,
+      "shippingAddress": {
+    "id": 1,
+    "firstName": "Joe",
+    "lastName": "Jankowiak",
+    "city": "Rancho Cordova",
+    "address": "48 Washington Avenue",
+    "zip": "81678",
+    "customerId": 1,
+    "state": {
+      "id": 56,
+      "state": "Washington",
+      "rate": 0.05
     }
+  },
+  "paymentMethod": {
+    "cardNumber": "2198",
+    "id": 1,
+    "CVC": 1047,
+    "expirationDate": "1970-01-27T13:43:16.000Z",
+    "billingAddressId": 1,
+    "billingAddress": {
+      "id": 1,
+      "firstName": "Joe",
+      "lastName": "Jankowiak",
+      "city": "Rancho Cordova",
+      "address": "48 Washington Avenue",
+      "zip": "81678",
+      "customerId": 1,
+      "state": {
+        "id": 56,
+        "state": "Washington",
+        "rate": 0.05
+      }
+    }
+  },
+  "customer": {
+    "password": null,
+    "id": 1,
+    "firstName": "Joe",
+    "lastName": "Jankowiak",
+    "email": "jrj2211@rit.edu",
+    "phoneNumber": "123-123-1234",
+    "isCompany": false
+  },
+  "items": [
+    {
+      "id": 1,
+      "serialNumber": 120133,
+      "modelId": "A",
+      "price": 150.99,
+      "replacementDeadline": "1970-01-26T13:21:47.000Z",
+      "refundDeadline": "1970-01-18T01:17:11.000Z",
+      "refunded": null,
+      "bogoSerialNumber": null,
+      "orderId": 1
+    }
+  ]
+]
 """

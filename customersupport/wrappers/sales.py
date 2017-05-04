@@ -55,11 +55,13 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
         try:
             r = requests.post(refund_url, data=payload)
         except requests.exceptions.RequestException:
+            print("request exception")
             return None
 
     try:
         json_resp = r.json()
     except ValueError:
+        print("value error")
         return None
 
     # In the search order API, the "id" is the "orderId here.
