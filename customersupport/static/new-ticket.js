@@ -33,6 +33,8 @@ $(document).ready(function () {
      });
 
     $("#saveTicketChanges").click(function(){
+        // Close any and all alerts
+        $(".alert").removeClass("in");
         
         var ticketBar = $("#ticketProgressBar");        
         var ticketBarContainer = $("#ticketProgressContainer");
@@ -66,6 +68,7 @@ $(document).ready(function () {
                         width: "100%"
                 }, 25, function(){
                     // Change ticket status to pass
+                    $("#salesSucessAlert").addClass("in");
                     $("#status option[value='pass']").prop('selected', 'selected').change();
                     // Delay then hide the progress bar
                     setTimeout(function(){
