@@ -32,9 +32,9 @@ def refund_order():
 
     ticket = Ticket(
         ticket_type=ticket_type,
-        current_status=current_status,
         customer_id=customer_id,
-        order_id=order_id
+        order_id=order_id,
+        current_status=current_status
     )
 
     db_session.add(ticket)
@@ -42,20 +42,20 @@ def refund_order():
 
     # TODO: Call sales
     try:
-        order = sales.initiate_refund(
-            replace=True,
-            order_id=1,
-            serial_numbers=[
-                123,
-                456,
-                789
-            ],
+        status_is_good = sales.initiate_refund(
+            replace=replace,
+            order_id=order_id,
+            serial_numbers=serial_ids,
             mock=use_mock
         )
     except Exception as ex:
         print(ex)
-        abort(500) 
-    return jsonify(ticket.serialize())
+        abort(500)
+    if status_is_good:
+        return jsonify(ticket.serialize())
+    else:
+        abort(500)
+        return jsonify({})
 
 
 @app.route('/sales/refund/stub')

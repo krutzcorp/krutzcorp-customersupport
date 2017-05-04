@@ -22,7 +22,7 @@ $(document).ready(function () {
         $("#status option[value='open']").prop('selected', 'selected').change();
 
         // Search for items within an order to add to the form
-        $.get("/api/orderitem", {'order_id':orderID, 'mocked':true})
+        $.get("/api/orderitem", {'order_id':orderID})
             .done(function (data) {
                 $.each(data, function (index, item) { // Iterates through a collection
                     var serial_id = item.serialId;
@@ -37,6 +37,9 @@ $(document).ready(function () {
         var ticketBar = $("#ticketProgressBar");        
         var ticketBarContainer = $("#ticketProgressContainer");
         ticketBar.css("width","0%");
+        // Make sure we start with a gree bar
+        ticketBar.removeClass("progress-bar-danger");
+        ticketBar.addClass("progress-bar-success");
         ticketBarContainer.css("visibility", "visible");
 
         // Build payload to post
@@ -63,11 +66,30 @@ $(document).ready(function () {
                     // Delay then hide the progress bar
                     setTimeout(function(){
                         ticketBarContainer.css("visibility", "hidden");
+                        ticketBar.css("width","0%");
                         $("#ticketId").val(res.id);
-                        $("#newTicketModal").modal("hide");
+                    },750);
+                });
+        }).fail(function(res){
+            ticketBar.removeClass("progress-bar-success");
+            ticketBar.addClass("progress-bar-danger");
+            ticketBar.animate({
+                        width: "100%"
+                }, 25, function(){
+                    // Show error
+                    $("#salesErrorAlert").addClass('in');
+                    // Delay then hide the progress bar
+                    setTimeout(function(){
+                        ticketBarContainer.css("visibility", "hidden");
+                        ticketBar.css("width","0%");
                     },750);
                 });
         });
+    });
+
+    // Listen for alert close click and close the alert
+    $("#salesErrorAlert button.close").click(function(){
+        $("#salesErrorAlert").removeClass("in");
     });
 
      //Hook up a change listener to see if the new tickets button should be active

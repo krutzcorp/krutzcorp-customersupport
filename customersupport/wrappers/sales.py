@@ -55,24 +55,10 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
         try:
             r = requests.post(refund_url, data=payload)
         except requests.exceptions.RequestException:
-            return None
+            return False
 
-    try:
-        json_resp = r.json()
-    except ValueError:
-        return None
-
-    # In the search order API, the "id" is the "orderId here.
-    if "orderId" in json_resp and "id" not in json_resp:
-        json_resp["id"] = json_resp["orderId"]
-
-    try:
-        order = Order(json_resp)
-    except KeyError as ex:
-        print("Error creating an Order.")
-        raise ex
-
-    return order
+    # Return true / false if the post suceeded or now
+    return r.status_code == requests.codes.ok
 
 
 def get_orders(
