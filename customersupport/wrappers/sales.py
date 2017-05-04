@@ -56,7 +56,7 @@ def initiate_refund(replace, order_id, serial_numbers, mock=False):
             r = requests.post(refund_url, data=payload)
         except requests.exceptions.RequestException:
             return False
-
+    print("Init Refund for order"+str(order_id)+", status: "+str(r.status_code))
     # Return true / false if the post suceeded or now
     return r.status_code == requests.codes.ok
 

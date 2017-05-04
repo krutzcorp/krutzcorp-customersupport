@@ -2,7 +2,7 @@ from customersupport import app
 from customersupport.wrappers import sales, hr
 from customersupport.models import Ticket, CallLog, TicketType, TicketStatus
 from customersupport.database import db_session
-from customersupport.util import get_param_from_request_if_not_empty
+from customersupport.util import get_param_from_request_if_not_empty, get_post_data
 
 from flask import Flask, request, render_template, abort
 from flask import request
@@ -13,12 +13,12 @@ from flask import json
 @app.route('/api/refund', methods=['POST'])
 def refund_order():
 
-    use_mock = get_param_from_request_if_not_empty("use_mock") is not None
-    replace = get_param_from_request_if_not_empty("replace")
+    use_mock = get_post_data("use_mock") is not None
+    replace = get_post_data("replace")
     ticket_type = TicketType.REFUND
     if replace:
         ticket_type = TicketType.REPLACE
-    status = get_param_from_request_if_not_empty("status")
+    status = get_post_data("status")
     current_status = TicketStatus.CLOSED
     if status == "open":
         current_status = TicketStatus.OPEN
@@ -26,9 +26,9 @@ def refund_order():
         current_status = TicketStatus.PENDING
     elif status == "pass" or status == "fail":
         current_status = TicketStatus.CLOSED
-    order_id = get_param_from_request_if_not_empty("order_id")
-    serial_ids = get_param_from_request_if_not_empty("serial_ids")
-    customer_id = get_param_from_request_if_not_empty("customer_id")
+    order_id = get_post_data("order_id")
+    serial_ids = get_post_data("serial_ids")
+    customer_id = get_post_data("customer_id")
 
     ticket = Ticket(
         ticket_type=ticket_type,
@@ -40,7 +40,6 @@ def refund_order():
     db_session.add(ticket)
     db_session.commit()
 
-    # TODO: Call sales
     try:
         status_is_good = sales.initiate_refund(
             replace=replace,

@@ -48,7 +48,6 @@ $(document).ready(function () {
             serialIds.push($(this).attr('serialId'));
         });
         payload = {
-            'use_mock': true,
             'replace': ($(".modal-body #replaceTicket").val()) == "true",
             'order_id': $('#order').val(),
             'serial_ids': serialIds,
@@ -70,7 +69,7 @@ $(document).ready(function () {
                         $("#ticketId").val(res.id);
                     },750);
                 });
-        }).fail(function(res){
+        }).fail(function(res,status){
             ticketBar.removeClass("progress-bar-success");
             ticketBar.addClass("progress-bar-danger");
             ticketBar.animate({
