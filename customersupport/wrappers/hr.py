@@ -49,6 +49,7 @@ def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         auth = request.authorization
+        #check if authenticated already or if token is valid
         if not auth or not check_authtoken():
             return Response('<p>You are not allowed to view this page</p>')
         return f(*args, **kwargs)
