@@ -7,8 +7,12 @@ from flask import request, render_template, flash, redirect, url_for
 
 from datetime import datetime
 
+from customersupport.wrappers.hr import requires_auth
+
+
 
 @app.route('/')
+@requires_auth
 def index():
     return render_template("index.html")
 
