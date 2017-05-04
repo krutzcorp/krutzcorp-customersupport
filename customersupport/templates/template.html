@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     <title>{% block title %}{% endblock %} - Krutz Corp.</title>
 
@@ -27,7 +27,7 @@
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -37,13 +37,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for("new_call") }}">Customer Support</a>
+            <a class="navbar-brand" href="{{ url_for("index") }}">Customer Support</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ url_for("new_call") }}">New Call</a></li>
+                <li{% if request.endpoint == "new_call" %} class="active"{% endif %}>
+                    <a href="{{ url_for("new_call") }}">New Call</a>
+                </li>
+                <li{% if request.endpoint == "call_log_index" %} class="active"{% endif %}>
+                    <a id="call_log_index" href="{{ url_for("call_log_index") }}">Call Logs</a>
+                </li>
                 {#<li><a href="#">Search Tickets</a></li>#}
-                {#<li><a href="#">List Call Logs</a></li>#}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><p class="navbar-text">Current Time: {% include 'clock.html' %}</p></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -62,7 +69,7 @@
                         <strong>Error:</strong> {{ message }}
                     </div>
                 {% else %}
-                    <div class="alert alert-info alert-dismissible" role="alert">
+                    <div id="flash-info" class="alert alert-info alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -87,5 +94,6 @@
 
 {% block page_scripts %}
 {% endblock %}
+<script src="{{ url_for('static', filename='clock.js') }}"></script>
 </body>
 </html>
