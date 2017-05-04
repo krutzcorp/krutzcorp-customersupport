@@ -37,10 +37,12 @@ $(document).ready(function () {
         var ticketBar = $("#ticketProgressBar");        
         var ticketBarContainer = $("#ticketProgressContainer");
         ticketBar.css("width","0%");
-        // Make sure we start with a gree bar
+        // Make sure we start with a green bar
         ticketBar.removeClass("progress-bar-danger");
         ticketBar.addClass("progress-bar-success");
         ticketBarContainer.css("visibility", "visible");
+
+        ticketBar.animate({width: "20%"},0);
 
         // Build payload to post
         serialIds = [];
