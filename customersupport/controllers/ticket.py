@@ -14,7 +14,7 @@ from flask import json
 def refund_order():
 
     use_mock = get_post_data("use_mock") is not None
-    replace = get_post_data("replace") is "true"
+    replace = get_post_data("replace") == "true"
     ticket_type = TicketType.REFUND
     if replace:
         ticket_type = TicketType.REPLACE
