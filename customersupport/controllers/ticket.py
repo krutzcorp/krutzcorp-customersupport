@@ -47,11 +47,19 @@ def refund_order():
             serial_numbers=serial_ids,
             mock=use_mock
         )
+        if status_is_good:
+            """
+            Yay, we came back successfully, now go tell hr we made a refund/return.
+            Blind fire for now, we do not care if this is delivered or not.
+            TODO: Actually pass an employeeId
+            """
+            hr.report_action(replace, order_id, serial_ids, "1")
+            # Return the ticket created ealier
+            return jsonify(ticket.serialize())
     except Exception as ex:
         print(ex)
         abort(500)
-    if status_is_good:
-        return jsonify(ticket.serialize())
+
     else:
         abort(500)
         return jsonify({})
