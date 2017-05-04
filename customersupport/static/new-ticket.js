@@ -54,6 +54,9 @@ $(document).ready(function () {
             'status': $("#status option[selected='selected']").val(),
             'customer_id': $("#customer").val()
         }
+        if ($('#ticketUseMock').is(':checked')){
+            payload['use_mock'] = true
+        }
 
         // TODO call the api endpoint
         $.post("/api/refund", payload, function(res,status){
@@ -77,6 +80,7 @@ $(document).ready(function () {
                 }, 25, function(){
                     // Show error
                     $("#salesErrorAlert").addClass('in');
+                    $("#status option[value='fail']").prop('selected', 'selected').change();
                     // Delay then hide the progress bar
                     setTimeout(function(){
                         ticketBarContainer.css("visibility", "hidden");
