@@ -255,7 +255,8 @@ class TicketType(enum.Enum):
     REPLACE="REPLACE"
 
 class TicketStatus(enum.Enum):
-    CLOSED="CLOSED"
+    CLOSED_PASS="CLOSED_PASS"
+    CLOSED_FAIL="CLOSED_FAIL"
     OPEN="OPEN"
     PENDING="PENDING"
 
@@ -290,7 +291,7 @@ class Ticket(Base):
             order_id,
             date_opened=datetime.today(),
             date_closed=datetime.today(),
-            current_status=TicketStatus.CLOSED,
+            current_status=TicketStatus.CLOSED_PASS,
             ):
         """
         Params come from API docs

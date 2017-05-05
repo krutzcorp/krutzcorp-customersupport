@@ -19,13 +19,15 @@ def refund_order():
     if replace:
         ticket_type = TicketType.REPLACE
     status = get_post_data("status")
-    current_status = TicketStatus.CLOSED
+    current_status = TicketStatus.CLOSED_PASS
     if status == "open":
         current_status = TicketStatus.OPEN
     elif status == "pend":
         current_status = TicketStatus.PENDING
-    elif status == "pass" or status == "fail":
-        current_status = TicketStatus.CLOSED
+    elif status == "pass":
+        current_status = TicketStatus.CLOSED_PASS
+    elif status == "fail":
+        current_status = TicketStatus.CLOSED_FAIL
     order_id = get_post_data("order_id")
     serial_ids = get_post_data("serial_ids")
     customer_id = get_post_data("customer_id")
