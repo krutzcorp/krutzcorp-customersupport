@@ -67,10 +67,6 @@ def refund_order():
         return jsonify({})
 
 
-@app.route('/sales/refund/stub')
-def refund_order_stubbed():
-    return refund_order(mock=True)
-
 
 @app.route('/api/ticket')
 def get_ticket():
@@ -86,15 +82,5 @@ def get_ticket():
         res = Ticket.query.all()
     return jsonify([r.serialize() for r in res])
 
-@app.route('/api/refund/report', methods=["POST"])
-def report_refund():
-    employee_id = "1"
-    replace = get_param_from_request_if_not_empty('replace')
-    order_id = get_param_from_request_if_not_empty('orderId')
-    serial_numbers = get_param_from_request_if_not_empty('serialIds')
-    mocked = get_param_from_request_if_not_empty('mocked')
 
-    res = hr.report_action(replace,order_id,serial_numbers,employee_id,mocked)
-    if res is None:
-        return jsonify({})
-    return jsonify(res)
+
