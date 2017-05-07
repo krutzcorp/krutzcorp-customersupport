@@ -7,13 +7,16 @@ from flask import request, render_template, flash, redirect, url_for
 
 from datetime import datetime
 
-from customersupport.wrappers.hr import requires_auth
+from customersupport.wrappers.hr import requires_auth, check_authtoken, login
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 @requires_auth
 def index():
+    token = request.args.get('token')
+    if token and check_authtoken(token):
+        login(token)
     return render_template("index.html")
 
 
