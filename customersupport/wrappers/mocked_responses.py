@@ -107,125 +107,315 @@ sales_initiate_refund = """
 """
 
 sales_search_orders = """
-    {
-      "orders": [
-        {
-          "billingInfo": {
-            "address": "1111 street",
-            "ccLastFourDigets": "1234",
-            "firstName": "john",
-            "lastName": "doe",
-            "state": "NY",
-            "zip": "14586"
-          },
-          "cost": 200,
-          "customerId": 1,
-          "customerInfo": {
-            "customerId": 42,
-            "email": "nottheotherjohn@email.com",
-            "firstName": "John",
-            "lastName": "Johnson",
-            "phone": "5451112222"
-          },
-          "id": 1000,
-          "isPaid": false,
-          "items": [
-            {
-              "price": 100,
-              "refundDeadline": "2017-03-01T20:51:26.908Z",
-              "replaceDeadline": "2017-03-01T20:51:26.908Z",
-              "serialId": 20,
-              "status": "original|return|replace"
-            },
-            {
-              "price": 200,
-              "refundDeadline": "2017-03-01T20:51:26.909Z",
-              "replaceDeadline": "2017-03-01T20:51:26.909Z",
-              "serialId": 21,
-              "status": "original|return|replace"
-            }
-          ],
-          "orderDate": "2017-03-01T20:51:26.905Z",
-          "repId": 99,
-          "shippingInfo": {
-            "address": "1111 street",
-            "firstName": "john",
-            "lastName": "doe",
-            "state": "NY",
-            "zip": "14586"
-          },
-          "taxPercentage": 8
+[  
+  {
+    "id": 1,
+    "repId": null,
+    "totalItemCost": 2029.8,
+    "shippingCost": 3.99,
+    "orderDate": "1970-01-27T07:59:20.000Z",
+    "isPaid": true,
+    "taxPercentage": 0.01,
+    "shippingAddress": {
+      "id": 2,
+      "firstName": "Dan",
+      "lastName": "Fisher",
+      "city": "Heritage Park",
+      "address": "286 Broadway",
+      "zip": "10578",
+      "customerId": 2,
+      "state": {
+        "id": 31,
+        "state": "Nebraska",
+        "rate": 0.1
+      }
+    },
+    "paymentMethod": {
+      "cardNumber": "6561",
+      "id": 2,
+      "CVC": "639",
+      "expirationDate": "1970-02-05T10:58:47.118Z",
+      "billingAddressId": 2,
+      "billingAddress": {
+        "id": 2,
+        "firstName": "Dan",
+        "lastName": "Fisher",
+        "city": "Heritage Park",
+        "address": "286 Broadway",
+        "zip": "10578",
+        "customerId": 2,
+        "state": {
+          "id": 31,
+          "state": "Nebraska",
+          "rate": 0.1
         }
-      ]
-    }
+      }
+    },
+    "customer": {
+      "password": null,
+      "id": 7,
+      "email": "newDan@gmail.com",
+      "phoneNumber": "123-123-1234",
+      "company": null
+    },
+    "items": []
+  },
+  {
+    "id": 2,
+    "repId": null,
+    "totalItemCost": 1324.22,
+    "shippingCost": 3.99,
+    "orderDate": "1970-01-22T03:43:37.402Z",
+    "isPaid": true,
+    "taxPercentage": 0.04,
+    "shippingAddress": {
+      "id": 2,
+      "firstName": "Dan",
+      "lastName": "Fisher",
+      "city": "Heritage Park",
+      "address": "286 Broadway",
+      "zip": "10578",
+      "customerId": 2,
+      "state": {
+        "id": 31,
+        "state": "Nebraska",
+        "rate": 0.1
+      }
+    },
+    "paymentMethod": {
+      "cardNumber": "6561",
+      "id": 2,
+      "CVC": "639",
+      "expirationDate": "1970-02-05T10:58:47.118Z",
+      "billingAddressId": 2,
+      "billingAddress": {
+        "id": 2,
+        "firstName": "Dan",
+        "lastName": "Fisher",
+        "city": "Heritage Park",
+        "address": "286 Broadway",
+        "zip": "10578",
+        "customerId": 2,
+        "state": {
+          "id": 31,
+          "state": "Nebraska",
+          "rate": 0.1
+        }
+      }
+    },
+    "customer": {
+      "password": null,
+      "id": 7,
+      "email": "newDan@gmail.com",
+      "phoneNumber": "123-123-1234",
+      "company": null
+    },
+    "items": [
+      {
+        "id": 1,
+        "serialNumber": 120133,
+        "modelId": "A",
+        "price": 253.09,
+        "replacementDeadline": "1970-01-18T21:45:40.819Z",
+        "refundDeadline": "1970-01-20T18:57:47.978Z",
+        "refunded": null,
+        "bogoSerialNumber": null,
+        "orderId": 2
+      },
+      {
+        "id": 3,
+        "serialNumber": 120135,
+        "modelId": "A",
+        "price": 224.44,
+        "replacementDeadline": "1970-01-18T14:23:11.319Z",
+        "refundDeadline": "1970-01-24T13:24:06.767Z",
+        "refunded": null,
+        "bogoSerialNumber": null,
+        "orderId": 2
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "repId": null,
+    "totalItemCost": 1726.15,
+    "shippingCost": 3.99,
+    "orderDate": "1970-02-02T13:34:13.347Z",
+    "isPaid": true,
+    "taxPercentage": 0.07,
+    "shippingAddress": {
+      "id": 2,
+      "firstName": "Dan",
+      "lastName": "Fisher",
+      "city": "Heritage Park",
+      "address": "286 Broadway",
+      "zip": "10578",
+      "customerId": 2,
+      "state": {
+        "id": 31,
+        "state": "Nebraska",
+        "rate": 0.1
+      }
+    },
+    "paymentMethod": {
+      "cardNumber": "6561",
+      "id": 2,
+      "CVC": "639",
+      "expirationDate": "1970-02-05T10:58:47.118Z",
+      "billingAddressId": 2,
+      "billingAddress": {
+        "id": 2,
+        "firstName": "Dan",
+        "lastName": "Fisher",
+        "city": "Heritage Park",
+        "address": "286 Broadway",
+        "zip": "10578",
+        "customerId": 2,
+        "state": {
+          "id": 31,
+          "state": "Nebraska",
+          "rate": 0.1
+        }
+      }
+    },
+    "customer": {
+      "password": null,
+      "id": 7,
+      "email": "newDan@gmail.com",
+      "phoneNumber": "123-123-1234",
+      "company": null
+    },
+    "items": [
+      {
+        "id": 2,
+        "serialNumber": 120134,
+        "modelId": "C",
+        "price": 247.32,
+        "replacementDeadline": "1970-01-23T07:44:07.395Z",
+        "refundDeadline": "1970-01-30T06:11:12.412Z",
+        "refunded": null,
+        "bogoSerialNumber": null,
+        "orderId": 3
+      },
+      {
+        "id": 4,
+        "serialNumber": 120136,
+        "modelId": "B",
+        "price": 356.37,
+        "replacementDeadline": "1970-01-27T05:49:46.100Z",
+        "refundDeadline": "1970-01-18T02:06:58.488Z",
+        "refunded": null,
+        "bogoSerialNumber": null,
+        "orderId": 3
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "repId": null,
+    "totalItemCost": 0,
+    "shippingCost": 0,
+    "orderDate": "2017-05-08T15:52:16.257Z",
+    "isPaid": true,
+    "taxPercentage": 0.06,
+    "shippingAddress": {
+      "id": 2,
+      "firstName": "Dan",
+      "lastName": "Fisher",
+      "city": "Heritage Park",
+      "address": "286 Broadway",
+      "zip": "10578",
+      "customerId": 2,
+      "state": {
+        "id": 31,
+        "state": "Nebraska",
+        "rate": 0.1
+      }
+    },
+    "paymentMethod": {
+      "cardNumber": "6561",
+      "id": 2,
+      "CVC": "639",
+      "expirationDate": "1970-02-05T10:58:47.118Z",
+      "billingAddressId": 2,
+      "billingAddress": {
+        "id": 2,
+        "firstName": "Dan",
+        "lastName": "Fisher",
+        "city": "Heritage Park",
+        "address": "286 Broadway",
+        "zip": "10578",
+        "customerId": 2,
+        "state": {
+          "id": 31,
+          "state": "Nebraska",
+          "rate": 0.1
+        }
+      }
+    },
+    "customer": {
+      "password": null,
+      "id": 2,
+      "email": "dan@gmail.com",
+      "phoneNumber": "123-123-1234",
+      "company": "Verizon"
+    },
+    "items": []
+  }
+]
 """
 
 sales_get_order_info = """
-[
-    {
-      "id": 1,
-      "repId": null,
-      "totalItemCost": 1769.45,
-      "shippingCost": 3.99,
-      "orderDate": "1970-01-21T02:39:21.000Z",
-      "isPaid": true,
-      "taxPercentage": 0.07,
-      "shippingAddress": {
-    "id": 1,
-    "firstName": "Joe",
-    "lastName": "Jankowiak",
-    "city": "Rancho Cordova",
-    "address": "48 Washington Avenue",
-    "zip": "81678",
-    "customerId": 1,
+{
+  "id": 1,
+  "repId": null,
+  "totalItemCost": 2029.8,
+  "shippingCost": 3.99,
+  "orderDate": "1970-01-27T07:59:20.000Z",
+  "isPaid": true,
+  "taxPercentage": 0.01,
+  "shippingAddress": {
+    "id": 2,
+    "firstName": "Dan",
+    "lastName": "Fisher",
+    "city": "Heritage Park",
+    "address": "286 Broadway",
+    "zip": "10578",
+    "customerId": 2,
     "state": {
-      "id": 56,
-      "state": "Washington",
-      "rate": 0.05
+      "id": 31,
+      "state": "Nebraska",
+      "rate": 0.1
     }
   },
   "paymentMethod": {
-    "cardNumber": "2198",
-    "id": 1,
-    "CVC": 1047,
-    "expirationDate": "1970-01-27T13:43:16.000Z",
-    "billingAddressId": 1,
+    "cardNumber": "6561",
+    "id": 2,
+    "CVC": "639",
+    "expirationDate": "1970-02-05T10:58:47.118Z",
+    "billingAddressId": 2,
     "billingAddress": {
-      "id": 1,
-      "firstName": "Joe",
-      "lastName": "Jankowiak",
-      "city": "Rancho Cordova",
-      "address": "48 Washington Avenue",
-      "zip": "81678",
-      "customerId": 1,
+      "id": 2,
+      "firstName": "Dan",
+      "lastName": "Fisher",
+      "city": "Heritage Park",
+      "address": "286 Broadway",
+      "zip": "10578",
+      "customerId": 2,
       "state": {
-        "id": 56,
-        "state": "Washington",
-        "rate": 0.05
+        "id": 31,
+        "state": "Nebraska",
+        "rate": 0.1
       }
     }
   },
   "customer": {
     "password": null,
-    "id": 1,
-    "firstName": "Joe",
-    "lastName": "Jankowiak",
-    "email": "jrj2211@rit.edu",
+    "id": 7,
+    "email": "newDan@gmail.com",
     "phoneNumber": "123-123-1234",
-    "isCompany": false
+    "company": null
   },
-  "items": [
-    {
-      "id": 1,
-      "serialNumber": 120133,
-      "modelId": "A",
-      "price": 150.99,
-      "replacementDeadline": "1970-01-26T13:21:47.000Z",
-      "refundDeadline": "1970-01-18T01:17:11.000Z",
-      "refunded": null,
-      "bogoSerialNumber": null,
-      "orderId": 1
-    }
-  ]
-]
+  "items": []
+}
 """
