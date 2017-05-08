@@ -1,5 +1,5 @@
 from flask import jsonify
-from flask import request
+from flask import request, abort
 
 from customersupport import app
 from customersupport.wrappers import sales
@@ -53,9 +53,14 @@ def search_order_id():
 @app.route('/api/orderitem')
 def get_info():
     order_id = get_param_from_request_if_not_empty('order_id')
+    mocked = get_param_from_request_if_not_empty('mocked')
     if order_id is not None:
-        order_info = sales.get_order_info(order_id = order_id)
-        order = order_info
-        items_list = order.items
-        return jsonify([c.serialize() for c in items_list])
+        try:
+            order_info = sales.get_order_info(order_id = order_id, mock=mocked)
+            order = order_info
+            items_list = order.items
+            return jsonify([c.serialize() for c in items_list])
+        except Exception as ex:
+            print(ex)
+            abort(503)
     return jsonify([])

@@ -8,11 +8,24 @@
             </div>
             <div class="modal-body">
                 <form>
+                    <div class="alert alert-danger alert-dismissible fade collapse" role="alert" id="salesErrorAlert">
+                        <button type="button" class="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Opps!</strong> There was an error communicating with sales, try again.
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade collapse" role="alert" id="salesSucessAlert">
+                        <button type="button" class="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Yay!</strong> The ticket was created and saved. 
+                    </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="titleForm">Ticket Name</label>
                                 <input type="text" class="form-control" id="titleForm" value="">
+                                <input type="hidden" id="replaceTicket" name="replace" value="">
                             </div>
                         </div>
                     </div>
@@ -22,10 +35,10 @@
                             <div class="form-group">
                                 <label for="status">Status</label>
                                 <select class="form-control" id="status">
-                                    <option>New</option>
-                                    <option>Pending</option>
-                                    <option>Closed - Successful</option>
-                                    <option>Closed - Failure</option>
+                                    <option value="open">New</option>
+                                    <option value="pend">Pending</option>
+                                    <option value="pass">Closed - Successful</option>
+                                    <option value="fail">Closed - Failure</option>
                                 </select>
                             </div>
                         </div>
@@ -39,8 +52,7 @@
                                         <tr>
                                             <th>Serial Number</th>
                                             <th>Phone Model</th>
-                                            <th>Refund</th>
-                                            <th>Replace</th>
+                                            <th>Select</th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -51,8 +63,16 @@
                 </form>
             </div>
             <div class="modal-footer">
+                <label class="checkbox-inline"><input type="checkbox" name="use_mock" value="" id="ticketUseMock">Mock</label>
                 <button type="button" class="btn btn-default" id="closeNewTicket" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="saveTicketChanges">Save changes</button>
+                <div class="row" id="ticketProgressContainer"> 
+                    <div class="col-xs-12 col-sm-12 progress-container">
+                        <div id="ticketProgress" class="progress progress-striped active">
+                            <div id="ticketProgressBar" class="progress-bar progress-bar-success" style="width:0%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

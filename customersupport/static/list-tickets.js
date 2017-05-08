@@ -1,7 +1,7 @@
 $(document).ready(function(){
     
     $("#listTicketsButton").click(function(){
-        $.get("api/ticket",{customer_id:$("#customer").val()})
+        $.get("/api/ticket",{customer_id:$("#customer").val()})
             .done(function (data) {
                 $("#listTicketSelection").find("option").remove();
                 $.each(data, function(index, item){

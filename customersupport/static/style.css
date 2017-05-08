@@ -2,6 +2,19 @@ body {
   padding-top: 50px;
 }
 
+#ticketProgressContainer {
+  visibility: hidden;
+}
+
+#ticketProgress .progress.active .progress-bar {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
+#ticketProgressContainer {
+  padding-top: 15px;
+}
+
 .btn-monster {
   padding: 10% 0;
 }

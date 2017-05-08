@@ -2,19 +2,19 @@
 
 # HR
 hr_get_employee = """
-   {
+    {
   "employee_array": [
     {
-      "address": "0 Lomb Memorial Drive, Rochester, New York 14623",
-      "birth_date": "1992-02-12",
-      "department": "Sales",
+      "address": "42 Wallaby Way, Rochester, New York 14623",
+      "birth_date": "1995-04-25",
+      "department": "Human Resources",
       "employee_id": 1,
       "is_active": true,
-      "name": "Joseph Campione",
-      "role": "Developer",
-      "salary": "88083",
-      "start_date": "2017-01-23",
-      "team_start_date": "2017-01-23"
+      "name": "Wendy Williams",
+      "role": "HR Admin",
+      "salary": "60000",
+      "start_date": "2017-03-28",
+      "team_start_date": "2006-11-10"
     }
   ]
 }
@@ -84,338 +84,154 @@ sales_search_customer = """
 
 sales_initiate_refund = """
     {
-      “orderId”: 24,
-        “items”: [
-          {
-            "serialNumber": 20,
-            "price": 100,
-            "status": "return",
-            "replaceDeadline": "2017-03-01T20:51:26.908Z",
-            "refundDeadline": "2017-03-01T20:51:26.908Z",
-            "bogoSerialId": 25
-          },
-          {
-            "serialNumber": 25,
-            "price": 200,
-            "status": "return",
-            "replaceDeadline": "2017-03-01T20:51:26.909Z",
-            "refundDeadline": "2017-03-01T20:51:26.909Z",
-            "bogoSerialId": null
-          }  
-      ]
+      "items": [
+        {
+          "price": 100,
+          "refundDeadline": "2017-03-01T20:51:26.908Z",
+          "replaceDeadline": "2017-03-01T20:51:26.908Z",
+          "serialId": 20,
+          "status": "return"
+        },
+        {
+          "price": 200,
+          "refundDeadline": "2017-03-01T20:51:26.909Z",
+          "replaceDeadline": "2017-03-01T20:51:26.909Z",
+          "serialId": 21,
+          "status": "return"
+        }
+      ],
+      "orderId": 24
     }
 """
 
 sales_search_orders = """
-[  
-  {
-    "id": 1,
-    "repId": null,
-    "totalItemCost": 2029.8,
-    "shippingCost": 3.99,
-    "orderDate": "1970-01-27T07:59:20.000Z",
-    "isPaid": true,
-    "taxPercentage": 0.01,
-    "shippingAddress": {
-      "id": 2,
-      "firstName": "Dan",
-      "lastName": "Fisher",
-      "city": "Heritage Park",
-      "address": "286 Broadway",
-      "zip": "10578",
-      "customerId": 2,
-      "state": {
-        "id": 31,
-        "state": "Nebraska",
-        "rate": 0.1
-      }
-    },
-    "paymentMethod": {
-      "cardNumber": "6561",
-      "id": 2,
-      "CVC": "639",
-      "expirationDate": "1970-02-05T10:58:47.118Z",
-      "billingAddressId": 2,
-      "billingAddress": {
-        "id": 2,
-        "firstName": "Dan",
-        "lastName": "Fisher",
-        "city": "Heritage Park",
-        "address": "286 Broadway",
-        "zip": "10578",
-        "customerId": 2,
-        "state": {
-          "id": 31,
-          "state": "Nebraska",
-          "rate": 0.1
+    {
+      "orders": [
+        {
+          "billingInfo": {
+            "address": "1111 street",
+            "ccLastFourDigets": "1234",
+            "firstName": "john",
+            "lastName": "doe",
+            "state": "NY",
+            "zip": "14586"
+          },
+          "cost": 200,
+          "customerId": 1,
+          "customerInfo": {
+            "customerId": 42,
+            "email": "nottheotherjohn@email.com",
+            "firstName": "John",
+            "lastName": "Johnson",
+            "phone": "5451112222"
+          },
+          "id": 1000,
+          "isPaid": false,
+          "items": [
+            {
+              "price": 100,
+              "refundDeadline": "2017-03-01T20:51:26.908Z",
+              "replaceDeadline": "2017-03-01T20:51:26.908Z",
+              "serialId": 20,
+              "status": "replace"
+            },
+            {
+              "price": 200,
+              "refundDeadline": "2017-03-01T20:51:26.909Z",
+              "replaceDeadline": "2017-03-01T20:51:26.909Z",
+              "serialId": 21,
+              "status": "original"
+            }
+          ],
+          "orderDate": "2017-03-01T20:51:26.905Z",
+          "repId": 99,
+          "shippingInfo": {
+            "address": "1111 street",
+            "firstName": "john",
+            "lastName": "doe",
+            "state": "NY",
+            "zip": "14586"
+          },
+          "taxPercentage": 8
         }
-      }
-    },
-    "customer": {
-      "password": null,
-      "id": 7,
-      "email": "newDan@gmail.com",
-      "phoneNumber": "123-123-1234",
-      "company": null
-    },
-    "items": []
-  },
-  {
-    "id": 2,
-    "repId": null,
-    "totalItemCost": 1324.22,
-    "shippingCost": 3.99,
-    "orderDate": "1970-01-22T03:43:37.402Z",
-    "isPaid": true,
-    "taxPercentage": 0.04,
-    "shippingAddress": {
-      "id": 2,
-      "firstName": "Dan",
-      "lastName": "Fisher",
-      "city": "Heritage Park",
-      "address": "286 Broadway",
-      "zip": "10578",
-      "customerId": 2,
-      "state": {
-        "id": 31,
-        "state": "Nebraska",
-        "rate": 0.1
-      }
-    },
-    "paymentMethod": {
-      "cardNumber": "6561",
-      "id": 2,
-      "CVC": "639",
-      "expirationDate": "1970-02-05T10:58:47.118Z",
-      "billingAddressId": 2,
-      "billingAddress": {
-        "id": 2,
-        "firstName": "Dan",
-        "lastName": "Fisher",
-        "city": "Heritage Park",
-        "address": "286 Broadway",
-        "zip": "10578",
-        "customerId": 2,
-        "state": {
-          "id": 31,
-          "state": "Nebraska",
-          "rate": 0.1
-        }
-      }
-    },
-    "customer": {
-      "password": null,
-      "id": 7,
-      "email": "newDan@gmail.com",
-      "phoneNumber": "123-123-1234",
-      "company": null
-    },
-    "items": [
-      {
-        "id": 1,
-        "serialNumber": 120133,
-        "modelId": "A",
-        "price": 253.09,
-        "replacementDeadline": "1970-01-18T21:45:40.819Z",
-        "refundDeadline": "1970-01-20T18:57:47.978Z",
-        "refunded": null,
-        "bogoSerialNumber": null,
-        "orderId": 2
-      },
-      {
-        "id": 3,
-        "serialNumber": 120135,
-        "modelId": "A",
-        "price": 224.44,
-        "replacementDeadline": "1970-01-18T14:23:11.319Z",
-        "refundDeadline": "1970-01-24T13:24:06.767Z",
-        "refunded": null,
-        "bogoSerialNumber": null,
-        "orderId": 2
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "repId": null,
-    "totalItemCost": 1726.15,
-    "shippingCost": 3.99,
-    "orderDate": "1970-02-02T13:34:13.347Z",
-    "isPaid": true,
-    "taxPercentage": 0.07,
-    "shippingAddress": {
-      "id": 2,
-      "firstName": "Dan",
-      "lastName": "Fisher",
-      "city": "Heritage Park",
-      "address": "286 Broadway",
-      "zip": "10578",
-      "customerId": 2,
-      "state": {
-        "id": 31,
-        "state": "Nebraska",
-        "rate": 0.1
-      }
-    },
-    "paymentMethod": {
-      "cardNumber": "6561",
-      "id": 2,
-      "CVC": "639",
-      "expirationDate": "1970-02-05T10:58:47.118Z",
-      "billingAddressId": 2,
-      "billingAddress": {
-        "id": 2,
-        "firstName": "Dan",
-        "lastName": "Fisher",
-        "city": "Heritage Park",
-        "address": "286 Broadway",
-        "zip": "10578",
-        "customerId": 2,
-        "state": {
-          "id": 31,
-          "state": "Nebraska",
-          "rate": 0.1
-        }
-      }
-    },
-    "customer": {
-      "password": null,
-      "id": 7,
-      "email": "newDan@gmail.com",
-      "phoneNumber": "123-123-1234",
-      "company": null
-    },
-    "items": [
-      {
-        "id": 2,
-        "serialNumber": 120134,
-        "modelId": "C",
-        "price": 247.32,
-        "replacementDeadline": "1970-01-23T07:44:07.395Z",
-        "refundDeadline": "1970-01-30T06:11:12.412Z",
-        "refunded": null,
-        "bogoSerialNumber": null,
-        "orderId": 3
-      },
-      {
-        "id": 4,
-        "serialNumber": 120136,
-        "modelId": "B",
-        "price": 356.37,
-        "replacementDeadline": "1970-01-27T05:49:46.100Z",
-        "refundDeadline": "1970-01-18T02:06:58.488Z",
-        "refunded": null,
-        "bogoSerialNumber": null,
-        "orderId": 3
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "repId": null,
-    "totalItemCost": 0,
-    "shippingCost": 0,
-    "orderDate": "2017-05-08T15:52:16.257Z",
-    "isPaid": true,
-    "taxPercentage": 0.06,
-    "shippingAddress": {
-      "id": 2,
-      "firstName": "Dan",
-      "lastName": "Fisher",
-      "city": "Heritage Park",
-      "address": "286 Broadway",
-      "zip": "10578",
-      "customerId": 2,
-      "state": {
-        "id": 31,
-        "state": "Nebraska",
-        "rate": 0.1
-      }
-    },
-    "paymentMethod": {
-      "cardNumber": "6561",
-      "id": 2,
-      "CVC": "639",
-      "expirationDate": "1970-02-05T10:58:47.118Z",
-      "billingAddressId": 2,
-      "billingAddress": {
-        "id": 2,
-        "firstName": "Dan",
-        "lastName": "Fisher",
-        "city": "Heritage Park",
-        "address": "286 Broadway",
-        "zip": "10578",
-        "customerId": 2,
-        "state": {
-          "id": 31,
-          "state": "Nebraska",
-          "rate": 0.1
-        }
-      }
-    },
-    "customer": {
-      "password": null,
-      "id": 2,
-      "email": "dan@gmail.com",
-      "phoneNumber": "123-123-1234",
-      "company": "Verizon"
-    },
-    "items": []
-  }
-]
+      ]
+    }
 """
 
 sales_get_order_info = """
-{
-  "id": 1,
-  "repId": null,
-  "totalItemCost": 2029.8,
-  "shippingCost": 3.99,
-  "orderDate": "1970-01-27T07:59:20.000Z",
-  "isPaid": true,
-  "taxPercentage": 0.01,
-  "shippingAddress": {
-    "id": 2,
-    "firstName": "Dan",
-    "lastName": "Fisher",
-    "city": "Heritage Park",
-    "address": "286 Broadway",
-    "zip": "10578",
-    "customerId": 2,
-    "state": {
-      "id": 31,
-      "state": "Nebraska",
-      "rate": 0.1
+{  
+  "id":1,
+  "repId":null,
+  "totalItemCost":489.3,
+  "shippingCost":3.99,
+  "orderDate":"1970-01-20T02:44:32.000Z",
+  "isPaid":true,
+  "taxPercentage":0.1,
+  "shippingAddress":{  
+    "id":1,
+    "firstName":"Sally",
+    "lastName":"Doe",
+    "city":"Golden Creek",
+    "address":"419 Grove Street",
+    "zip":"97578",
+    "customerId":1,
+    "state":{  
+      "id":14,
+      "state":"Guam",
+      "rate":0.05
     }
   },
-  "paymentMethod": {
-    "cardNumber": "6561",
-    "id": 2,
-    "CVC": "639",
-    "expirationDate": "1970-02-05T10:58:47.118Z",
-    "billingAddressId": 2,
-    "billingAddress": {
-      "id": 2,
-      "firstName": "Dan",
-      "lastName": "Fisher",
-      "city": "Heritage Park",
-      "address": "286 Broadway",
-      "zip": "10578",
-      "customerId": 2,
-      "state": {
-        "id": 31,
-        "state": "Nebraska",
-        "rate": 0.1
+  "paymentMethod":{  
+    "id":1,
+    "cardNumber":"5397030165636",
+    "CVC":220,
+    "expirationDate":"1970-01-29T02:44:29.000Z",
+    "billingAddress":{  
+      "id":8,
+      "firstName":"John",
+      "lastName":"Doe",
+      "city":"Ashton Park",
+      "address":"274 Clark Street",
+      "zip":"89180",
+      "customerId":8,
+      "state":{  
+        "id":113,
+        "state":"Virgin Islands",
+        "rate":0.04
       }
     }
   },
-  "customer": {
-    "password": null,
-    "id": 7,
-    "email": "newDan@gmail.com",
-    "phoneNumber": "123-123-1234",
-    "company": null
+  "customer":{  
+    "id":1,
+    "firstName":"John",
+    "lastName":"Doe",
+    "email":"jrj2211@rit.edu",
+    "phoneNumber":"123-123-1234",
+    "isCompany":true
   },
-  "items": []
+  "items":[  
+    {  
+      "id":1,
+      "serialNumber":120133,
+      "modelId":"B",
+      "price":550.58,
+      "replacementDeadline":"1970-01-20T02:52:45.000Z",
+      "refundDeadline":"1970-01-26T07:17:54.000Z",
+      "refunded":null,
+      "bogoSerialNumber":null,
+      "orderId":1
+    },
+    {  
+      "id":2,
+      "serialNumber":120134,
+      "modelId":"B",
+      "price":160.85,
+      "replacementDeadline":"1970-01-17T22:54:46.000Z",
+      "refundDeadline":"1970-01-29T15:23:47.000Z",
+      "refunded":null,
+      "bogoSerialNumber":null,
+      "orderId":1
+    }
+  ]
 }
 """
