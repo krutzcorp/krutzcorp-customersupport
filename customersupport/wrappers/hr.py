@@ -3,7 +3,7 @@ import requests
 from functools import wraps
 import json
 import urllib.parse
-from flask import request, Response
+from flask import request, Response, session
 from customersupport import app
 from config import HR_URL
 from customersupport.models import Employee
@@ -52,8 +52,20 @@ def requires_auth(f):
         #check if authenticated already or if token is valid
         if not auth or not check_authtoken():
             return Response('<p>You are not allowed to view this page</p>')
+        session['username'] = check_authtoken()
         return f(*args, **kwargs)
     return decorated
+
+def login(token):
+    session['token'] = token
+
+def logout():
+    session.pop('token', None)
+
+def get_current_user():
+    return session['token'] if 'token' in session else None
+
+
 
 # oauth authentication token sent from hr to the main page
 def check_authtoken():
