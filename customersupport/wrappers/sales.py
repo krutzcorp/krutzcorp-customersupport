@@ -24,7 +24,7 @@ def search_customer(first_name=None, last_name=None, email=None, phone_number=No
             r = requests.get(search_customer_url, params=query_params)
     else:
         try:
-            r = requests.get(search_customer_url, params=query_params)
+            r = requests.get(search_customer_url, params=query_params, timeout=2)
         except requests.exceptions.RequestException:
             print("Request error.")
             raise

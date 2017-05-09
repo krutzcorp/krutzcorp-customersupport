@@ -53,8 +53,11 @@ class TestCase(unittest.TestCase):
     def test_sales_orderinfo_called(self):
         """tests for Sales order information"""
         actual = sales.get_order_info(1, mock=True)
-        final = [actual.items, actual.order_date, actual.id]
-        expected = [[], '1970-01-27T07:59:20.000Z', 1]
+        item_list = []
+        for ord in actual.items:
+            item_list.append(ord.id)
+        final = [item_list, actual.order_date, actual.id]
+        expected = [[120133, 120134], '1970-01-20T02:44:32.000Z', 1]
         assert final == expected
 
     def test_sales_customer_called(self):
@@ -69,18 +72,18 @@ class TestCase(unittest.TestCase):
         """ Tests to check if api address is correct and live """
         actual = hr.get_employee(1, mock=True)
         final = [actual.name, actual.id]
-        expected = ['Joseph Campione', 1]
+        expected = ['Wendy Williams', 1]
         assert final == expected
 
     def test_sales_return_called(self):
         serial_id = [20, 25]
         actual = sales.initiate_refund(False, 24, 20, mock=True)
-        assert actual.status_code == 200
+        assert actual == True
 
     def test_sales_replace_called(self):
         serial_id = [120133]
         actual = sales.initiate_refund(True, 1, serial_id, mock=True)
-        assert actual.status_code == 200
+        assert actual == True
 
 if __name__ == '__main__':
     unittest.main()
